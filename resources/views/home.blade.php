@@ -14,10 +14,11 @@
                     <p>VrijeParking is een initiatief om alle beschikbare parkingdata uit België eenvoudig en toegankelijk beschikbaar te stellen voor het grote publiek.
                     Wij breiden ons aanbod van data steeds zoveel mogelijk uit en proberen steden/bedrijven steeds aan te moedigen hun data beschikbaar te stellen.<p>
                 </div>
-
             </div>
         </div>
     </header>
+
+    Random tekstje ter test.
 
     <section id="portfolio">
         <div class="container">
