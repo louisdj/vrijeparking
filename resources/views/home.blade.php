@@ -18,8 +18,6 @@
         </div>
     </header>
 
-    Random tekstje ter test.
-
     <section id="portfolio">
         <div class="container">
             <div class="row" style="margin-top: -100px;">
