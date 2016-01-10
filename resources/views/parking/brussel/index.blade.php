@@ -19,9 +19,8 @@
 
 
             <div class="row">
-                {{--<h3>Details</h3>--}}
                 <div class="col-md-4">
-                    <img src="/img/parkings/Brussel/{{$parking->name_nl}}.jpg" alt=""/>
+                    <img src="/img/parkings/Brussel/{{$parking->name_nl}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
                 </div>
                 <div class="col-md-4">
                     <h4>Address</h4>

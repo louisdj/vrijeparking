@@ -163,8 +163,6 @@
               @endforeach
               0;
 
-              console.log(bezet);
-
             var totaal =
                 @foreach($data as $parking)
                     @if(isset($parking->parkingStatus->availableCapacity))
@@ -172,9 +170,6 @@
                     @endif
               @endforeach
               0;
-
-              console.log(totaal);
-
         </script>
 
 @endsection

@@ -25,8 +25,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -63,9 +63,7 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    {{--<li class="page-scroll">--}}
-                        {{--<a href="#portfolio">Portfolio</a>--}}
-                    {{--</li>--}}
+
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parkings <span class="caret"></span></a>
                           <ul class="dropdown-menu">
@@ -81,9 +79,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
 
     @yield('content')
@@ -94,8 +90,7 @@
             <div class="container">
                 <div class="row">
                     <div class="footer-col col-md-0">
-                        {{--<h3>Locatie</h3>--}}
-                        {{--<p>9800 Deinze<br>Amakersstraat 12</p>--}}
+
                     </div>
                     <div class="footer-col col-md-12">
                         <h3>Volg ons op social media</h3>
@@ -109,8 +104,7 @@
                         </ul>
                     </div>
                     <div class="footer-col col-md-0">
-                        {{--<h3>About Freelancer</h3>--}}
-                        {{--<p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>--}}
+
                     </div>
                 </div>
             </div>
@@ -159,5 +153,4 @@
 
 
 </body>
-
 </html>

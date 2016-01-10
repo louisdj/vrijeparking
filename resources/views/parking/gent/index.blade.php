@@ -32,8 +32,9 @@
                 </div>
                 <div class="col-md-2">
                     <h4>Availability</h4>
-                    <div class="progress" style="height:20px; vertical-align: bottom;">
-                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ 100 - round(($parking->parkingStatus->availableCapacity  /  $parking->parkingStatus->totalCapacity) * 100) }}%; font-size:20px; padding-top: 4px;">
+                    <div class="progress" style="height:20px; vertical-align: bottom; background-color: red;">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
+                      style="width: {{ 100 - round(($parking->parkingStatus->availableCapacity  /  $parking->parkingStatus->totalCapacity) * 100) }}%; font-size:20px; padding-top: 4px;">
                         {{ 100 - round(($parking->parkingStatus->availableCapacity  /  $parking->parkingStatus->totalCapacity) * 100) }}%
                       </div>
                     </div>

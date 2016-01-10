@@ -18,8 +18,6 @@
         </div>
     </header>
 
-    Nog eens testen, integrated git nu.
-
     <section id="portfolio">
         <div class="container">
             <div class="row" style="margin-top: -100px;">
