@@ -47,6 +47,8 @@
                 <div class="col-md-2" style="border: 1px solid black; padding:10px; text-align:center">
                     <h4>Opening times</h4>
 
+                    Data niet beschikbaar.
+
                     {{--@foreach($parking->openingTimes[0]->days as $day)--}}
                         {{--{{ $day }} <br/>--}}
                     {{--@endforeach--}}
