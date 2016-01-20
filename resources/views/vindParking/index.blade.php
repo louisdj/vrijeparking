@@ -59,6 +59,8 @@
                 position: place.geometry.location
               });
 
+              console.log(position);
+
               markers.push(marker);
 
               bounds.extend(place.geometry.location);

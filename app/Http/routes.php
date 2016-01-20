@@ -34,3 +34,8 @@ Route::get('/stad/{stad}', 'ParkingController@stad');
 Route::get('/parking/{parking}', 'ParkingController@parking');
 
 Route::get('/vindparking', 'ParkingController@vindparking');
+
+
+
+
+//Route::get('/update', 'ParkingController@enterData');

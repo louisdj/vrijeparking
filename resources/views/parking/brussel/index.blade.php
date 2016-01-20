@@ -31,11 +31,13 @@
                 </div>
                 <div class="col-md-2">
                     <h4>Availability</h4>
-                    <div class="progress" style="height:20px; vertical-align: bottom;">
-                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ 100 - round(($parking->free_places  /  $parking->total_places) * 100) }}%; font-size:20px; padding-top: 4px;">
+                    <div class="progress" style="height:20px; vertical-align: bottom; background-color: red;">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ 100 - round(($parking->free_places  /  $parking->total_places) * 100) }}%; font-size:20px; padding-top: 4px;">
                         {{ 100 - round(($parking->free_places  /  $parking->total_places) * 100) }}%
                       </div>
                     </div>
+
+                    <small>{{ $parking->total_places - $parking->free_places }} / {{ $parking->total_places }} beschikbaar</small>
 
                     {{--<span class="label @if(($parking->parkingStatus->availableCapacity / $parking->parkingStatus->totalCapacity) > 0.90) label-danger--}}
                                 {{--@elseif(($parking->parkingStatus->availableCapacity / $parking->parkingStatus->totalCapacity) > 0.70) label-warning--}}

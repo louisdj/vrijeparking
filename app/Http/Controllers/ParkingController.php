@@ -54,4 +54,37 @@ class ParkingController extends Controller
 
         return view('vindParking.index');
     }
+
+
+
+
+
+
+    //Wordt gebruikt om eenvoudig alle data vd "Parkings" tabel te inserten
+    public function enterData() {
+
+//        $json = file_get_contents("http://data.irail.be/Parkings/Brussels.json");
+//        $data = json_decode($json);
+
+        //Gent
+//        foreach($data as $parking) {
+//            DB::insert("insert into parkings(naam,stad,adres, latitude, longitude) values(?, ?, ?, ?, ?)" ,
+//                [$parking->description,
+//                    $parking->city->name,
+//                    $parking->address,
+//                    $parking->latitude,
+//                    $parking->longitude]);
+//        }
+
+        //Brussel
+//        foreach($data->Brussels as $parking) {
+//            DB::insert("insert into parkings(naam,stad,adres, latitude, longitude) values(?, ?, ?, ?, ?)" ,
+//                [$parking->name_nl,
+//                    "Brussel",
+//                    $parking->address_nl,
+//                    $parking->latitude,
+//                    $parking->longitude]);
+//        }
+
+    }
 }
