@@ -31,8 +31,8 @@
                     <h2>Steden</h2><br/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
+            <div class="row" text-align="center">
+                <div class="col-md-4 portfolio-item">
                     <a href="/stad/gent" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
