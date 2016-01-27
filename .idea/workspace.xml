@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="026458c1-8f42-4d7c-bf9c-e38e63248127" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/parking/brussel/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/parking/brussel/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/parking/gent/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/parking/gent/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/templates/parking_template.blade.php" afterPath="$PROJECT_DIR$/resources/views/templates/parking_template.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/parking/brussel/stad.blade.php" afterPath="$PROJECT_DIR$/resources/views/parking/brussel/stad.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/parking/gent/stad.blade.php" afterPath="$PROJECT_DIR$/resources/views/parking/gent/stad.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/templates/stad_template.blade.php" afterPath="$PROJECT_DIR$/resources/views/templates/stad_template.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/parkings/brussel/Loi.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/img/parkings/brussel/Albertine-Square.jpg" afterPath="$PROJECT_DIR$/public/img/parkings/brussel/Albertine-Square.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ParkingController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ParkingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vindParking/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/vindParking/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="VrijeParking.iws" />
@@ -32,18 +31,31 @@
     <favorites_list name="VrijeParking" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.22380657">
+    <splitter split-orientation="horizontal" split-proportion="0.69625604">
       <split-first>
         <leaf>
-          <file leaf-file-name="parking_template.blade.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/resources/views/vindParking/index.blade.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.7529274" vertical-offset="2128" max-vertical-offset="3893">
+                  <caret line="163" column="44" selection-start-line="163" selection-start-column="44" selection-end-line="163" selection-end-column="44" />
+                  <folding>
+                    <element signature="e#3258#3283#0#HTML" expanded="true" />
+                    <element signature="e#4800#4829#0#HTML" expanded="true" />
+                    <element signature="e#4970#4999#0#HTML" expanded="true" />
+                    <element signature="e#5054#5083#0#HTML" expanded="true" />
+                    <element signature="e#5139#5168#0#HTML" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="parking_template.blade.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/resources/views/templates/parking_template.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.37046006" vertical-offset="0" max-vertical-offset="1632">
-                  <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#56#81#0#HTML" expanded="true" />
-                    <element signature="e#1031#1095#0#HTML" expanded="true" />
-                  </folding>
+                <state vertical-scroll-proportion="-11.769231" vertical-offset="663" max-vertical-offset="1632">
+                  <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="79" selection-end-column="32" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -52,11 +64,33 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/resources/views/parking/gent/index.blade.php">
+          <file leaf-file-name="ParkingController.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ParkingController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-15.038462" vertical-offset="0" max-vertical-offset="918">
-                  <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+                <state vertical-scroll-proportion="0.6185319" vertical-offset="761" max-vertical-offset="1989">
+                  <caret line="79" column="46" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+                  <folding>
+                    <marker date="1453912796948" expanded="true" signature="276:319" placeholder="select url f..data_sources..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="646">
+                  <caret line="36" column="69" selection-start-line="36" selection-start-column="69" selection-end-line="36" selection-end-column="69" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="stad_template.blade.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/resources/views/templates/stad_template.blade.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-10.307693" vertical-offset="4" max-vertical-offset="2584">
+                  <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
                   <folding />
                 </state>
               </provider>
@@ -65,18 +99,8 @@
           <file leaf-file-name="stad.blade.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/resources/views/parking/brussel/stad.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-21.576923" vertical-offset="0" max-vertical-offset="1258">
-                  <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/resources/views/parking/brussel/index.blade.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.33333334" vertical-offset="0" max-vertical-offset="867">
-                  <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+                <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="1258">
+                  <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
                   <folding />
                 </state>
               </provider>
@@ -105,9 +129,6 @@
         <option value="$PROJECT_DIR$/public/css/freelancer.css" />
         <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
         <option value="$PROJECT_DIR$/readme.md" />
-        <option value="$PROJECT_DIR$/resources/views/vindParking/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ParkingController.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/templates/cityOverview.blade.php" />
@@ -117,6 +138,9 @@
         <option value="$PROJECT_DIR$/resources/views/templates/parking_template.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/parking/gent/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/parking/brussel/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ParkingController.php" />
+        <option value="$PROJECT_DIR$/resources/views/vindParking/index.blade.php" />
       </list>
     </option>
   </component>
@@ -393,6 +417,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parkings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brussel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VrijeParking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VrijeParking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -480,12 +530,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\public\img\parkings" />
       <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\public\img\parkings\brussel" />
       <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\resources\views\parking\brussel" />
       <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\public\img\parkings\gent" />
       <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\public\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\public\img\parkings\brussel" />
       <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\public\img" />
       <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\public\img\portfolio" />
       <recent name="C:\Users\robbert\Desktop\VrijParking\VrijeParking\resources\views\parking\gent" />
@@ -561,7 +613,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453851610181</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Templates volledig functioneel. Nieuwe steden toevoegen is nu een batje.">
+      <created>1453892265794</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1453892265794</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -576,7 +634,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15989584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -611,7 +669,8 @@
     <MESSAGE value="Updated some pics, small changes. Made a readme" />
     <MESSAGE value="Fixing mysqlcredentials for cloudhost" />
     <MESSAGE value="Enkele templates maken het makkelijker om nieuwe parkings toe te voegen en layout globaal te wijzigen." />
-    <option name="LAST_COMMIT_MESSAGE" value="Enkele templates maken het makkelijker om nieuwe parkings toe te voegen en layout globaal te wijzigen." />
+    <MESSAGE value="Templates volledig functioneel. Nieuwe steden toevoegen is nu een batje." />
+    <option name="LAST_COMMIT_MESSAGE" value="Templates volledig functioneel. Nieuwe steden toevoegen is nu een batje." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -635,8 +694,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="918">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="select url f..data_sources..." />
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="insert into ..." />
+            <marker date="1453912796948" expanded="true" signature="276:319" placeholder="select url f..data_sources..." />
           </folding>
         </state>
       </provider>
@@ -689,8 +747,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="748">
           <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
           <folding>
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="select url f..data_sources..." />
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="insert into ..." />
+            <marker date="1453912796948" expanded="true" signature="276:319" placeholder="select url f..data_sources..." />
           </folding>
         </state>
       </provider>
@@ -736,8 +793,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="493">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="select url f..data_sources..." />
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="insert into ..." />
+            <marker date="1453912796948" expanded="true" signature="276:319" placeholder="select url f..data_sources..." />
           </folding>
         </state>
       </provider>
@@ -782,8 +838,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="493">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="select url f..data_sources..." />
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="insert into ..." />
+            <marker date="1453912796948" expanded="true" signature="276:319" placeholder="select url f..data_sources..." />
           </folding>
         </state>
       </provider>
@@ -891,24 +946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/vindParking/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7208766" vertical-offset="412" max-vertical-offset="2091">
-          <caret line="61" column="36" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ParkingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="1564">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="2" selection-end-line="66" selection-end-column="37" />
-          <folding>
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="select url f..data_sources..." />
-            <marker date="1452699700150" expanded="true" signature="-1:-1" placeholder="insert into ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
@@ -925,38 +962,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="629">
-          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.78431374" vertical-offset="391" max-vertical-offset="1258">
           <caret line="63" column="22" selection-start-line="54" selection-start-column="16" selection-end-line="63" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/stad_template.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7962529" vertical-offset="255" max-vertical-offset="2584">
-          <caret line="55" column="93" selection-start-line="55" selection-start-column="93" selection-end-line="55" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/parking_template.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37046006" vertical-offset="0" max-vertical-offset="1632">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#56#81#0#HTML" expanded="true" />
-            <element signature="e#1031#1095#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -968,27 +978,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/parking/gent/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.038462" vertical-offset="0" max-vertical-offset="918">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/parking/brussel/stad.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.576923" vertical-offset="0" max-vertical-offset="1258">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="646">
+          <caret line="36" column="69" selection-start-line="36" selection-start-column="69" selection-end-line="36" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/parking/brussel/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="0" max-vertical-offset="867">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="816">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="129" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/parking/gent/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8627451" vertical-offset="51" max-vertical-offset="918">
+          <caret line="47" column="60" selection-start-line="47" selection-start-column="60" selection-end-line="47" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/parking/brussel/stad.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="1258">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/stad_template.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.307693" vertical-offset="4" max-vertical-offset="2584">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/parking_template.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231" vertical-offset="663" max-vertical-offset="1632">
+          <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="79" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ParkingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6185319" vertical-offset="761" max-vertical-offset="1989">
+          <caret line="79" column="46" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+          <folding>
+            <marker date="1453912796948" expanded="true" signature="276:319" placeholder="select url f..data_sources..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/vindParking/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7529274" vertical-offset="2128" max-vertical-offset="3893">
+          <caret line="163" column="44" selection-start-line="163" selection-start-column="44" selection-end-line="163" selection-end-column="44" />
+          <folding>
+            <element signature="e#3258#3283#0#HTML" expanded="true" />
+            <element signature="e#4800#4829#0#HTML" expanded="true" />
+            <element signature="e#4970#4999#0#HTML" expanded="true" />
+            <element signature="e#5054#5083#0#HTML" expanded="true" />
+            <element signature="e#5139#5168#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

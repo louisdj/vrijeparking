@@ -52,7 +52,32 @@ class ParkingController extends Controller
 
     public function vindparking() {
 
-        return view('vindParking.index');
+        return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8]);
+    }
+
+    public function vindparkingpost(Request $request) {
+
+//        dd($request->location);
+        $searchFor = str_replace(",","+", $request->location);
+        $searchFor = str_replace(" ","+", $searchFor);
+
+        $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
+        $data = json_decode($json);
+
+//        dd($data->results[0]->geometry->location->lat);
+        $lat = $data->results[0]->geometry->location->lat;
+        $Lng = $data->results[0]->geometry->location->lng;
+
+        $parkings = DB::table('parkings')
+            ->whereBetween('latitude', [$lat - 0.005, $lat + 0.005])
+            ->whereBetween('longitude', [$Lng - 0.005, $Lng + 0.005])
+            ->get();
+
+        return view('vindparking.index',
+            ['mapCenter' => "$lat, $Lng",
+            'parkings' => $parkings,
+            'zoom' => 16,
+            'searchTerm' => $request->location]);
     }
 
 
