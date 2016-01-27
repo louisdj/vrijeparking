@@ -24,6 +24,11 @@
 @endsection
 
 
+@section('centraleMapCoordinaten')
+    51.0507644,3.7250077
+@endsection
+
+
 @section('parkingsOpKaartLijst')
     @foreach($data as $parking)
           ["{{ isset($parking->description) ? $parking->description : "Niet beschikbaar"   }}" , {{ $parking->latitude }}, {{ $parking->longitude  }}, "/parking/{{ isset($parking->description) ? $parking->description : "Niet beschikbaar"  }}"],
@@ -31,26 +36,6 @@
 @endsection
 
 
-@section('parkingsOpKaartMarkers')
-    for (var i = 0; i < parkings.length; i++) {
-      var parking = parkings[i];
-      var marker = new google.maps.Marker({
-        position: {lat: parking[1], lng: parking[2]},
-        map: map,
-        icon: image,
-        shape: shape,
-        title: parking[0],
-//      zIndex: parking[3],
-        url: parking[3]
-      });
-
-      google.maps.event.addListener(marker, 'click', function() {
-      console.log(this.url);
-            window.location.href = this.url;
-
-        });
-    }
-@endsection
 
 
 @section('bezetting')

@@ -15,6 +15,15 @@
 @endsection
 
 
+@section('adres')
+    {{ $parking->address }}
+@endsection
+
+@section('contact')
+    {{ $parking->contactInfo }}
+@endsection
+
+
 @section('beschikbaarheid')
     <div class="progress" style="height:20px; vertical-align: bottom; background-color: red;">
       <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"

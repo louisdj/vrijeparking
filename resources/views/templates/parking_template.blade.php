@@ -24,10 +24,10 @@
                 </div>
                 <div class="col-md-4">
                     <h4>Address</h4>
-                    {{ $parking->address }}
+                    @yield('adres')
                     <br/><br/>
                     <h4>Contact</h4>
-                    {{ $parking->contactInfo }}
+                    @yield('contact')
                 </div>
                 <div class="col-md-2">
                     <h4>Beschikbaar</h4>

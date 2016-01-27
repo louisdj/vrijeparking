@@ -28,6 +28,12 @@
 @endsection
 
 
+@section('centraleMapCoordinaten')
+    50.8474244,4.3584517
+@endsection
+
+
+
 @section('parkingsOpKaartMarkers')
     for (var i = 0; i < parkings.length; i++) {
       var parking = parkings[i];

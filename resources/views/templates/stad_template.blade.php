@@ -53,7 +53,7 @@
                           {
                            var mapOptions = {
                              zoom: 14,
-                             center: new google.maps.LatLng(51.0557644,3.7220077)
+                             center: new google.maps.LatLng(@yield('centraleMapCoordinaten'))
                            }
                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
@@ -104,7 +104,24 @@
                               coords: [1, 1, 1, 20, 18, 20, 18, 1],
                               type: 'poly'
                             };
-                            @yield('parkingsOpKaartMakers')
+                            for (var i = 0; i < parkings.length; i++) {
+                              var parking = parkings[i];
+                              var marker = new google.maps.Marker({
+                                position: {lat: parking[1], lng: parking[2]},
+                                map: map,
+                                icon: image,
+                                shape: shape,
+                                title: parking[0],
+                        //      zIndex: parking[3],
+                                url: parking[3]
+                              });
+
+                              google.maps.event.addListener(marker, 'click', function() {
+                              console.log(this.url);
+                                    window.location.href = this.url;
+
+                                });
+                            }
                           }
 
                           google.maps.event.addDomListener(window, 'load', initialize);
