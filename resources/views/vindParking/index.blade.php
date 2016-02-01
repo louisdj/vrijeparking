@@ -2,85 +2,7 @@
 
 @section('content')
 
-    {{--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>--}}
-    <script>
-        // This example adds a search box to a map, using the Google Place Autocomplete
-        // feature. People can enter geographical searches. The search box will return a
-        // pick list containing a mix of places and predicted search terms.
-
-//        function initialize() {
-//
-//          var markers = [];
-//          var map = new google.maps.Map(document.getElementById('map-canvas'), {
-//            mapTypeId: google.maps.MapTypeId.ROADMAP
-//          });
-//
-//          var defaultBounds = new google.maps.LatLngBounds(
-//              new google.maps.LatLng(-33.8902, 151.1759),
-//              new google.maps.LatLng(-33.8474, 151.2631));
-//          map.fitBounds(defaultBounds);
-//
-//          // Create the search box and link it to the UI element.
-//          var input = (document.getElementById('pac-input'));
-//          //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-//
-//          var searchBox = new google.maps.places.SearchBox((input));
-//
-//          // [START region_getplaces]
-//          // Listen for the event fired when the user selects an item from the
-//          // pick list. Retrieve the matching places for that item.
-//          google.maps.event.addListener(searchBox, 'places_changed', function() {
-//            var places = searchBox.getPlaces();
-//
-//            if (places.length == 0) {
-//              return;
-//            }
-//            for (var i = 0, marker; marker = markers[i]; i++) {
-//              marker.setMap(null);
-//            }
-//
-//            // For each place, get the icon, place name, and location.
-//            markers = [];
-//            var bounds = new google.maps.LatLngBounds();
-//            for (var i = 0, place; place = places[i]; i++) {
-//              var image = {
-//                url: place.icon,
-//                size: new google.maps.Size(71, 71),
-//                origin: new google.maps.Point(0, 0),
-//                anchor: new google.maps.Point(17, 34),
-//                scaledSize: new google.maps.Size(25, 25)
-//              };
-//
-//              // Create a marker for each place.
-//              var marker = new google.maps.Marker({
-//                map: map,
-//                icon: image,
-//                title: place.name,
-//                position: place.geometry.location
-//              });
-//
-//              console.log(position);
-//
-//              markers.push(marker);
-//
-//              bounds.extend(place.geometry.location);
-//            }
-//
-//            map.fitBounds(bounds);
-//          });
-//          // [END region_getplaces]
-//
-//          // Bias the SearchBox results towards places that are within the bounds of the
-//          // current map's viewport.
-//          google.maps.event.addListener(map, 'bounds_changed', function() {
-//            var bounds = map.getBounds();
-//            searchBox.setBounds(bounds);
-//          });
-//        }
-
-//        google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
     <style>
         td {
@@ -103,14 +25,34 @@
     <section id="portfolio">
         <div class="container">
             <div class="row">
-                <form action="/vindParkingPost" method="post">
+                <form action="/vindparking" method="post">
                     <label for="locatie">Vind parkeerplek nabij uw locatie</label><br>
                         <div class="col-sm-10">
-                            <input id="pac-input" name="location" class="form-control" type="text" placeholder="Search Box" value="{{ isset($searchTerm) ? $searchTerm : "" }}">
+                            <input id="locationTextField" name="location" class="form-control" type="text" placeholder="Search Box" value="{{ isset($searchTerm) ? $searchTerm : "" }}">
+                            <input id="coordinates" name="coordinates" type="hidden" value=""/>
                         </div>
                         <input type="submit" class="btn btn-primary col-sm-2" value="Zoek parking" />
+
                 </form>
             </div>
+
+            <script>
+                function init() {
+                    var input = document.getElementById('locationTextField');
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+
+                    google.maps.event.addListener(autocomplete, 'place_changed',
+                       function() {
+                          var place = autocomplete.getPlace();
+                          var lat = place.geometry.location.lat();
+                          var lng = place.geometry.location.lng();
+                          document.getElementById("coordinates").value = lat+","+lng;
+                       }
+                    );
+                }
+
+                google.maps.event.addDomListener(window, 'load', init);
+            </script>
 
             <hr/>
 
@@ -143,6 +85,7 @@
                     <script>
                       function initialize()
                       {
+
                        var mapOptions = {
                          zoom: {{ $zoom }},
                          center: new google.maps.LatLng({{ isset($mapCenter) ? $mapCenter : ""  }})
@@ -156,12 +99,16 @@
                           title: "{{ isset($searchTerm) ? $searchTerm : "" }}"
                         });
 
+                        var input = document.getElementById('pac-input');
+                          var searchBox = new google.maps.places.SearchBox(input);
+                          map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
 
                         marker.addListener('click', function() {
                           infowindow.open(map, marker);
                         });
 
-                            setMarkers(map);
+                        setMarkers(map);
                       }
 
                       var parkings = [

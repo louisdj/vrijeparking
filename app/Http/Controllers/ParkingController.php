@@ -63,20 +63,24 @@ class ParkingController extends Controller
 
     public function vindparkingpost(Request $request) {
 
-//        dd($request->location);
-        $searchFor = str_replace(",","+", $request->location);
-        $searchFor = str_replace(" ","+", $searchFor);
+        if($request->coordinates == null) {
+            $searchFor = str_replace(",","+", $request->location);
+            $searchFor = str_replace(" ","+", $searchFor);
 
-        $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
-        $data = json_decode($json);
+            $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
+            $data = json_decode($json);
 
-//        dd($data->results[0]->geometry->location->lat);
-        $lat = $data->results[0]->geometry->location->lat;
-        $Lng = $data->results[0]->geometry->location->lng;
+            $lat = $data->results[0]->geometry->location->lat;
+            $Lng = $data->results[0]->geometry->location->lng;
+        }
+        else {
+            $lat = substr($request->coordinates, 0, strpos($request->coordinates, ','));
+            $Lng = substr($request->coordinates, strpos($request->coordinates, ',') + 1);
+        }
 
         $parkings = DB::table('parkings')
-            ->whereBetween('latitude', [$lat - 0.008, $lat + 0.008])
-            ->whereBetween('longitude', [$Lng - 0.008, $Lng + 0.008])
+            ->whereBetween('latitude', [$lat - 0.007, $lat + 0.007])
+            ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
             ->get();
 
         //key: AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
@@ -90,7 +94,7 @@ class ParkingController extends Controller
 
 
         return view('vindparking.index',
-            ['mapCenter' => "$lat, $Lng",
+            ['mapCenter' => $lat .",". $Lng,
             'parkings' => $parkings,
             'zoom' => 16,
             'searchTerm' => $request->location]);
