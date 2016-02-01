@@ -22,22 +22,33 @@
                 <div class="col-md-4">
                     @yield('parkingFoto')
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
+
+                    <h4>Omschrijving</h4>
+                    @yield('omschrijving')
+                    <br/><br/>
+
                     <h4>Address</h4>
                     @yield('adres')
                     <br/><br/>
+
                     <h4>Contact</h4>
                     @yield('contact')
+
                 </div>
-                <div class="col-md-2">
-                    <h4>Beschikbaar</h4>
-                    @yield('beschikbaarheid')
-                </div>
+                {{--<div class="col-md-2">--}}
+                    {{----}}
+                {{--</div>--}}
                 <div class="col-md-2" style="border: 1px solid black; padding:10px; text-align:center">
+                    <h4>Beschikbaar</h4>
+                                        @yield('beschikbaarheid')
+
                     <h4>Openingsuren</h4>
                     @yield('openingsUren')
                 </div>
             </div>
+
+            @yield('tarieven')
 
             <hr/>
 

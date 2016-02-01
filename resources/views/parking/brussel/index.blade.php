@@ -14,6 +14,15 @@
 @endsection
 
 
+@section('omschrijving')
+    @if($parkingDb->omschrijving != "")
+        {{ $parkingDb->omschrijving }}
+    @else
+        Geen Omschrijving
+    @endif
+
+@endsection
+
 
 @section('adres')
     {{ $parking->address_nl }}
@@ -27,14 +36,21 @@
 
 @section('beschikbaarheid')
 
-    <b>Totaal: {{ $parking->total_places }} plaatsen</b>
+    <b>Totaal: {{ $parking->total_places }} plaatsen</b><br/>
     <small>Geen realtime data  </small>
 
 @endsection
 
 
 @section('openingsUren')
-    Niet beschikbaar
+    Maandag	07:00 - 01:00
+    Dinsdag	07:00 - 01:00
+    Woensdag	07:00 - 01:00
+    Donderdag	07:00 - 01:00
+    Vrijdag	07:00 - 02:00
+    Zaterdag	07:00 - 02:00
+    Zondag	10:00 - 01:00
+    Feestdagen	10:00 - 01:00
 @endsection
 
 
