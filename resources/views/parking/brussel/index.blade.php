@@ -10,7 +10,7 @@
 @endsection
 
 @section('parkingFoto')
-    <img src="/img/parkings/Brussel/{{$parking->name_nl}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
+    <img src="/img/parkings/Brussel/{{ str_replace("'", "", str_replace(["è", 'é'], "e", $parking->name_nl)) }}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
 @endsection
 
 
@@ -43,14 +43,42 @@
 
 
 @section('openingsUren')
-    Maandag	07:00 - 01:00
-    Dinsdag	07:00 - 01:00
-    Woensdag	07:00 - 01:00
-    Donderdag	07:00 - 01:00
-    Vrijdag	07:00 - 02:00
-    Zaterdag	07:00 - 02:00
-    Zondag	10:00 - 01:00
-    Feestdagen	10:00 - 01:00
+
+    {{--<table>--}}
+        {{--<tr>--}}
+            {{--<td>Maandag</td>--}}
+            {{--<td>07:00 - 01:00</td>--}}
+        {{--</tr>--}}
+        {{--<tr>--}}
+            {{--<td>Dinsdag</td>--}}
+            {{--<td>07:00 - 01:00</td>--}}
+        {{--</tr>--}}
+        {{--<tr>--}}
+            {{--<td>Woensdag</td>--}}
+            {{--<td>07:00 - 01:00</td>--}}
+        {{--</tr>--}}
+        {{--<tr>--}}
+            {{--<td>Donderdag</td>--}}
+            {{--<td>07:00 - 01:00</td>--}}
+        {{--</tr>--}}
+        {{--<tr>--}}
+            {{--<td>Vrijdag</td>--}}
+            {{--<td>07:00 - 02:00</td>--}}
+        {{--</tr>--}}
+        {{--<tr>--}}
+            {{--<td>Zaterdag</td>--}}
+            {{--<td>07:00 - 02:00</td>--}}
+        {{--</tr>--}}
+        {{--<tr>--}}
+            {{--<td>Zondag</td>--}}
+            {{--<td>10:00 - 01:00</td>--}}
+        {{--</tr>--}}
+        {{--<tr>--}}
+            {{--<td>Feestdagen</td>--}}
+            {{--<td>10:00 - 01:00</td>--}}
+        {{--</tr>--}}
+    {{--</table>--}}
+
 @endsection
 
 

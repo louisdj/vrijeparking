@@ -7,7 +7,7 @@
 
 @section('parkingLijst')
     @foreach($data->Brussels as $parking)
-            <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ $parking->name_nl }}'">
+            <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ addslashes($parking->name_nl) }}'">
                 <td>
                     <img height="25px" src="http://www.downtownseattle.com/assets/2013/07/parking-icon.gif" alt=""/>
                     {{ $parking->name_nl }}
@@ -19,6 +19,13 @@
             </tr>
     @endforeach
 @endsection
+
+
+
+@section('beschikbaarheid')
+    <img src="https://www.b-europe.com/~/media/ImagesNew/Bestemmingen/Brussel/ImageCarrousels/Small/500x338-bruxelles-nl.ashx" alt="" width="375px"/>
+@endsection
+
 
 
 @section('parkingsOpKaartLijst')

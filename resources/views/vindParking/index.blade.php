@@ -56,7 +56,7 @@
 
             <hr/>
 
-            @if(isset($parkings))
+            @if(isset($parkings) && count($parkings) > 0)
                 <table class="table table-striped table-bordered table-hover text-center" >
                     <tr class="info"  >
                         <th class="text-center">Foto</th>
@@ -79,6 +79,12 @@
                 </table>
             @endif
 
+            @if(isset($parkings) && count($parkings) == 0)
+                <div class="alert alert-warning">
+                 <strong>0 resultaten!</strong> Wij hebben geen openbaring parkings in de buurt gevonden.
+               </div>
+            @endif
+
             <div class="row">
                 <h3>Kaart</h3>
                 <div class="col-md-12">
@@ -92,12 +98,13 @@
                        }
                        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-
+                        @if(isset($parkings))
                         var marker = new google.maps.Marker({
                           position: new google.maps.LatLng({{ $mapCenter }}),
                           map: map,
                           title: "{{ isset($searchTerm) ? $searchTerm : "" }}"
                         });
+                        @endif
 
                         var input = document.getElementById('pac-input');
                           var searchBox = new google.maps.places.SearchBox(input);

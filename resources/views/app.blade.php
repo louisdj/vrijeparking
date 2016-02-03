@@ -71,7 +71,8 @@
                             {{--<li role="separator" class="divider"></li>--}}
                             <li><a href="/stad/brussel"><img src="/img/transpa_ParkingBrussel.png" alt="parkingBrussel" width="20px"/> Stad Brussel</a></li>
                             {{--<li role="separator" class="divider"></li>--}}
-                            <li><a href="/stad/kortrijk"><img src="/img/transpa_ParkingKortrijk.png" alt="parkingKortrijk" width="20px"/> Stad Kortrijk</a></li>
+                            {{--<li><a href="/stad/kortrijk"><img src="/img/transpa_ParkingKortrijk.png" alt="parkingKortrijk" width="20px"/> Stad Kortrijk</a></li>--}}
+                            {{--Looking at source code huh? Kortrijk komt misschien binnenkort--}}
                           </ul>
                         </li>
                     <li class="page-scroll">
@@ -93,13 +94,13 @@
 
                     </div>
                     <div class="footer-col col-md-12">
-                        <h3>Volg ons op social media</h3>
+                        <h3>Social media</h3>
                         <ul class="list-inline">
                             <li>
-                                <a href="//facebook.com/vrijeparking" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                                <a href="//facebook.com/vrijeparking" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="//twitter.com/vrijeparking" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                                <a href="//twitter.com/vrijeparking" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -113,7 +114,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; VrijeParking.be 2016
+                        Copyright &copy; VrijeParking.be 2016 <br/>
+                        <a HREF="mailto:Contact@vrijeparking.be">Contact@vrijeparking.be</a>
                     </div>
                 </div>
             </div>

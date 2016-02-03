@@ -33,10 +33,12 @@
                     <h6>* Beschikbaarheid: <span style="color: #e74c3c">minder dan 10%</span>, <span style="color: #f39c12">minder dan 30%</span> </h6>
                 </div>
                 <div class="col-md-4">
-                    <div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+                    @yield('beschikbaarheid')
                 </div>
 
             </div>
+
+            @yield('twitter')
 
             <hr/>
 
