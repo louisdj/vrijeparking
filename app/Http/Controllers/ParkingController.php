@@ -67,6 +67,7 @@ class ParkingController extends Controller
             $searchFor = str_replace(",","+", $request->location);
             $searchFor = str_replace(" ","+", $searchFor);
 
+
             $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
             $data = json_decode($json);
 
