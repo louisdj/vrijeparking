@@ -93,7 +93,7 @@ class ParkingController extends Controller
 //        Ter+Platen+12+9000+Gent|amakersstraat+12&destinations=Sint-Pietersplein+65+9000+Gent&mode=bicycling&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
 
 
-        return view('vindparking.index',
+        return view('vindParking.index',
             ['mapCenter' => $lat .",". $Lng,
             'parkings' => $parkings,
             'zoom' => 16,
