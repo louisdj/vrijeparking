@@ -35,8 +35,9 @@ class ParkingController extends Controller
         $brussel = json_decode($json);
 
         $parkingDb = Parking::where('naam', $name)->first();
+        dd($parkingDb);
 
-        if($parkingDb->stad == "gent") {
+        if($parkingDb->stad == "Gent") {
             foreach($gent as $parking)
             {
                 if($parking->description == $name)
@@ -44,7 +45,7 @@ class ParkingController extends Controller
                     return view('parking.'.$parking->city->name.'.index', compact('parking', 'parkingDb'));
                 }
             }
-        } else if($parkingDb->stad == "brussel") {
+        } else if($parkingDb->stad == "Brussel") {
             foreach($brussel->brussels as $parking)
             {
                 if($parking->name_nl == $name) {

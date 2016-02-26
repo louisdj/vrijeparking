@@ -11,7 +11,7 @@
 
 
 @section('parkingFoto')
-    <img src="/img/parkings/{{ $parking->city->name }}/{{$parking->description}}.jpg" alt=""/>
+    <img src="/img/parkings/gent/{{$parking->description}}.jpg" alt=""/>
 @endsection
 
 @section('omschrijving')

@@ -10,7 +10,7 @@
 @endsection
 
 @section('parkingFoto')
-    <img src="/img/parkings/Brussel/{{ str_replace("'", "", str_replace(["è", 'é'], "e", $parking->name_nl)) }}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
+    <img src="/img/parkings/brussel/{{ str_replace("'", "", str_replace(["è", 'é'], "e", $parking->name_nl)) }}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
 @endsection
 
 
