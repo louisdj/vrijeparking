@@ -48,7 +48,7 @@ class ParkingController extends Controller
             foreach($brussel->Brussels as $parking)
             {
                 if($parking->name_nl == $name) {
-                    return view('parking.brussel.index', compact('parking', 'parkingDb'));
+                    return view('parking.Brussel.index', compact('parking', 'parkingDb'));
                 }
             }
         }
