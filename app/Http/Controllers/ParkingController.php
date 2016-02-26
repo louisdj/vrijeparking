@@ -32,7 +32,7 @@ class ParkingController extends Controller
         $gent = json_decode($json);
 
         $json = file_get_contents('http://data.irail.be/Parkings/Brussels.json');
-        $brussel = json_decode($json);
+        $Brussel = json_decode($json);
 
         $parkingDb = Parking::where('naam', $name)->first();
 
@@ -45,7 +45,7 @@ class ParkingController extends Controller
                 }
             }
         } else if($parkingDb->stad == "Brussel") {
-            foreach($brussel->brussels as $parking)
+            foreach($Brussel->Brussels as $parking)
             {
                 if($parking->name_nl == $name) {
                     return view('parking.brussel.index', compact('parking', 'parkingDb'));
