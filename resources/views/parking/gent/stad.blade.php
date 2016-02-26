@@ -8,7 +8,7 @@
 @section('parkingLijst')
     @foreach($data as $parking)
         @if(isset($parking->parkingStatus->availableCapacity))
-            <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->description) ? addslashes($parking->description) : "Niet beschikbaar" }}'" class="@if(($parking->parkingStatus->availableCapacity / $parking->parkingStatus->totalCapacity) < 0.10) danger
+            <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->description) ? strtolower(addslashes($parking->description)) : "Niet beschikbaar" }}'" class="@if(($parking->parkingStatus->availableCapacity / $parking->parkingStatus->totalCapacity) < 0.10) danger
                         @elseif(($parking->parkingStatus->availableCapacity / $parking->parkingStatus->totalCapacity) < 0.30) warning @endif">
                 <td>
                     <img height="25px" src="http://www.downtownseattle.com/assets/2013/07/parking-icon.gif" alt=""/>
