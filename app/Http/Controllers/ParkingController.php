@@ -31,7 +31,7 @@ class ParkingController extends Controller
         $json = file_get_contents('http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json');
         $gent = json_decode($json);
 
-        $json = file_get_contents('http://data.irail.be/Parkings/brussels.json');
+        $json = file_get_contents('http://data.irail.be/Parkings/Brussels.json');
         $brussel = json_decode($json);
 
         $parkingDb = Parking::where('naam', $name)->first();
