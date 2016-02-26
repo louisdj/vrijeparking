@@ -35,7 +35,6 @@ class ParkingController extends Controller
         $brussel = json_decode($json);
 
         $parkingDb = Parking::where('naam', $name)->first();
-        dd($parkingDb);
 
         if($parkingDb->stad == "Gent") {
             foreach($gent as $parking)
