@@ -31,12 +31,12 @@ class ParkingController extends Controller
         $json = file_get_contents('http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json');
         $gent = json_decode($json);
 
-        $json = file_get_contents('http://data.irail.be/Parkings/Brussels.json');
+        $json = file_get_contents('http://data.irail.be/Parkings/brussels.json');
         $brussel = json_decode($json);
 
         $parkingDb = Parking::where('naam', $name)->first();
 
-        if($parkingDb->stad == "Gent") {
+        if($parkingDb->stad == "gent") {
             foreach($gent as $parking)
             {
                 if($parking->description == $name)
@@ -44,11 +44,11 @@ class ParkingController extends Controller
                     return view('parking.'.$parking->city->name.'.index', compact('parking', 'parkingDb'));
                 }
             }
-        } else if($parkingDb->stad == "Brussel") {
-            foreach($brussel->Brussels as $parking)
+        } else if($parkingDb->stad == "brussel") {
+            foreach($brussel->brussels as $parking)
             {
                 if($parking->name_nl == $name) {
-                    return view('parking.Brussel.index', compact('parking', 'parkingDb'));
+                    return view('parking.brussel.index', compact('parking', 'parkingDb'));
                 }
             }
         }
@@ -91,7 +91,7 @@ class ParkingController extends Controller
 //        http://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
 
 //        https://maps.googleapis.com/maps/api/distancematrix/json?origins=
-//        Ter+Platen+12+9000+Gent|amakersstraat+12&destinations=Sint-Pietersplein+65+9000+Gent&mode=bicycling&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
+//        Ter+Platen+12+9000+gent|amakersstraat+12&destinations=Sint-Pietersplein+65+9000+gent&mode=bicycling&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
 
 
         return view('vindParking.index',
@@ -109,10 +109,10 @@ class ParkingController extends Controller
     //Wordt gebruikt om eenvoudig alle data vd "Parkings" tabel te inserten
     public function enterData() {
 
-//        $json = file_get_contents("http://data.irail.be/Parkings/Brussels.json");
+//        $json = file_get_contents("http://data.irail.be/Parkings/brussels.json");
 //        $data = json_decode($json);
 
-        //Gent
+        //gent
 //        foreach($data as $parking) {
 //            DB::insert("insert into parkings(naam,stad,adres, latitude, longitude) values(?, ?, ?, ?, ?)" ,
 //                [$parking->description,
@@ -122,11 +122,11 @@ class ParkingController extends Controller
 //                    $parking->longitude]);
 //        }
 
-        //Brussel
-//        foreach($data->Brussels as $parking) {
+        //brussel
+//        foreach($data->brussels as $parking) {
 //            DB::insert("insert into parkings(naam,stad,adres, latitude, longitude) values(?, ?, ?, ?, ?)" ,
 //                [$parking->name_nl,
-//                    "Brussel",
+//                    "brussel",
 //                    $parking->address_nl,
 //                    $parking->latitude,
 //                    $parking->longitude]);
