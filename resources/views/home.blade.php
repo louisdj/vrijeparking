@@ -52,7 +52,7 @@
                                 <i class="fa fa-3x">Brussel</i>
                             </div>
                         </div>
-                        <img src="http://www.odysse.nl/wp-content/uploads/2014/01/brussel.jpg" alt="">
+                        <img src="{{ asset('img/brussel.jpg') }}" alt="">
                     </a>
                 </div>
                 {{--<div class="col-sm-4 portfolio-item">--}}
