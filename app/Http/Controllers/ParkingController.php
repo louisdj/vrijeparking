@@ -37,17 +37,18 @@ class ParkingController extends Controller
         $parkingDb = Parking::where('naam', $name)->first();
 
         if($parkingDb->stad == "gent") {
+
             foreach($gent as $parking)
             {
-                if($parking->description == $name)
+                if(strtolower($parking->description) == $name)
                 {
-                    return view('parking.'.$parking->city->name.'.index', compact('parking', 'parkingDb'));
+                    return view('parking.gent.index', compact('parking', 'parkingDb'));
                 }
             }
         } else if($parkingDb->stad == "brussel") {
             foreach($Brussel->Brussels as $parking)
             {
-                if($parking->name_nl == $name) {
+                if(strtolower($parking->name_nl) == $name) {
                     return view('parking.brussel.index', compact('parking', 'parkingDb'));
                 }
             }
