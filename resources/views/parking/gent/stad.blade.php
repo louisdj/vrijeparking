@@ -56,7 +56,7 @@
 
 @section('parkingsOpKaartLijst')
     @foreach($data as $parking)
-          ["{{ isset($parking->description) ? $parking->description : "Niet beschikbaar"   }}" , {{ $parking->latitude }}, {{ $parking->longitude  }}, "/parking/{{ isset($parking->description) ? $parking->description : "Niet beschikbaar"  }}"],
+          ["{{ isset($parking->description) ? $parking->description : "Niet beschikbaar"   }}" , {{ $parking->latitude }}, {{ $parking->longitude  }}, "/parking/{{ isset($parking->description) ? strtolower($parking->description) : "Niet beschikbaar"  }}"],
       @endforeach
 @endsection
 

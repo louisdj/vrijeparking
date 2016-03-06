@@ -30,7 +30,7 @@
 
 @section('parkingsOpKaartLijst')
     @foreach($data->Brussels as $parking)
-        ["{{ $parking->name_nl  }}" , {{ $parking->latitude }}, {{ $parking->longitude  }}, "/parking/{{ $parking->name_nl }}"],
+        ["{{ $parking->name_nl  }}" , {{ $parking->latitude }}, {{ $parking->longitude  }}, "/parking/{{ strtolower($parking->name_nl) }}"],
     @endforeach
 @endsection
 
