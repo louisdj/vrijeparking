@@ -20,9 +20,9 @@
 
     <section id="portfolio">
         <div class="container">
-            <div class="row" style="margin-top: -100px;">
+            <div class="row" style="margin-top: -75px;">
                 <div class="col-lg-12 text-center">
-                    <img src="/img/parkingBelgie.png" alt="kaartBelgië"/>
+                    <img class="img-responsive" src="/img/parkingBelgie.png" alt="kaartBelgië" style="margin: 0 auto"/>
                 </div>
             </div>
 

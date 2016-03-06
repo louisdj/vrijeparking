@@ -27,12 +27,15 @@
             <div class="row">
                 <form action="/vindparking" method="post">
                     <label for="locatie">Vind parkeerplek nabij uw locatie</label><br>
-                        <div class="col-sm-10">
-                            <input id="locationTextField" name="location" class="form-control" type="text" placeholder="Search Box" value="{{ isset($searchTerm) ? $searchTerm : "" }}">
-                            <input id="coordinates" name="coordinates" type="hidden" value=""/>
+                        <div class="form-group">
+                            <div class="col-xs-10">
+                                    <input id="locationTextField" name="location" class="form-control" type="text" placeholder="Search Box" value="{{ isset($searchTerm) ? $searchTerm : "" }}">
+                                    <input id="coordinates" name="coordinates" type="hidden" value=""/>
+                            </div>
+                            <div class="col-xs-2">
+                                <input type="submit" class="btn btn-primary" value="Zoek parking" />
+                            </div>
                         </div>
-                        <input type="submit" class="btn btn-primary col-sm-2" value="Zoek parking" />
-
                 </form>
             </div>
 
