@@ -52,7 +52,7 @@
 
 </head>
 
-<body id="page-top" class="index">
+<body id="page-top" class="index">a
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -164,7 +164,7 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-    <script src="/js/chart.js"></script>
+    @yield('scripts');
 
 
 </body>

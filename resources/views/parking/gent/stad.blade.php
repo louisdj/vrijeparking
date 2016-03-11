@@ -78,3 +78,7 @@
         @endif
       @endforeach
 @endsection
+
+@section('scripts')
+    <script src="/js/chart.js"></script>
+@endsection

@@ -74,3 +74,7 @@
         {{ $parking->total_places }} +
     @endforeach
 @endsection
+
+@section('scripts')
+    <script src="/js/chart.js"></script>
+@endsection
