@@ -28,7 +28,7 @@
                     @yield('omschrijving')
                     <br/><br/>
 
-                    <h4>Address</h4>
+                    <h4>Adres</h4>
                     @yield('adres')
                     <br/><br/>
 
