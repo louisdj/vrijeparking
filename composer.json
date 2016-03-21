@@ -6,9 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
-        "orchestra/parser": "^3.2",
-        "soapbox/laravel-formatter": "^2.0"
+        "laravel/framework": "5.2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

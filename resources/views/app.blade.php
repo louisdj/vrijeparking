@@ -52,7 +52,7 @@
 
 </head>
 
-<body id="page-top" class="index">a
+<body id="page-top" class="index">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -84,7 +84,7 @@
                             {{--<li role="separator" class="divider"></li>--}}
                             <li><a href="/stad/brussel"><img src="/img/transpa_ParkingBrussel.png" alt="parkingBrussel" width="20px"/> Stad Brussel</a></li>
                             {{--<li role="separator" class="divider"></li>--}}
-                            {{--<li><a href="/stad/kortrijk"><img src="/img/transpa_ParkingKortrijk.png" alt="parkingKortrijk" width="20px"/> Stad Kortrijk</a></li>--}}
+                            <li><a href="/stad/kortrijk"><img src="/img/transpa_ParkingKortrijk.png" alt="parkingKortrijk" width="20px"/> Stad Kortrijk</a></li>
                             {{--Looking at source code huh? Kortrijk komt misschien binnenkort--}}
                           </ul>
                         </li>
