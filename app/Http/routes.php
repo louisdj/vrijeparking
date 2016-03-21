@@ -37,3 +37,12 @@ Route::get('/vindparking', 'ParkingController@vindparking');
 Route::post('/vindparking', 'ParkingController@vindparkingpost');
 
 //Route::get('/update', 'ParkingController@enterData');
+
+
+Route::group(['prefix' => 'api'], function () {
+
+    Route::get('/steden', 'ApiController@steden');
+    Route::get('/parking/{parking}', 'ApiController@parking');
+    Route::get('/parkings/{stad}', 'ApiController@parkings');
+
+});
