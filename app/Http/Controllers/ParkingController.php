@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+//use \XmlParser;
+//use SoapBox\Formatter\Formatter;
+
+
 
 class ParkingController extends Controller
 {
@@ -18,10 +22,18 @@ class ParkingController extends Controller
         if (empty($url)) {
             return redirect('/');
         }
+        else if($stad == "kortrijk") {
+            $formatter = Formatter::make(file_get_contents($url[0]->url), Formatter::XML);
+            $json  = $formatter->toJson();
+
+
+        }
         else {
             $json = file_get_contents($url[0]->url);
             $data = json_decode($json);
         }
+
+//        $data = Parking::where('stad', $stad)->all();
 
         return view('parking.'.$stad.'.stad', compact('stad', 'data'));
     }
