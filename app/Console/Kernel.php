@@ -41,6 +41,6 @@ class Kernel extends ConsoleKernel
                     ['parking_id' => $id[0]->id, 'bezetting' => $parking->parkingStatus->availableCapacity]
                 ]);
             }
-        })->everyMinute();
+        })->everyFiveMinutes();
     }
 }
