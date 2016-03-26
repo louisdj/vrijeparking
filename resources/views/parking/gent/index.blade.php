@@ -121,6 +121,144 @@
 
 
 
+@section('voorspelling')
+
+    <hr/>
+    <h4>Voorspelling</h4>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    <script>
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: 'Bezetting parking Vrijdagmarkt'
+                },
+                subtitle: {
+                    text: 'Gemiddelde <?php echo(date('l')) ?>'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Bezetting parking'
+                    },
+                    minorGridLineWidth: 0,
+                    gridLineWidth: 0,
+                    alternateGridColor: null,
+                    plotBands: [{ // Light air
+                        from: 0.0,
+                        to: 100.0,
+                        color: 'rgba(68, 170, 213, 0.1)',
+                        label: {
+                            text: 'Leeg',
+                            style: {
+                                color: '#606060'
+                            }
+                        }
+                    }, { // Light breeze
+                        from: 100,
+                        to: 200,
+                        color: 'rgba(0, 0, 0, 0)',
+                        label: {
+                            text: 'Lichte bezetting',
+                            style: {
+                                color: '#606060'
+                            }
+                        }
+                    }, { // Gentle breeze
+                        from: 200,
+                        to: 300,
+                        color: 'rgba(68, 170, 213, 0.1)',
+                        label: {
+                            text: 'Gemiddeld',
+                            style: {
+                                color: '#606060'
+                            }
+                        }
+                    }, { // Moderate breeze
+                        from: 300,
+                        to: 400,
+                        color: 'rgba(0, 0, 0, 0)',
+                        label: {
+                            text: 'Druk',
+                            style: {
+                                color: '#606060'
+                            }
+                        }
+                    }, { // Fresh breeze
+                        from: 500,
+                        to: 600,
+                        color: 'rgba(68, 170, 213, 0.1)',
+                        label: {
+                            text: 'Bijna vol',
+                            style: {
+                                color: '#606060'
+                            }
+                        }
+                    }, { // Strong breeze
+                        from: 600,
+                        to: 650,
+                        color: 'rgba(0, 0, 0, 0)',
+                        label: {
+                            text: 'Volzet',
+                            style: {
+                                color: '#606060'
+                            }
+                        }
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ' bezet'
+                },
+                plotOptions: {
+                    spline: {
+                        lineWidth: 4,
+                        states: {
+                            hover: {
+                                lineWidth: 5
+                            }
+                        },
+                        marker: {
+                            enabled: false
+                        },
+                        pointInterval: 300000, // one hour
+                        pointStart: Date.UTC(2016, 2, 25, 0, 0, 0)
+                    }
+                },
+                series: [{
+                    name: 'Vorige week',
+                    data: [
+
+                    @foreach($result as $enkel)
+                                        {{ $enkel->bezetting }},
+                    @endforeach
+
+                    ]
+
+                }, {
+                    name: 'Gemiddeld',
+                    data: []
+                }],
+                navigation: {
+                    menuItemStyle: {
+                        fontSize: '10px'
+                    }
+                }
+            });
+        });
+    </script>
+
+@endsection
+
+
+
 @section('parkingLocatie')
     "{{ $parking->latitude }}", "{{ $parking->longitude  }}"
 @endsection

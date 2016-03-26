@@ -46,3 +46,5 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/parkings/{stad}', 'ApiController@parkings');
 
 });
+
+Route::get('/graph', 'ParkingController@graph');

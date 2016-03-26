@@ -50,6 +50,8 @@
 
             @yield('tarieven')
 
+            @yield('voorspelling')
+
             <hr/>
 
             <div class="row">

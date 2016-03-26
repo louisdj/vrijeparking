@@ -23,10 +23,9 @@ class ParkingController extends Controller
             return redirect('/');
         }
         else if($stad == "kortrijk") {
-            $formatter = Formatter::make(file_get_contents($url[0]->url), Formatter::XML);
-            $json  = $formatter->toJson();
+            $parkings = Parking::all()->where('stad', 'kortrijk');
 
-
+            return view('parking.kortrijk.stad', compact('stad','parkings'));
         }
         else {
             $json = file_get_contents($url[0]->url);
@@ -48,13 +47,20 @@ class ParkingController extends Controller
 
         $parkingDb = Parking::where('naam', $name)->first();
 
+        $result = DB::table('parkings_historie')
+            ->select('bezetting')
+            ->where('parking_id', $parkingDb->id)
+            ->where('updated_at', '>', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
+            ->where('updated_at', '<', date('Y-m-d', strtotime('-6 days')).' 00:00:00')
+            ->get();
+
         if($parkingDb->stad == "gent") {
 
             foreach($gent as $parking)
             {
                 if(strtolower($parking->description) == $name)
                 {
-                    return view('parking.gent.index', compact('parking', 'parkingDb'));
+                    return view('parking.gent.index', compact('parking', 'parkingDb', 'result'));
                 }
             }
         } else if($parkingDb->stad == "brussel") {
@@ -115,6 +121,19 @@ class ParkingController extends Controller
     }
 
 
+    public function graph() {
+        $result = DB::table('parkings_historie')
+            ->select('bezetting')
+            ->where('parking_id', 7)
+            ->where('updated_at', '>', '2016-03-25 00:00:00')
+            ->where('updated_at', '<', '2016-03-26 00:00:00')
+            ->get();
+
+
+//        $result = DB::select('b')
+
+        return view('testGraph', compact('result'));
+    }
 
 
 

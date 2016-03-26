@@ -34,11 +34,23 @@ class Kernel extends ConsoleKernel
 
             foreach($gent as $parking)
             {
-                Parking::where('naam', strtolower($parking->description))->update(['beschikbare_plaatsen' => $parking->parkingStatus->availableCapacity]);
+                Parking::where('naam', strtolower($parking->description))->update(['beschikbare_plaatsen' => ($parking->parkingStatus->totalCapacity - $parking->parkingStatus->availableCapacity)]);
                 $id = DB::table('parkings')->select('id')->where('naam', strtolower($parking->description))->get();
 
                 DB::table('parkings_historie')->insert([
-                    ['parking_id' => $id[0]->id, 'bezetting' => $parking->parkingStatus->availableCapacity]
+                    ['parking_id' => $id[0]->id, 'bezetting' => ($parking->parkingStatus->totalCapacity - $parking->parkingStatus->availableCapacity)]
+                ]);
+            }
+
+            foreach(Parking::all()->where('stad', 'kortrijk') as $parking)
+            {
+                $bezetting = file_get_contents('http://www.parko.be/drk_parko_realtime_info.php?parking='.str_replace(" ", "%20", $parking->naam).'');
+                $bezetting = substr($bezetting,strpos($bezetting, 'availableSpacesText\u0022\u003E') + 31,3);
+
+                Parking::where('naam', $parking->naam)->update(['beschikbare_plaatsen' => stripslashes($bezetting)]);
+
+                DB::table('parkings_historie')->insert([
+                    ['parking_id' => $parking->id, 'bezetting' => ($parking->totaal_plaatsen - stripslashes($bezetting))]
                 ]);
             }
         })->everyFiveMinutes();
