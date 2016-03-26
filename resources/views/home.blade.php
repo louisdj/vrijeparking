@@ -31,8 +31,7 @@
                     <h2>Steden</h2><br/>
                 </div>
             </div>
-            <div class="col-sm-2 portfolio-item">
-            </div>
+
 
             <div class="row" text-align="center">
                 <div class="col-md-4 portfolio-item">
@@ -55,16 +54,16 @@
                         <img src="{{ asset('img/brussel.jpg') }}" alt="">
                     </a>
                 </div>
-                {{--<div class="col-sm-4 portfolio-item">--}}
-                    {{--<a href="/stad/kortrijk" class="portfolio-link" data-toggle="modal">--}}
-                        {{--<div class="caption" >--}}
-                            {{--<div class="caption-content">--}}
-                                {{--<i class="fa fa-3x">Kortrijk</i>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<img src="https://upload.wikimedia.org/wikipedia/commons/6/61/KortrijkBroeltorens.JPG" alt="">--}}
-                    {{--</a>--}}
-                {{--</div>--}}
+                <div class="col-sm-4 portfolio-item">
+                    <a href="/stad/kortrijk" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-3x">Kortrijk</i>
+                            </div>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/KortrijkBroeltorens.JPG" alt="">
+                    </a>
+                </div>
             </div>
         </div>
     </section>
