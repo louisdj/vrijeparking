@@ -24,7 +24,7 @@
             <hr/>
 
             <div class="row">
-                <div class="col-xs-3 col-md-offset-3" align="center">
+                <div class="col-sm-3 col-md-offset-3" align="center">
                     <div class="row">
                         <img src="/img/team/robbert.jpg" width="200px" class="img-circle">
                     </div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-3" align="center">
+                <div class="col-sm-3" align="center">
                     <div class="row">
                         <img src="/img/team/louis.jpg" width="200px" class="img-circle">
                     </div>
