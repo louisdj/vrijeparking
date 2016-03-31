@@ -50,8 +50,8 @@ class ParkingController extends Controller
         $result = DB::table('parkings_historie')
             ->select('bezetting')
             ->where('parking_id', $parkingDb->id)
-            ->where('updated_at', '>', date('Y-m-d', strtotime('-8 days')).' 00:00:00')
-            ->where('updated_at', '<', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
+            ->where('updated_at', '>', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
+            ->where('updated_at', '<', date('Y-m-d', strtotime('-6 days')).' 00:00:00')
             ->get();
 
         if($parkingDb->stad == "gent") {
