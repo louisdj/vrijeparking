@@ -99,7 +99,7 @@
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Extra <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            {{--<li><a href="/blog"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Blog</a></li>--}}
+                            <li><a href="/blog"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Blog</a></li>
                             <li><a href="/team"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Team</a></li>
                         </ul>
                     </li>

@@ -39,6 +39,8 @@ Route::post('/vindparking', 'ParkingController@vindparkingpost');
 Route::get('/team', 'ExtraController@team');
 Route::get('/blog', 'ExtraController@blog');
 
+Route::get('/blog/{titel}', 'ExtraController@blogPost');
+
 
 //Route::get('/update', 'ParkingController@enterData');
 
