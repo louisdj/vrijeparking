@@ -50,8 +50,8 @@ class ParkingController extends Controller
         $result = DB::table('parkings_historie')
             ->select('bezetting')
             ->where('parking_id', $parkingDb->id)
-            ->where('updated_at', '>', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
-            ->where('updated_at', '<', date('Y-m-d', strtotime('-6 days')).' 00:00:00')
+            ->where('updated_at', '>', date('Y-m-d', strtotime('-8 days')).' 00:00:00')
+            ->where('updated_at', '<', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
             ->get();
 
         if($parkingDb->stad == "gent") {
@@ -124,9 +124,9 @@ class ParkingController extends Controller
     public function graph() {
         $result = DB::table('parkings_historie')
             ->select('bezetting')
-            ->where('parking_id', 7)
-            ->where('updated_at', '>', '2016-03-25 00:00:00')
-            ->where('updated_at', '<', '2016-03-26 00:00:00')
+            ->where('parking_id', 3)
+            ->where('updated_at', '>', date('Y-m-d', strtotime('-3 days')).' 00:00:00')
+            ->where('updated_at', '<', date('Y-m-d', strtotime('-2 days')).' 00:00:00')
             ->get();
 
 
