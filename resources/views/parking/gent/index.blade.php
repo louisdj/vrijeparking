@@ -134,10 +134,10 @@
                     type: 'spline'
                 },
                 title: {
-                    text: 'Bezetting parking Vrijdagmarkt'
+                    text: 'Bezetting parking'
                 },
                 subtitle: {
-                    text: 'Gemiddelde <?php echo(date('l')) ?>'
+                    text: '<?php echo(date('l')) ?>'
                 },
                 xAxis: {
                     type: 'datetime',
@@ -229,7 +229,7 @@
                             enabled: false
                         },
                         pointInterval: 300000, // one hour
-                        pointStart: Date.UTC(2016, 2, 25, 0, 0, 0)
+                        pointStart: Date.UTC({{ date('Y,m,d', strtotime('- 1 month -7 days')) }}, 0, 0, 0)
                     }
                 },
                 series: [{
