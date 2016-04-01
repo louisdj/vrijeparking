@@ -137,6 +137,11 @@ class ParkingController extends Controller
 
 
 
+    public function antwerpen() {
+
+        return view('extra.antwerpen');
+    }
+
 
     //Wordt gebruikt om eenvoudig alle data vd "Parkings" tabel te inserten
     public function enterData() {

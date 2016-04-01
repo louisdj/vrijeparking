@@ -41,6 +41,8 @@ Route::get('/blog', 'ExtraController@blog');
 
 Route::get('/blog/{titel}', 'ExtraController@blogPost');
 
+Route::get('/antwerpen', 'ParkingController@antwerpen');
+
 
 //Route::get('/update', 'ParkingController@enterData');
 
