@@ -36,7 +36,7 @@
                         <a href="/blog/{{ $post->titel }}"><h3>{{ $post->titel }}</h3></a>
                     </div>
                     <div class="row">
-                        {{ substr($post->inhoud, 0, 300) }} <a href="/blog/{{ $post->titel }}">Read more..</a>
+                        {{ substr(strip_tags($post->inhoud), 0, 300) }}... <a href="/blog/{{ $post->titel }}"> Lees meer</a>
                         <br/>
                         <b><i>door {{ $post->auteur }}</i></b><br/>
                     </div>
