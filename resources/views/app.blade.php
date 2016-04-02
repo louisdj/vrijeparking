@@ -46,6 +46,8 @@
 
     </script>
 
+    @yield('head')
+
     <style>
       #map {
         width: 100%;

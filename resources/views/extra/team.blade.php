@@ -40,7 +40,7 @@
                     </div>
                     <div class="row"><br/>
                         <b>Louis De Jaeger</b> <br/>
-                        Mobile App
+                        Mobile App/PR
                     </div>
                 </div>
             </div>
