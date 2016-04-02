@@ -236,8 +236,8 @@
                     name: 'Vorige week',
                     data: [
 
-                    @foreach($result as $enkel)
-                                        {{ $enkel->bezetting }},
+                    @foreach($historie as $tijdstip)
+                                        {{ $tijdstip->bezetting }},
                     @endforeach
 
                     ]

@@ -39,6 +39,8 @@ class ParkingController extends Controller
 
     public function parking($name)
     {
+        //TODO: data uit eigen db halen ipv online
+
         $json = file_get_contents('http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json');
         $gent = json_decode($json);
 
@@ -47,7 +49,7 @@ class ParkingController extends Controller
 
         $parkingDb = Parking::where('naam', $name)->first();
 
-        $result = DB::table('parkings_historie')
+        $historie = DB::table('parkings_historie')
             ->select('bezetting')
             ->where('parking_id', $parkingDb->id)
             ->where('updated_at', '>', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
@@ -60,7 +62,7 @@ class ParkingController extends Controller
             {
                 if(strtolower($parking->description) == $name)
                 {
-                    return view('parking.gent.index', compact('parking', 'parkingDb', 'result'));
+                    return view('parking.gent.index', compact('parking', 'parkingDb', 'historie'));
                 }
             }
         } else if($parkingDb->stad == "brussel") {
@@ -70,6 +72,11 @@ class ParkingController extends Controller
                     return view('parking.brussel.index', compact('parking', 'parkingDb'));
                 }
             }
+        } else if($parkingDb->stad == "kortrijk") {
+
+            $parking = Parking::where('naam', $name)->first();
+
+            return view('parking.kortrijk.parking_template', compact('parking', 'historie'));
         }
 
         return redirect()->back();
