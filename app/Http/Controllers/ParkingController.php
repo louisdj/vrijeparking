@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Openingsuren;
 use App\Parking;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
 //use \XmlParser;
 //use SoapBox\Formatter\Formatter;
 
@@ -72,11 +75,13 @@ class ParkingController extends Controller
                     return view('parking.brussel.index', compact('parking', 'parkingDb'));
                 }
             }
-        } else if($parkingDb->stad == "kortrijk") {
+        }
+        else if($parkingDb->stad == "kortrijk") {
 
             $parking = Parking::where('naam', $name)->first();
+            $openingsuren = Openingsuren::where('parking_id', $parkingDb->id)->get();
 
-            return view('parking.kortrijk.parking_template', compact('parking', 'historie'));
+            return view('parking.kortrijk.parking_template', compact('parking', 'openingsuren', 'historie'));
         }
 
         return redirect()->back();

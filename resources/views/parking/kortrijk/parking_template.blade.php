@@ -33,7 +33,7 @@
                     <br/><br/>
 
                     <h4>Contact</h4>
-                        <b>Tel</b> 056 28 12 12 <b>Fax</b> 056 28 12 13 <i>info@parko.be</i>
+                        <b>Tel</b> 056 28 12 12  <br/>info@parko.be
 
 
                 </div>
@@ -51,7 +51,19 @@
                     </div>
 
                     <h4>Openingsuren</h4>
-                    Niet beschikbaar.
+
+                    <?php $dowMap = array('Ma', 'Di', 'Woe', 'Do', 'Vrij', 'Zat', 'Zon'); ?>
+
+                    <table align="center" style="border-collapse:separate; border-spacing: 5px;">
+
+                        @foreach($openingsuren as $dag)
+                            <tr>
+                                <td><b>{{ $dowMap[$dag->dag -1]  }}</b></td>
+                                <td>{{ date('H:i', strtotime($dag->openingsuur)) }} - {{ date('H:i', strtotime($dag->sluitingsuur)) }}</td>
+                            </tr>
+                        @endforeach
+
+                    </table>
                 </div>
             </div>
 

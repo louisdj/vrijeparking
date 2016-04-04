@@ -23,25 +23,36 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+Route::group(['middleware' => 'web'], function () {
+
+    Route::get('/', function () {
+            return view('home');
+        });
+
+    Route::get('/stad/{stad}', 'ParkingController@stad');
+    Route::get('/parking/{parking}', 'ParkingController@parking');
+
+    Route::get('/vindparking', 'ParkingController@vindparking');
+    Route::post('/vindparking', 'ParkingController@vindparkingpost');
+
+    Route::get('/team', 'ExtraController@team');
+    Route::get('/blog', 'ExtraController@blog');
+
+    Route::get('/blog/{titel}', 'ExtraController@blogPost');
+
+    Route::get('/antwerpen', 'ParkingController@antwerpen');
+
+
+    Route::get('/taal/{locale}', function ($locale)
+    {
+        Session::set('locale', $locale);
+        App::setLocale($locale);
+
+        return View::make('home');
+    });
+
 });
 
-
-Route::get('/', function() { return view('home'); });
-
-Route::get('/stad/{stad}', 'ParkingController@stad');
-Route::get('/parking/{parking}', 'ParkingController@parking');
-
-Route::get('/vindparking', 'ParkingController@vindparking');
-Route::post('/vindparking', 'ParkingController@vindparkingpost');
-
-Route::get('/team', 'ExtraController@team');
-Route::get('/blog', 'ExtraController@blog');
-
-Route::get('/blog/{titel}', 'ExtraController@blogPost');
-
-Route::get('/antwerpen', 'ParkingController@antwerpen');
 
 
 //Route::get('/update', 'ParkingController@enterData');
