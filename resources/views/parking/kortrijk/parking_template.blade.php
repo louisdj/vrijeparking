@@ -57,7 +57,7 @@
                     <table align="center" style="border-collapse:separate; border-spacing: 5px;">
 
                         @foreach($openingsuren as $dag)
-                            <tr>
+                            <tr @if(date('w') == $dag->dag)style="font-weight: bold; color: royalblue; font-size: 17px;" @endif>
                                 <td><b>{{ $dowMap[$dag->dag -1]  }}</b></td>
                                 <td>{{ date('H:i', strtotime($dag->openingsuur)) }} - {{ date('H:i', strtotime($dag->sluitingsuur)) }}</td>
                             </tr>
