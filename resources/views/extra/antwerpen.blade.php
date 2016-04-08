@@ -15,7 +15,7 @@
     <section id="portfolio">
         <div class="container">
 
-            <?php echo date('r') ?>
+            <?php echo date("Y-m-d H:i:s e"); ?>
 
             <p>
                 Aangezien wij veel problemen ondervonden met gebruikers uit Antwerpen die niet
