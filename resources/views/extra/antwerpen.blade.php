@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<?php date_default_timezone_set('Europe/Brussels'); ?>
 
     <header>
         <div class="container" style="padding-top:110px">
