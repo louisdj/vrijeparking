@@ -229,7 +229,7 @@
                             enabled: false
                         },
                         pointInterval: 300000, // one hour
-                        pointStart: Date.UTC({{ date('Y,m,d', strtotime('-9 days')) }}, 0, 0, 0)
+                        pointStart: Date.UTC({{ date('Y,m,d', strtotime('-15 days')) }}, 0, 0, 0)
                     }
                 },
                 series: [{
