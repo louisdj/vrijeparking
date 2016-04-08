@@ -15,6 +15,8 @@
     <section id="portfolio">
         <div class="container">
 
+            <?php echo date('r') ?>
+
             <p>
                 Aangezien wij veel problemen ondervonden met gebruikers uit Antwerpen die niet
                 goed begrepen waar ze precies konden parkeren, hebben we speciaal deze extra sectie
