@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Betaalmogelijkheden;
 use App\Openingsuren;
 use App\Parking;
+use App\Tarief;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -81,7 +83,14 @@ class ParkingController extends Controller
             $parking = Parking::where('naam', $name)->first();
             $openingsuren = Openingsuren::where('parking_id', $parkingDb->id)->get();
 
-            return view('parking.kortrijk.parking_template', compact('parking', 'openingsuren', 'historie'));
+            $parking_betaalmogelijkheden = Betaalmogelijkheden::where('parking_id', $parkingDb->id)->get();
+
+            $tarievenDag = Tarief::where('parking_id', $parkingDb->id)->where('moment', 'dag')->get();
+            $tarievenNacht = Tarief::where('parking_id', $parkingDb->id)->where('moment', 'nacht')->get();
+
+
+            return view('parking.kortrijk.parking_template',
+                compact('parking', 'openingsuren', 'historie', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht'));
         }
 
         return redirect()->back();

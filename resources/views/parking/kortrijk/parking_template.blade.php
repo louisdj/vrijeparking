@@ -21,6 +21,16 @@
                 {{--<h3>Details</h3>--}}
                 <div class="col-md-4">
                     <img src="/img/parkings/{{ $parking->stad }}/{{strtolower($parking->naam)}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
+
+                    <?php $mogelijkheden = array('Maestro', 'Bancontact', 'Visa', 'Mastercard', 'Cash'); ?>
+                    <br/><br/>
+
+                    @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
+                        <img src="/img/betaalmogelijkheden/{{ strtolower($mogelijkheden[$betaalmogelijkheid->betaling_id-1]) }}.png"
+                        width="45px" alt="{{ $mogelijkheden[$betaalmogelijkheid->betaling_id] }}" style="padding-right: 5px;" />
+                    @endforeach
+
+
                 </div>
                 <div class="col-md-6">
 
@@ -68,8 +78,38 @@
             </div>
 
             <hr/>
+
+
+
             <h4>Tarieven</h4>
-            Niet beschikbaar
+            @if(count($tarievenDag) == 0) Niet beschikbaar @endif
+            <h6>{{ $parking->dagtarief }}</h6>
+            <table class="table table-bordered">
+                <tr class="info">
+                    @foreach($tarievenDag as $tarief)
+                        <th>{{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u</th>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($tarievenDag as $tarief)
+                        <td>@if($tarief->prijs == 0) Gratis @else €{{ number_format($tarief->prijs, 2) }} @endif</td>
+                    @endforeach
+                </tr>
+            </table>
+
+            <h6>{{ $parking->nachttarief }}</h6>
+            <table class="table table-bordered">
+                <tr class="info">
+                    @foreach($tarievenNacht as $tarief)
+                        <th>{{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u</th>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach($tarievenNacht as $tarief)
+                        <td>@if($tarief->prijs == 0) Gratis @else €{{ number_format($tarief->prijs, 2) }} @endif</td>
+                    @endforeach
+                </tr>
+            </table>
 
             <hr/>
             <h4>Voorspelling</h4>
