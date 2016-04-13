@@ -22,7 +22,7 @@
                 <div class="col-md-4">
                     <img src="/img/parkings/{{ $parking->stad }}/{{strtolower($parking->naam)}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
 
-                    <?php $mogelijkheden = array('Maestro', 'Bancontact', 'Visa', 'Mastercard', 'Cash', ''); ?>
+                    <?php $mogelijkheden = array('Maestro', 'Bancontact', 'Visa', 'Mastercard', 'Cash', 'Iets', 'anders'); ?>
                     <br/><br/>
 
                     @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
