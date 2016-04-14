@@ -31,6 +31,7 @@
                             <div class="col-xs-10">
                                     <input id="locationTextField" name="location" class="form-control" type="text" placeholder="Search Box" value="{{ isset($searchTerm) ? $searchTerm : "" }}">
                                     <input id="coordinates" name="coordinates" type="hidden" value=""/>
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                             </div>
                             <div class="col-xs-2">
                                 <input type="submit" class="btn btn-primary" value="Zoek parking" />
