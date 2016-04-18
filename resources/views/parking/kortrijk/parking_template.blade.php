@@ -54,10 +54,22 @@
                 <div class="col-md-2" style="border: 1px solid black; padding:10px; text-align:center">
                     <h4>Beschikbaar</h4>
 
+                    <style>
+                        .progress {
+                          position: relative;
+                        }
+
+                        .progress span {
+                            position: absolute;
+                            display: block;
+                            width: 100%;
+                        }
+                    </style>
+
                     <div class="progress" style="height:20px; vertical-align: bottom; background-color: red;">
                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
                         style="width: {{ round(($parking->beschikbare_plaatsen  /  $parking->totaal_plaatsen) * 100) }}%; font-size:20px; padding-top: 4px;">
-                        {{ round(($parking->beschikbare_plaatsen  /  $parking->totaal_plaatsen) * 100) }}%
+                            <span class="show">{{ round(($parking->beschikbare_plaatsen  /  $parking->totaal_plaatsen) * 100) }}% ({{$parking->beschikbare_plaatsen}}/{{$parking->totaal_plaatsen}})</span>
                         </div>
                     </div>
 
@@ -226,7 +238,7 @@
                             data: [
 
                             @foreach($historie as $tijdstip)
-                                                {{ $tijdstip->bezetting }},
+                                {{ $tijdstip->bezetting }},
                             @endforeach
 
                             ]
