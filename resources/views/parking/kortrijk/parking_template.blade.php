@@ -26,10 +26,11 @@
                     <br/><br/>
 
                     @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
-                        <img src="/img/betaalmogelijkheden/{{ strtolower($mogelijkheden[$betaalmogelijkheid->betaling_id-1]) }}.png"
-                        width="45px" alt="{{ $mogelijkheden[$betaalmogelijkheid->betaling_id] }}" style="padding-right: 5px;" />
-                    @endforeach
+                        {{--{{ dd($betaalmogelijkheid->Betaalmiddel) }}--}}
 
+                        <img src="/img/betaalmogelijkheden/{{ $mogelijkheden[$betaalmogelijkheid->betaling_id-1] }}.png"
+                        width="45px" alt="" style="padding-right: 5px;" />
+                    @endforeach
 
                 </div>
                 <div class="col-md-6">
@@ -216,7 +217,7 @@
                                 marker: {
                                     enabled: false
                                 },
-                                pointInterval: 300000, // one hour
+                                pointInterval: 3600000, // one hour
                                 pointStart: Date.UTC({{ date('Y,m,d', strtotime(' -7 days')) }}, 0, 0, 0)
                             }
                         },
