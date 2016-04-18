@@ -28,7 +28,7 @@
                     @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
                         {{--{{ dd($betaalmogelijkheid->Betaalmiddel) }}--}}
 
-                        <img src="/img/betaalmogelijkheden/{{ $mogelijkheden[$betaalmogelijkheid->betaling_id-1] }}.png"
+                        <img src="/img/betaalmogelijkheden/{{ strtolower($mogelijkheden[$betaalmogelijkheid->betaling_id-1]) }}.png"
                         width="45px" alt="" style="padding-right: 5px;" />
                     @endforeach
 
