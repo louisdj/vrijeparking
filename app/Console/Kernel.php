@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
 
             foreach($gent as $parking)
             {
-                Parking::where('naam', strtolower($parking->description))->update(['beschikbare_plaatsen' => ($parking->parkingStatus->totalCapacity - $parking->parkingStatus->availableCapacity)]);
+                Parking::where('naam', strtolower($parking->description))->update(['beschikbare_plaatsen' => ($parking->parkingStatus->availableCapacity)]);
                 $id = DB::table('parkings')->select('id')->where('naam', strtolower($parking->description))->get();
 
                 DB::table('parkings_historie')->insert([
