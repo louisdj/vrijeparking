@@ -44,54 +44,25 @@ class ParkingController extends Controller
 
     public function parking($name)
     {
-        //TODO: data uit eigen db halen ipv online
-
-        $json = file_get_contents('http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json');
-        $gent = json_decode($json);
-
-        $json = file_get_contents('http://data.irail.be/Parkings/Brussels.json');
-        $Brussel = json_decode($json);
-
-        $parkingDb = Parking::where('naam', $name)->first();
+        $parking = Parking::where('naam', $name)->first();
 
         $historie = DB::table('parkings_historie')
             ->select('bezetting')
-            ->where('parking_id', $parkingDb->id)
+            ->where('parking_id', $parking->id)
             ->where('updated_at', '>', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
             ->where('updated_at', '<', date('Y-m-d', strtotime('-6 days')).' 00:00:00')
             ->get();
 
-        if($parkingDb->stad == "gent") {
+        $openingsuren = Openingsuren::where('parking_id', $parking->id)->get();
 
-            foreach($gent as $parking)
-            {
-                if(strtolower($parking->description) == $name)
-                {
-                    return view('parking.gent.index', compact('parking', 'parkingDb', 'historie'));
-                }
-            }
-        } else if($parkingDb->stad == "brussel") {
-            foreach($Brussel->Brussels as $parking)
-            {
-                if(strtolower($parking->name_nl) == $name) {
-                    return view('parking.brussel.index', compact('parking', 'parkingDb'));
-                }
-            }
-        }
-        else if($parkingDb->stad == "kortrijk") {
+        $parking_betaalmogelijkheden = Betaalmogelijkheden::where('parking_id', $parking->id)->get();
 
-            $parking = Parking::where('naam', $name)->first();
-            $openingsuren = Openingsuren::where('parking_id', $parkingDb->id)->get();
-
-            $parking_betaalmogelijkheden = Betaalmogelijkheden::where('parking_id', $parkingDb->id)->get();
-
-            $tarievenDag = Tarief::where('parking_id', $parkingDb->id)->where('moment', 'dag')->get();
-            $tarievenNacht = Tarief::where('parking_id', $parkingDb->id)->where('moment', 'nacht')->get();
+        $tarievenDag = Tarief::where('parking_id', $parking->id)->where('moment', 'dag')->get();
+        $tarievenNacht = Tarief::where('parking_id', $parking->id)->where('moment', 'nacht')->get();
 
 
-            return view('parking.kortrijk.parking_template',
-                compact('parking', 'openingsuren', 'historie', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht'));
-        }
+        return view('parking.kortrijk.parking_template',
+            compact('parking', 'openingsuren', 'historie', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht'));
 
         return redirect()->back();
     }
