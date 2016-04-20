@@ -16,7 +16,7 @@
                 </td>
                 <td>{{ $parking->address }}</td>
                 <td>
-                        {{ $parking->parkingStatus->availableCapacity }} / {{ $parking->parkingStatus->totalCapacity }}
+                        @if($parking->parkingStatus->availableCapacity < 0) 0 @else {{ $parking->parkingStatus->availableCapacity }} @endif / {{ $parking->parkingStatus->totalCapacity }}
                 </td>
             </tr>
         @endif
