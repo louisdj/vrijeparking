@@ -34,8 +34,8 @@
                                     <input id="coordinates" name="coordinates" type="hidden" value=""/>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                                 </div>
-                                <div class="col-sm-2" style="margin-right:-20px; min-width: 200px">
-                                    <input type="submit" class="btn btn-primary" value="Zoek parking" style="width: 100%" />
+                                <div class="col-sm-2" style="margin-right:-20px; min-width: 200px;">
+                                    <input type="submit" class="btn btn-primary" value="Zoek parking" style="width: 100%; margin-bottom:10px;" />
                                 </div>
                                 <div class="col-sm-2" style="margin-right:-20px; min-width: 200px">
                                     <input type="button" onclick="getLocation()" class="btn btn-primary" value="Zoek nabij locatie" style="width: 100%" />
