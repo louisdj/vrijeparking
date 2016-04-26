@@ -25,17 +25,27 @@
     <section id="portfolio">
         <div class="container">
             <div class="row">
-                <form action="/vindparking" method="post">
+                <form action="/vindparking" name="searchform" method="post">
                     <label for="locatie">Vind parkeerplek nabij uw locatie</label><br>
                         <div class="form-group">
-                            <div class="col-xs-10">
-                                    <input id="locationTextField" name="location" class="form-control" type="text" placeholder="Search Box" value="{{ isset($searchTerm) ? $searchTerm : "" }}">
+                            <div class="row">
+                                <div class="col-md-8" style="margin-right:-20px; margin-bottom: 10px;">
+                                    <input id="locationTextField" name="location" class="form-control" type="text" placeholder="{{ isset($searchTerm) ? $searchTerm : "Geef uw locatie in" }}" value="">
                                     <input id="coordinates" name="coordinates" type="hidden" value=""/>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                                </div>
+                                <div class="col-sm-2" style="margin-right:-20px; min-width: 200px">
+                                    <input type="submit" class="btn btn-primary" value="Zoek parking" style="width: 100%" />
+                                </div>
+                                <div class="col-sm-2" style="margin-right:-20px; min-width: 200px">
+                                    <input type="button" onclick="getLocation()" class="btn btn-primary" value="Zoek nabij locatie" style="width: 100%" />
+                                </div>
                             </div>
-                            <div class="col-xs-2">
-                                <input type="submit" class="btn btn-primary" value="Zoek parking" />
+                            <div class="row" style="padding-top: 10px;">
+
                             </div>
+
+
                         </div>
                 </form>
             </div>
@@ -56,6 +66,22 @@
                 }
 
                 google.maps.event.addDomListener(window, 'load', init);
+            </script>
+
+            <script>
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+
+            function showPosition(position) {
+                document.getElementById("coordinates").value = position.coords.latitude+","+position.coords.longitude;
+                document.searchform.submit();
+            }
             </script>
 
             <hr/>
@@ -86,6 +112,8 @@
             @if(isset($parkings) && count($parkings) == 0)
                 <div class="alert alert-warning">
                  <strong>0 resultaten!</strong> Wij hebben geen openbaring parkings in de buurt gevonden.
+
+                 {{ session('emptySearch') }}
                </div>
             @endif
 

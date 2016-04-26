@@ -74,7 +74,10 @@ class ParkingController extends Controller
 
     public function vindparkingpost(Request $request) {
 
-        if($request->coordinates == null) {
+        if($request->location == null && $request->coordinates == null) {
+            return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8])->with('parkings', []);
+        }
+        else if($request->coordinates == null) {
             $searchFor = str_replace(",","+", $request->location);
             $searchFor = str_replace(" ","+", $searchFor);
 
