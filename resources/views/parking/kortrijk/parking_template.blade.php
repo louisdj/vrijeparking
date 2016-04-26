@@ -229,7 +229,7 @@
                                 marker: {
                                     enabled: false
                                 },
-                                pointInterval: 3600000, // one hour
+                                pointInterval: 300000, // one hour
                                 pointStart: Date.UTC({{ date('Y,m,d', strtotime(' -7 days')) }}, 0, 0, 0)
                             }
                         },
