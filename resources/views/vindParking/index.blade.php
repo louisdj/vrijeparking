@@ -111,7 +111,7 @@
 
             @if(isset($parkings) && count($parkings) == 0)
                 <div class="alert alert-warning">
-                 <strong>0 resultaten!</strong> Wij hebben geen openbaring parkings in de buurt gevonden.
+                 <strong>0 resultaten!</strong> Wij hebben geen openbare parkings in de buurt gevonden.
 
                  {{ session('emptySearch') }}
                </div>
