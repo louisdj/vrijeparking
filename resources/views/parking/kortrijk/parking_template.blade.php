@@ -44,7 +44,7 @@
                     <br/><br/>
 
                     <h4>Contact</h4>
-                        <b>Tel</b> 056 28 12 12  <br/>info@parko.be
+                        {!! $parking->telefoon !!}
 
 
                 </div>
@@ -100,7 +100,11 @@
             <table class="table table-bordered">
                 <tr class="info">
                     @foreach($tarievenDag as $tarief)
-                        <th>{{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u</th>
+                        <th>@if(str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) >= 15)
+                             {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}m
+                            @else
+                            {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u
+                            @endif </th>
                     @endforeach
                 </tr>
                 <tr>
