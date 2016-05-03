@@ -65,7 +65,9 @@ class ParkingController extends Controller
 
         foreach ($historie2 as $key => $value)
         {
-            array_push($historieAverage, ($b[$key]->bezetting + $value->bezetting)/2);
+            if(isset($b[$key])) {
+                array_push($historieAverage, ($b[$key]->bezetting + $value->bezetting) / 2);
+            }
         }
 
         $openingsuren = Openingsuren::where('parking_id', $parking->id)->get();
