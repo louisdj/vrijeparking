@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <form action="/vindparking" name="searchform" method="post">
-                    <label for="locatie">Vind parkeerplek nabij uw locatie</label><br>
+                    <label for="locatie">Vind parkeerplek nabij uw adres</label><br>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-8" style="margin-right:-20px; margin-bottom: 10px;">
@@ -38,7 +38,9 @@
                                     <input type="submit" class="btn btn-primary" value="Zoek parking" style="width: 100%; margin-bottom:10px;" />
                                 </div>
                                 <div class="col-sm-2" style="margin-right:-20px; min-width: 200px">
-                                    <input type="button" onclick="getLocation()" class="btn btn-primary" value="Zoek nabij locatie" style="width: 100%" />
+                                    <button onclick="getLocation()" class="btn btn-primary" style="width: 100%" >
+                                        <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span> Zoek nabij locatie
+                                    </button>
                                 </div>
                             </div>
                             <div class="row" style="padding-top: 10px;">

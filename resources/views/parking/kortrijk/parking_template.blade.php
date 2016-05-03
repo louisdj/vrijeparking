@@ -114,7 +114,7 @@
                 </tr>
             </table>
 
-            <h6>{{ $parking->nachttarief }}</h6>
+            <h6>{!! $parking->nachttarief !!}</h6>
             <table class="table table-bordered">
                 <tr class="info">
                     @foreach($tarievenNacht as $tarief)
@@ -249,7 +249,13 @@
 
                         }, {
                             name: 'Gemiddeld',
-                            data: []
+                            data: [
+
+                            @foreach($historieAverage as $key => $tijdstip)
+                                {{ $tijdstip }},
+                            @endforeach
+
+                            ]
                         }],
                         navigation: {
                             menuItemStyle: {

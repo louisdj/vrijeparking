@@ -47,11 +47,26 @@ class ParkingController extends Controller
         $parking = Parking::where('naam', $name)->first();
 
         $historie = DB::table('parkings_historie')
+        ->select('bezetting')
+        ->where('parking_id', $parking->id)
+        ->where('updated_at', '>', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
+        ->where('updated_at', '<', date('Y-m-d', strtotime('-6 days')).' 00:00:00')
+        ->get();
+
+        $historie2 = DB::table('parkings_historie')
             ->select('bezetting')
             ->where('parking_id', $parking->id)
-            ->where('updated_at', '>', date('Y-m-d', strtotime('-7 days')).' 00:00:00')
-            ->where('updated_at', '<', date('Y-m-d', strtotime('-6 days')).' 00:00:00')
+            ->where('updated_at', '>', date('Y-m-d', strtotime('-13 days')).' 00:00:00')
+            ->where('updated_at', '<', date('Y-m-d', strtotime('-12 days')).' 00:00:00')
             ->get();
+
+        $b = $historie;
+        $historieAverage = array();
+
+        foreach ($historie2 as $key => $value)
+        {
+            array_push($historieAverage, ($b[$key]->bezetting + $value->bezetting)/2);
+        }
 
         $openingsuren = Openingsuren::where('parking_id', $parking->id)->get();
 
@@ -62,9 +77,7 @@ class ParkingController extends Controller
 
 
         return view('parking.kortrijk.parking_template',
-            compact('parking', 'openingsuren', 'historie', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht'));
-
-        return redirect()->back();
+            compact('parking', 'openingsuren', 'historie', 'historieAverage', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht'));
     }
 
     public function vindparking() {
