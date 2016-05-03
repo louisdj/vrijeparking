@@ -56,8 +56,8 @@ class ParkingController extends Controller
         $historie2 = DB::table('parkings_historie')
             ->select('bezetting')
             ->where('parking_id', $parking->id)
-            ->where('updated_at', '>', date('Y-m-d', strtotime('-13 days')).' 00:00:00')
-            ->where('updated_at', '<', date('Y-m-d', strtotime('-12 days')).' 00:00:00')
+            ->where('updated_at', '>', date('Y-m-d', strtotime('-14 days')).' 00:00:00')
+            ->where('updated_at', '<', date('Y-m-d', strtotime('-13 days')).' 00:00:00')
             ->get();
 
         $b = $historie;
