@@ -94,13 +94,16 @@
                         <th class="text-center">Foto</th>
                         <th class="text-center">Naam</th>
                         <th class="text-center">Adres</th>
+                        <th class="text-center">Beschikbaar</th>
                         <th class="text-center">Link</th>
                     </tr>
                     @foreach($parkings as $parking)
-                    <tr >
+                    <tr class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
+                                @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
                         <td style="vertical-align:middle"><img src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="150px" height="100px"/></td>
                         <td style="vertical-align:middle">{{ $parking->naam }}</td>
                         <td style="vertical-align:middle">{{ $parking->adres }}</td>
+                        <td style="vertical-align:middle">{{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}</td>
                         <td style="vertical-align:middle">
                             <a href="/parking/{{ $parking->naam }}">
                                 <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>

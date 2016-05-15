@@ -66,12 +66,16 @@
                         }
                     </style>
 
-                    <div class="progress" style="height:20px; vertical-align: bottom; background-color: red;">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
-                        style="width: {{ round(($parking->beschikbare_plaatsen  /  $parking->totaal_plaatsen) * 100) }}%; font-size:20px; padding-top: 4px;">
-                            <span class="show">{{ round(($parking->beschikbare_plaatsen  /  $parking->totaal_plaatsen) * 100) }}% ({{$parking->beschikbare_plaatsen}}/{{$parking->totaal_plaatsen}})</span>
+                    @if($parking->totaal_plaatsen == 0)
+                        Geen data
+                    @else
+                        <div class="progress" style="height:20px; vertical-align: bottom; background-color: red;">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
+                            style="width: {{ round(($parking->beschikbare_plaatsen  /  $parking->totaal_plaatsen) * 100) }}%; font-size:20px; padding-top: 4px;">
+                                <span class="show">{{ round(($parking->beschikbare_plaatsen  /  $parking->totaal_plaatsen) * 100) }}% ({{$parking->beschikbare_plaatsen}}/{{$parking->totaal_plaatsen}})</span>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <h4>Openingsuren</h4>
 
@@ -79,12 +83,18 @@
 
                     <table align="center" style="border-collapse:separate; border-spacing: 5px;">
 
-                        @foreach($openingsuren as $dag)
-                            <tr @if(date('w') == $dag->dag)style="font-weight: bold; color: royalblue; font-size: 17px;" @endif>
-                                <td><b>{{ $dowMap[$dag->dag -1]  }}</b></td>
-                                <td>{{ date('H:i', strtotime($dag->openingsuur)) }} - {{ date('H:i', strtotime($dag->sluitingsuur)) }}</td>
-                            </tr>
-                        @endforeach
+                        @if(count($openingsuren) > 0)
+                            @foreach($openingsuren as $dag)
+                                <tr @if(date('w') == $dag->dag)style="font-weight: bold; color: royalblue; font-size: 17px;" @endif>
+                                    <td><b>{{ $dowMap[$dag->dag -1]  }}</b></td>
+                                    <td>{{ date('H:i', strtotime($dag->openingsuur)) }} - {{ date('H:i', strtotime($dag->sluitingsuur)) }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            Geen data
+                        @endif
+
+
 
                     </table>
                 </div>
