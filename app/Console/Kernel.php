@@ -50,7 +50,7 @@ class Kernel extends ConsoleKernel
 
             foreach($xml as $parking)
             {
-                Parking::where('naam', $parking)->update(['beschikbare_plaatsen' => stripslashes($parking['bezet'])]);
+                Parking::where('naam', $parking)->update(['beschikbare_plaatsen' => stripslashes($parking['vrij'])]);
                 $parkingId = Parking::where('naam', $parking)->first();
 
                 DB::table('parkings_historie')->insert([
