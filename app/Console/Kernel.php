@@ -29,6 +29,8 @@ class Kernel extends ConsoleKernel
 
         //Update parkings
         $schedule->call(function () {
+
+            //GENT
             $json = file_get_contents('http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json');
             $gent = json_decode($json);
 
@@ -42,17 +44,35 @@ class Kernel extends ConsoleKernel
                 ]);
             }
 
-            foreach(Parking::all()->where('stad', 'kortrijk') as $parking)
-            {
-                $bezetting = file_get_contents('http://www.parko.be/drk_parko_realtime_info.php?parking='.str_replace(" ", "%20", $parking->naam).'');
-                $bezetting = substr($bezetting,strpos($bezetting, 'availableSpacesText\u0022\u003E') + 31,3);
 
-                Parking::where('naam', $parking->naam)->update(['beschikbare_plaatsen' => stripslashes($bezetting)]);
+            //KORTRIJK
+            $xml=simplexml_load_file("http://193.190.76.149:81/ParkoParkings/counters.php") or die("Error: Cannot create object");
+
+            foreach($xml as $parking)
+            {
+                echo $parking;
+                echo $parking['bezet'];
+
+                $parkingId = Parking::where('naam', $parking)->update(['beschikbare_plaatsen' => stripslashes($parking['bezet'])]);
+                dd($parkingId);
 
                 DB::table('parkings_historie')->insert([
-                    ['parking_id' => $parking->id, 'bezetting' => ($parking->totaal_plaatsen - stripslashes($bezetting))]
+                    ['parking_id' => $parking->id, 'bezetting' => $parking['bezet']]
                 ]);
             }
+
+            //KORTRIJK OLD
+//            foreach(Parking::all()->where('stad', 'kortrijk') as $parking)
+//            {
+//                $bezetting = file_get_contents('http://www.parko.be/drk_parko_realtime_info.php?parking='.str_replace(" ", "%20", $parking->naam).'');
+//                $bezetting = substr($bezetting,strpos($bezetting, 'availableSpacesText\u0022\u003E') + 31,3);
+//
+//                Parking::where('naam', $parking->naam)->update(['beschikbare_plaatsen' => stripslashes($bezetting)]);
+//
+//                DB::table('parkings_historie')->insert([
+//                    ['parking_id' => $parking->id, 'bezetting' => ($parking->totaal_plaatsen - stripslashes($bezetting))]
+//                ]);
+//            }
         })->everyFiveMinutes();
     }
 }
