@@ -78,7 +78,7 @@ class ParkingController extends Controller
         $tarievenNacht = Tarief::where('parking_id', $parking->id)->where('moment', 'nacht')->get();
 
 
-        return view('parking.kortrijk.parking_template',
+        return view('templates.parking_template',
             compact('parking', 'openingsuren', 'historie', 'historieAverage', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht'));
     }
 
@@ -179,5 +179,27 @@ class ParkingController extends Controller
 //                    $parking->longitude]);
 //        }
 
+        //Kotrijk
+//        $xml=simplexml_load_file("http://193.190.76.149:81/ParkoParkings/counters.php") or die("Error: Cannot create object");
+//
+//        foreach($xml as $parking)
+//        {
+//            echo $parking;
+//            echo $parking['capaciteit'];
+//
+//            echo "</br>";
+//        }
+
+//        $xml=simplexml_load_file("http://193.190.76.149:81/ParkoParkings/counters.php") or die("Error: Cannot create object");
+//
+//        foreach($xml as $parking)
+//        {
+//            Parking::where('naam', $parking)->update(['beschikbare_plaatsen' => stripslashes($parking['bezet'])]);
+//            $parkingId = Parking::where('naam', $parking)->first();
+//
+//            DB::table('parkings_historie')->insert([
+//                ['parking_id' => $parkingId->id, 'bezetting' => $parking['bezet']]
+//            ]);
+//        }
     }
 }
