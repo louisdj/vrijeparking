@@ -296,7 +296,7 @@
                                  '<div id="siteNotice">'+
                                  '</div>'+
                                  '<h3 id="firstHeading" class="firstHeading">'+
-                                 @yield('parkingNaam')+
+                                 '{{ $parking->naam }} ({{ $parking->stad  }})'+
                                  '</h3>'+
                                  '</div>';
 
