@@ -45,6 +45,7 @@
 
                     <h4>Contact</h4>
                         {!! $parking->telefoon !!}
+                        <br/><br/>
 
 
                 </div>
@@ -107,6 +108,7 @@
             <h4>Tarieven</h4>
             @if(count($tarievenDag) == 0) Niet beschikbaar @endif
             <h6>{!! $parking->dagtarief !!}</h6>
+            <div class="table-responsive">
             <table class="table table-bordered">
                 <tr class="info">
                     @foreach($tarievenDag as $tarief)
@@ -123,6 +125,7 @@
                     @endforeach
                 </tr>
             </table>
+            </div>
 
             <h6>{!! $parking->nachttarief !!}</h6>
             <table class="table table-bordered">
