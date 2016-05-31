@@ -96,13 +96,14 @@ class ParkingController extends Controller
     public function vindparkingpost(Request $request) {
 
         if($request->location == null && $request->coordinates == null) {
-            dd('da is t geval');
+
             return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8])->with('parkings', []);
+
         }
         else if($request->coordinates == null) {
+
             $searchFor = str_replace(",","+", $request->location);
             $searchFor = str_replace(" ","+", $searchFor);
-
 
             $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
             $data = json_decode($json);
@@ -136,22 +137,6 @@ class ParkingController extends Controller
             'zoom' => 16,
             'searchTerm' => $request->location]);
     }
-
-
-    public function graph() {
-        $result = DB::table('parkings_historie')
-            ->select('bezetting')
-            ->where('parking_id', 3)
-            ->where('updated_at', '>', date('Y-m-d', strtotime('-3 days')).' 00:00:00')
-            ->where('updated_at', '<', date('Y-m-d', strtotime('-2 days')).' 00:00:00')
-            ->get();
-
-
-//        $result = DB::select('b')
-
-        return view('testGraph', compact('result'));
-    }
-
 
 
     public function antwerpen() {

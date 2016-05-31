@@ -15,7 +15,6 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Vind Parkeerplaats</h2>
-                    {{--<hr class="star-light">--}}
                 </div>
             </div>
         </div>
@@ -38,7 +37,7 @@
                                     <input type="submit" class="btn btn-primary" value="Zoek parking" style="width: 100%; margin-bottom:10px;" />
                                 </div>
                                 <div class="col-sm-2" style="margin-right:-20px; min-width: 200px">
-                                    <button onclick="getLocation()" class="btn btn-primary" style="width: 100%" >
+                                    <button type="button" onclick="getLocation()" class="btn btn-primary" style="width: 100%" >
                                         <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span> Zoek nabij locatie
                                     </button>
                                 </div>
@@ -46,8 +45,6 @@
                             <div class="row" style="padding-top: 10px;">
 
                             </div>
-
-
                         </div>
                 </form>
             </div>
@@ -71,19 +68,18 @@
             </script>
 
             <script>
-
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                } else {
-                    alert("Geolocation is not supported by this browser.");
+                function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                        alert("Geolocation is not supported by this browser.");
+                    }
                 }
-            }
 
-            function showPosition(position) {
-                document.getElementById("coordinates").value = position.coords.latitude+","+position.coords.longitude;
-                document.searchform.submit();
-            }
+                function showPosition(position) {
+                    document.getElementById("coordinates").value = position.coords.latitude+","+position.coords.longitude;
+                    document.searchform.submit();
+                }
             </script>
 
             <hr/>

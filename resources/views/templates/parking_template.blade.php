@@ -95,8 +95,6 @@
                             Geen data
                         @endif
 
-
-
                     </table>
                 </div>
             </div>
