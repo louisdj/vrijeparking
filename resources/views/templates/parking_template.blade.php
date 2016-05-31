@@ -128,6 +128,7 @@
             </div>
 
             <h6>{!! $parking->nachttarief !!}</h6>
+            <div class="table-responsive">
             <table class="table table-bordered">
                 <tr class="info">
                     @foreach($tarievenNacht as $tarief)
@@ -140,6 +141,7 @@
                     @endforeach
                 </tr>
             </table>
+            </div>
 
             <hr/>
             <h4>Voorspelling</h4>
@@ -250,7 +252,8 @@
                                 pointStart: Date.UTC({{ date('Y,m,d', strtotime(' -7 days')) }}, 0, 0, 0)
                             }
                         },
-                        series: [{
+                        series: [
+                        {
                             name: 'Vorige week',
                             data: [
 
@@ -269,7 +272,21 @@
                             @endforeach
 
                             ]
-                        }],
+                        },
+                        {
+                            name: 'Trend vandaag',
+                            data: [
+
+                            @foreach($bezettingVandaag as $tijdstip)
+                                {{ $tijdstip->bezetting }},
+                            @endforeach
+
+                            ]
+
+                        }
+
+
+                        ],
                         navigation: {
                             menuItemStyle: {
                                 fontSize: '10px'

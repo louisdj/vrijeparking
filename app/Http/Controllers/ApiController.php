@@ -18,20 +18,33 @@ class ApiController extends Controller
             'error' => 'false',
             'steden' => Stad::all()
         ));
-
-//        return Stad::all();
     }
 
     public function parking($parking)
     {
+        $parking = Parking::where('naam', $parking)->first();
+
         return response()->json(array(
-            'error' => 'false',
-            'parking' => Parking::where('naam', $parking)->first()
+            'error' => !$parking,
+            'parking' => $parking
         ));
     }
 
 
     public function parkings($stad)
+    {
+        $parkings = Parking::where('stad', $stad)->get();
+
+        $response = response()->json(array(
+            'error' => $parkings->isEmpty(),
+            'parkings' => $parkings
+        ));
+
+        return $response;
+    }
+
+
+    public function twitter($stad)
     {
         return response()->json(array(
             'error' => 'false',

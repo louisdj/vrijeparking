@@ -51,11 +51,13 @@ Route::group(['middleware' => 'web'], function () {
         return View::make('home');
     });
 
+    Route::get('/beheer', 'ManagementController@index');
+
 });
 
 
-
-//Route::get('/update', 'ParkingController@enterData');
+//Working with DataSources
+Route::get('/update', 'ParkingController@enterData');
 
 
 Route::group(['prefix' => 'api'], function () {
@@ -63,6 +65,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/steden', 'ApiController@steden');
     Route::get('/parking/{parking}', 'ApiController@parking');
     Route::get('/parkings/{stad}', 'ApiController@parkings');
+    Route::get('/twitter/{stad}', 'ApiController@twitter');
 
 });
 

@@ -46,6 +46,12 @@ class ParkingController extends Controller
     {
         $parking = Parking::where('naam', $name)->first();
 
+        $bezettingVandaag = DB::table('parkings_historie')
+            ->select('bezetting')
+            ->where('parking_id', $parking->id)
+            ->where('updated_at', '>', date('Y-m-d').' 00:00:00')
+            ->get();
+
         $historie = DB::table('parkings_historie')
         ->select('bezetting')
         ->where('parking_id', $parking->id)
@@ -70,8 +76,8 @@ class ParkingController extends Controller
             }
         }
 
+        //
         $openingsuren = Openingsuren::where('parking_id', $parking->id)->get();
-
         $parking_betaalmogelijkheden = Betaalmogelijkheden::where('parking_id', $parking->id)->get();
 
         $tarievenDag = Tarief::where('parking_id', $parking->id)->where('moment', 'dag')->get();
@@ -79,7 +85,7 @@ class ParkingController extends Controller
 
 
         return view('templates.parking_template',
-            compact('parking', 'openingsuren', 'historie', 'historieAverage', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht'));
+            compact('parking', 'openingsuren', 'historie', 'historieAverage', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht', 'bezettingVandaag'));
     }
 
     public function vindparking() {
@@ -90,6 +96,7 @@ class ParkingController extends Controller
     public function vindparkingpost(Request $request) {
 
         if($request->location == null && $request->coordinates == null) {
+            dd('da is t geval');
             return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8])->with('parkings', []);
         }
         else if($request->coordinates == null) {
