@@ -89,6 +89,7 @@
             <hr/>
 
             @if(isset($parkings) && count($parkings) > 0)
+                <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover text-center" >
                     <tr class="info"  >
                         <th class="text-center">Foto</th>
@@ -112,6 +113,7 @@
                     </tr>
                     @endforeach
                 </table>
+                </div>
             @endif
 
             @if(isset($parkings) && count($parkings) == 0)
