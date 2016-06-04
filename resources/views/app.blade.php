@@ -19,8 +19,8 @@
 
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
@@ -32,7 +32,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
 
     <script>
@@ -82,7 +82,7 @@
 
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Parkings <span class="caret"></span>
+                            {{ trans('navbar.parkings') }} <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu">
                             <li><a href="/stad/gent"><img src="/img/transpa_ParkingGent.png" alt="parkingGent" width="20px"/> Stad Gent</a></li>
@@ -92,19 +92,37 @@
                             <li><a href="/stad/kortrijk"><img src="/img/transpa_ParkingKortrijk.png" alt="parkingKortrijk" width="20px"/> Stad Kortrijk</a></li>
                             {{--Looking at source code huh? Kortrijk komt misschien binnenkort--}}
                           </ul>
-                        </li>
-                    <li class="page-scroll">
-                        <a href="/vindparking">Vind Parkeerplaats</a>
                     </li>
+
+                    <li class="page-scroll">
+                        <a href="/vindparking">{{ trans('navbar.findParking') }}</a>
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Extra <span class="caret"></span>
+                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span> {{ trans('navbar.extra') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/blog"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Blog</a></li>
-                            <li><a href="/team"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Team</a></li>
+                            <li><a href="/blog"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ trans('navbar.blog') }}</a></li>
+                            <li><a href="/team"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ trans('navbar.team') }}</a></li>
                         </ul>
                     </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Config::get('languages')[App::getLocale()] }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                        {{ Session::get('locale') }}
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <li>
+                                        <a href="/taal/{{$lang}}">{{ $language }}</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -164,7 +182,7 @@
     <script src="/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="/js/classie.js"></script>
     <script src="/js/cbpAnimatedHeader.js"></script>
 
