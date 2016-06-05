@@ -41,7 +41,7 @@
                                 <i class="fa fa-3x">Gent</i>
                             </div>
                         </div>
-                        <img src="http://www.tcbi.be/system/medias/trip_gallery_medias/620/original/teambuilding-gent-brugge-1.jpg" alt="">
+                        <img src="{{ asset('img/gent.jpg') }}" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
