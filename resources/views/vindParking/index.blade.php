@@ -92,6 +92,7 @@
                         <th class="text-center">Naam</th>
                         <th class="text-center">Adres</th>
                         <th class="text-center">Beschikbaar</th>
+                        <th class="text-center">Wandelafstand</th>
                         <th class="text-center">Link</th>
                     </tr>
                     @foreach($parkings as $parking)
@@ -101,6 +102,20 @@
                         <td style="vertical-align:middle">{{ $parking->naam }}</td>
                         <td style="vertical-align:middle">{{ $parking->adres }}</td>
                         <td style="vertical-align:middle">{{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}</td>
+                        <td style="vertical-align:middle">
+
+
+                        <?php
+
+                            $distance = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $mapCenter . "&destinations=". $parking->latitude . "," . $parking->longitude . "&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo"));
+                            $distanceResult = ($distance->rows[0]->elements[0]);
+
+                            echo $distanceResult->distance->text;
+                            echo "<br><small>" . $distanceResult->duration->text . "</small>";
+
+                        ?>
+
+                        </td>
                         <td style="vertical-align:middle">
                             <a href="/parking/{{ $parking->naam }}">
                                 <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
