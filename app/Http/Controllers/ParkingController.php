@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Betaalmogelijkheden;
 use App\Openingsuren;
 use App\Parking;
+use App\Stad;
 use App\Tarief;
 use Illuminate\Http\Request;
 
@@ -13,33 +14,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-//use \XmlParser;
-//use SoapBox\Formatter\Formatter;
-
-
 
 class ParkingController extends Controller
 {
     public function stad($stad)
     {
-        $url = DB::select("select url from data_sources where stad = ?", [$stad]);
+        if($stad == "brussel") {
+            $url = DB::select("select url from data_sources where stad = ?", [$stad]);
 
-        if (empty($url)) {
-            return redirect('/');
-        }
-        else if($stad == "kortrijk") {
-            $parkings = Parking::all()->where('stad', 'kortrijk');
-
-            return view('parking.kortrijk.stad', compact('stad','parkings'));
-        }
-        else {
             $json = file_get_contents($url[0]->url);
             $data = json_decode($json);
+
+            return view('parking.brussel.stad', compact('stad', 'data'));
         }
 
-//        $data = Parking::where('stad', $stad)->all();
+        $parkings = Parking::all()->where('stad', $stad);
+        $stad = Stad::where('stad', $stad)->first();
 
-        return view('parking.'.$stad.'.stad', compact('stad', 'data'));
+        return view('templates.stad_template2', compact('stad', 'parkings'));
     }
 
     public function parking($name)
