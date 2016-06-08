@@ -41,7 +41,7 @@
                                 <i class="fa fa-3x">Gent</i>
                             </div>
                         </div>
-                        <img src="{{ asset('img/gent.jpg') }}" alt="">
+                        <img src="img/gent.jpg" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -51,7 +51,7 @@
                                 <i class="fa fa-3x">Brussel</i>
                             </div>
                         </div>
-                        <img src="{{ asset('img/brussel.jpg') }}" alt="">
+                        <img src="img/brussel.jpg" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -61,7 +61,7 @@
                                 <i class="fa fa-3x">Kortrijk</i>
                             </div>
                         </div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/KortrijkBroeltorens.JPG" alt="">
+                        <img src="img/kortrijk.jpg" alt="">
                     </a>
                 </div>
             </div>

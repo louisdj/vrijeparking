@@ -95,6 +95,7 @@ class ParkingController extends Controller
 
     public function vindparkingpost(Request $request) {
 
+
         if($request->location == null && $request->coordinates == null) {
 
             return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8])->with('parkings', []);
@@ -121,6 +122,9 @@ class ParkingController extends Controller
             ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
             ->get();
 
+
+//        dd($parkings);
+
         //key: AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
 
 //        $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
@@ -128,7 +132,13 @@ class ParkingController extends Controller
 //        http://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
 
 //        https://maps.googleapis.com/maps/api/distancematrix/json?origins=
-//        Ter+Platen+12+9000+gent|amakersstraat+12&destinations=Sint-Pietersplein+65+9000+gent&mode=bicycling&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
+//        Ter+Platen+12+9000+gent|amakersstraat+12&destinations=Sint-Pietersplein+65+9000+gent&mode=walking&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
+
+//        $distance = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $lat . "," . $Lng . "&destinations=". $parkings[0]->latitude . "," . $parkings[0]->longitude . "&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo"));
+//        $distanceResult = ($distance->rows[0]->elements[0]);
+//
+//        $afstand = $distanceResult->distance->text;
+//        $tijdsduur = $distanceResult->duration->text;
 
 
         return view('vindParking.index',
