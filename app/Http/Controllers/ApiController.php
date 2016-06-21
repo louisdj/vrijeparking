@@ -15,8 +15,7 @@ class ApiController extends Controller
     public function steden()
     {
         return response()->json(array(
-            'error' => 'false',
-            'steden' => Stad::all()
+            Stad::all()
         ));
     }
 
@@ -25,8 +24,7 @@ class ApiController extends Controller
         $parking = Parking::where('naam', $parking)->first();
 
         return response()->json(array(
-            'error' => !$parking,
-            'parking' => $parking
+            $parking
         ));
     }
 
@@ -36,8 +34,7 @@ class ApiController extends Controller
         $parkings = Parking::where('stad', $stad)->get();
 
         $response = response()->json(array(
-            'error' => $parkings->isEmpty(),
-            'parkings' => $parkings
+            $parkings
         ));
 
         return $response;
