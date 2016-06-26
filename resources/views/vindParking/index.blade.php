@@ -141,11 +141,11 @@
                     <script>
                       function initialize()
                       {
-
                        var mapOptions = {
                          zoom: {{ $zoom }},
-                         center: new google.maps.LatLng({{ isset($mapCenter) ? $mapCenter : ""  }})
-                       }
+                         center: new google.maps.LatLng({{ isset($mapCenter) ? $mapCenter : ""  }}),
+                         scrollwheel: false
+                       };
                        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
                         @if(isset($parkings))

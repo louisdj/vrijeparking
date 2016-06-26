@@ -55,8 +55,9 @@
                           {
                            var mapOptions = {
                              zoom: 14,
-                             center: new google.maps.LatLng(@yield('centraleMapCoordinaten'))
-                           }
+                             center: new google.maps.LatLng(@yield('centraleMapCoordinaten')),
+                             scrollwheel: false
+                           };
                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 //                           var marker = new google.maps.Marker({
