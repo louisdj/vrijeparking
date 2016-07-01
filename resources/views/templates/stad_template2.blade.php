@@ -80,8 +80,9 @@
                           {
                            var mapOptions = {
                              zoom: 14,
-                             center: new google.maps.LatLng({{ $stad->coordinaten }})
-                           }
+                             center: new google.maps.LatLng({{ $stad->coordinaten }}),
+                             scrollwheel: false
+                           };
                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
                                 setMarkers(map);

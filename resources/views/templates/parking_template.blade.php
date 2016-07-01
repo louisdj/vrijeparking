@@ -305,7 +305,8 @@
                       {
                            var mapOptions = {
                              zoom: 15,
-                             center: new google.maps.LatLng("{{ $parking->latitude }}", "{{ $parking->longitude  }}")
+                             center: new google.maps.LatLng("{{ $parking->latitude }}", "{{ $parking->longitude  }}"),
+                             scrollwheel: false
                            };
 
                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
