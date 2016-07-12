@@ -30,7 +30,7 @@
                     </div>
                     <div class="row"><br/>
                         <b>Robbert Goeminne</b> <br/>
-                        Website/API/Twitter Robot
+                        Website/API/Twitter Robot(s)/Mobile Apps
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
                     </div>
                     <div class="row"><br/>
                         <b>Louis De Jaeger</b> <br/>
-                        Mobile App/PR
+                        PR
                     </div>
                 </div>
             </div>
