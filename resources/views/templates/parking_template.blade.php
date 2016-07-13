@@ -14,8 +14,7 @@
 
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
-        <div class="container">
-
+        <div class="container" style="margin-top: -50px">
 
             <div class="row">
                 {{--<h3>Details</h3>--}}
@@ -100,8 +99,6 @@
             </div>
 
             <hr/>
-
-
 
             <h4>Tarieven</h4>
             @if(count($tarievenDag) == 0) Niet beschikbaar @endif

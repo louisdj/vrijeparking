@@ -36,11 +36,25 @@ Route::group(['middleware' => 'web'], function () {
     $this->get('logout', 'Auth\AuthController@logout');
 
     // Registration Routes... disabled for now
-//    $this->get('register', 'Auth\AuthController@showRegistrationForm');
-//    $this->post('register', 'Auth\AuthController@register');
+    $this->get('register', 'Auth\AuthController@showRegistrationForm');
+    $this->post('register', 'Auth\AuthController@register');
 
+
+
+    //Admin routes
     Route::group(['as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth'], 'prefix' => 'beheer'], function() {
-        Route::get('/', 'HomeController@index');
+
+        Route::get('/', 'ManagementController@index');
+        Route::get('/beheer/parking/{id}', 'ManagementController@parking');
+        Route::post('/beheer/parking/{id}/update', 'ManagementController@parkingUpdate');
+
+        //Blog stuff
+        Route::get('/blog/new', 'BlogController@newBlogPost');
+        Route::post('/blog/create', 'BlogController@create');
+
+        Route::post('/beheer/blog/{id}/update', 'BlogController@blogUpdate');
+        Route::get('/beheer/blog/{id}/remove', 'BlogController@remove');
+        Route::get('/beheer/blog/{id}', 'BlogController@edit');
     });
 
 

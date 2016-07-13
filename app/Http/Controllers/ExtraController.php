@@ -18,13 +18,13 @@ class ExtraController extends Controller
     {
         $posts = Blogpost::all();
 
-        return view('extra.blog', compact('posts'));
+        return view('blog.blog', compact('posts'));
     }
 
     public function blogPost($titel)
     {
         $blog = Blogpost::where('titel', $titel)->first();
 
-        return view('extra.blogPost', compact('blog'));
+        return view('blog.blogPost', compact('blog'));
     }
 }

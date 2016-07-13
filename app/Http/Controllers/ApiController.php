@@ -31,7 +31,11 @@ class ApiController extends Controller
 
     public function parkings($stad)
     {
-        $parkings = Parking::where('stad', $stad)->get();
+        if($stad == "all") {
+            $parkings = Parking::all();
+        } else {
+            $parkings = Parking::where('stad', $stad)->get();
+        }
 
         $response = response()->json(array(
             $parkings
