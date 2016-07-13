@@ -36,8 +36,8 @@ Route::group(['middleware' => 'web'], function () {
     $this->get('logout', 'Auth\AuthController@logout');
 
     // Registration Routes... disabled for now
-    $this->get('register', 'Auth\AuthController@showRegistrationForm');
-    $this->post('register', 'Auth\AuthController@register');
+//    $this->get('register', 'Auth\AuthController@showRegistrationForm');
+//    $this->post('register', 'Auth\AuthController@register');
 
 
 
