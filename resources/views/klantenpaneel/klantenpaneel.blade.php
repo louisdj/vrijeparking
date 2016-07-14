@@ -20,7 +20,7 @@
 
             <div class="row">
 
-                <div style="width: 100%; margin: 0 auto; padding: 120px 0 40px;">
+                <div style="width: 100%; margin: 0 auto; padding: 100px 0 40px;">
 
                     <ul class="tabs" data-persist="true">
                             <li><a href="#view1">Overzicht parkings</a></li>
@@ -29,7 +29,7 @@
                     <div class="tabcontents">
                         <div id="view1">
                             <h3><b>Parkings {{ $stad->stad }}</b></h3>
-                            <p>
+                            <p style="border: 1px solid black;">
                                 <b>Parkings in systeem: </b> {{ count($parkings) }}<br/>
                                 <b>Data-source: </b> {{ $stad->url }}<br/>
                                 <b>Coordinaten: </b> {{ $stad->coordinaten }}
