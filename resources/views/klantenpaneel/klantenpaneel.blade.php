@@ -49,7 +49,7 @@
                                                 <td style="vertical-align:middle"><img src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="150px" height="100px"/></td>
                                                 <td style="vertical-align:middle">{{ $parking->naam }}</td>
                                                 <td style="vertical-align:middle">{{ $parking->adres }}</td>
-                                                <td style="vertical-align:middle"><a href="/klantenpaneel/parking/{{ $parking->id }}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
+                                                <td style="vertical-align:middle"><a href="/beheer/klantenpaneel/parking/{{ $parking->id }}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
                                             </tr>
 
                                     @endforeach
