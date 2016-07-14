@@ -81,12 +81,12 @@
                                 <td style="vertical-align:middle">{{ $blog->updated_at }}</td>
                                 <td style="vertical-align:middle">{{ $blog->titel }}</td>
                                 <td style="vertical-align:middle">{{ substr($blog->inhoud,0 , 300) }}...</td>
-                                <td style="vertical-align:middle"><a href="/beheer/blog/{{ $blog->id }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                                <td style="vertical-align:middle"><a href="blog/{{ $blog->id }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                             </tr>
 
                     @endforeach
                 </table>
-                <a href="/blog/new"><button class="btn-primary"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nieuwe blog toevoegen</button></a>
+                <a href="blog/new"><button class="btn-primary"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nieuwe blog toevoegen</button></a>
 
             </div>
 

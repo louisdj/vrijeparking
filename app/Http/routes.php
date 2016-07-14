@@ -55,6 +55,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/blog/{id}/update', 'BlogController@blogUpdate');
         Route::get('/blog/{id}/remove', 'BlogController@remove');
         Route::get('/blog/{id}', 'BlogController@edit');
+
+
+
+        Route::get('/klantenpaneel/', 'KlantenPaneelController@index');
+        Route::get('/klantenpaneel/parking/{id}', 'KlantenPaneelController@parking');
     });
 
 
