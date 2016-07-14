@@ -54,7 +54,18 @@
                                         </tr>
                                         <tr>
                                             <td style="vertical-align:middle">Bericht</td>
-                                            <td style="vertical-align:middle"><input type="textarea" class="form-control" value="{{ $parking->bericht }}"  name="bericht"/></td>
+                                            <td style="vertical-align:middle"><input type="textarea" rows="2" class="form-control" value="{{ $parking->bericht }}"  name="bericht"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align:middle">Type bericht</td>
+                                            <td style="vertical-align:middle">
+                                                <select name="type">
+                                                      <option value="0" @if($parking->bericht_type==0) selected @endif>Info</option>
+                                                      <option value="1" @if($parking->bericht_type==1) selected @endif>Positief</option>
+                                                      <option value="2" @if($parking->bericht_type==2) selected @endif>Opgepast</option>
+                                                </select>
+
+                                            </td>
                                         </tr>
                                     </table>
                                 </p>
