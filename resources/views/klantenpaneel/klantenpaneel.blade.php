@@ -29,7 +29,7 @@
                     <div class="tabcontents">
                         <div id="view1">
                             <h3><b>Parkings {{ $stad->stad }}</b></h3>
-                            <p style="border: 1px solid black;">
+                            <p style="border: 1px solid black; padding:10px">
                                 <b>Parkings in systeem: </b> {{ count($parkings) }}<br/>
                                 <b>Data-source: </b> {{ $stad->url }}<br/>
                                 <b>Coordinaten: </b> {{ $stad->coordinaten }}
