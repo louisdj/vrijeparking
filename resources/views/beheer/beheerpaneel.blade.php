@@ -61,7 +61,7 @@
                                     </table>
                                 </p>
 
-                                 <a href=""><button class="btn-primary"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nieuwe parking toevoegen</button></a>
+                                 {{--<a href=""><button class="btn-primary"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nieuwe parking toevoegen</button></a>--}}
                             </div>
                         @endforeach
                     </div>

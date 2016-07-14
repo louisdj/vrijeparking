@@ -23,7 +23,7 @@
 
                     <div class="tabcontents">
                         <div id="view">
-                            <form action="/blog/create" method="post">
+                            <form action="/beheer/blog/create" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <h2><b></b></h2>
                             <p>
