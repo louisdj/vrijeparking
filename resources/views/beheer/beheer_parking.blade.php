@@ -52,6 +52,10 @@
                                             <input type="text" class="form-control" value="{{ $parking->longitude }}"  name="longitude">
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="vertical-align:middle">Bericht</td>
+                                            <td style="vertical-align:middle"><input type="textarea" class="form-control" value="{{ $parking->bericht }}"  name="bericht"/></td>
+                                        </tr>
                                     </table>
                                 </p>
 

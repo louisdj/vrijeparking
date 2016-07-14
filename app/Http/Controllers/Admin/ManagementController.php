@@ -36,6 +36,7 @@ class ManagementController extends Controller
         $parking->stad = $request->stad;
         $parking->latitude = $request->latitude;
         $parking->longitude = $request->longitude;
+        $parking->bericht = $request->bericht;
 
         $parking->save();
 

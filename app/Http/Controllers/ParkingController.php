@@ -68,7 +68,6 @@ class ParkingController extends Controller
             }
         }
 
-        //
         $openingsuren = Openingsuren::where('parking_id', $parking->id)->get();
         $parking_betaalmogelijkheden = Betaalmogelijkheden::where('parking_id', $parking->id)->get();
 

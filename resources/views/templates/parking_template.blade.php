@@ -16,6 +16,12 @@
     <section id="portfolio">
         <div class="container" style="margin-top: -50px">
 
+            @if($parking->bericht)
+                <div class="alert @if($parking->bericht_type == 0)alert-info @elseif($parking->bericht_type == 1)alert-success @else alert-warning  @endif" style="margin-right: -10px">
+                        {{ $parking->bericht }}
+                </div>
+            @endif
+
             <div class="row">
                 {{--<h3>Details</h3>--}}
                 <div class="col-md-4">
@@ -25,11 +31,10 @@
                     <br/><br/>
 
                     @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
-                        {{--{{ dd($betaalmogelijkheid->Betaalmiddel) }}--}}
-
                         <img src="/img/betaalmogelijkheden/{{ strtolower($mogelijkheden[$betaalmogelijkheid->betaling_id-1]) }}.png"
                         width="45px" alt="" style="padding-right: 5px;" />
                     @endforeach
+
 
                 </div>
                 <div class="col-md-6">
@@ -44,7 +49,7 @@
 
                     <h4>Contact</h4>
                         {!! $parking->telefoon !!}
-                        <br/><br/>
+                    <br/><br/>
 
 
                 </div>
