@@ -12,7 +12,7 @@ class BlogController extends Controller
 {
     public function newBlogPost()
     {
-        return view('blog.newBlog');
+        return view('blog.newblog');
     }
 
     public function create(Request $request)
