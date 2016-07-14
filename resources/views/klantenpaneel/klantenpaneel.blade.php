@@ -28,7 +28,7 @@
                     </ul>
                     <div class="tabcontents">
                         <div id="view1">
-                            <h3><b>Parkings {{ $stad->naam }}</b></h3>
+                            <h3><b>Parkings {{ $stad->stad }}</b></h3>
                             <p>
                                 <b>Parkings in systeem: </b> {{ count($parkings) }}<br/>
                                 <b>Data-source: </b> {{ $stad->url }}<br/>
