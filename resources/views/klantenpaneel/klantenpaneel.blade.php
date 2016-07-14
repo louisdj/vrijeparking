@@ -22,15 +22,13 @@
 
                 <div style="width: 100%; margin: 0 auto; padding: 120px 0 40px;">
 
-                    <h2>Overzicht van stad Gent</h2>
-
                     <ul class="tabs" data-persist="true">
                             <li><a href="#view1">Overzicht parkings</a></li>
                             <li><a href="#view2">Prestatiegegevens</a></li>
                     </ul>
                     <div class="tabcontents">
                         <div id="view1">
-                            <h3><b>Parkings</b></h3>
+                            <h3><b>Parkings {{ $stad->naam }}</b></h3>
                             <p>
                                 <b>Parkings in systeem: </b> {{ count($parkings) }}<br/>
                                 <b>Data-source: </b> {{ $stad->url }}<br/>
