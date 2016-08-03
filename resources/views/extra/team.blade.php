@@ -40,7 +40,7 @@
                     </div>
                     <div class="row"><br/>
                         <b>Louis De Jaeger</b> <br/>
-                        PR
+                        PR/Social Media
                     </div>
                 </div>
             </div>
