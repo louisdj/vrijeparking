@@ -73,8 +73,12 @@ Route::get('/update', 'ParkingController@enterData');
 Route::group(['prefix' => 'api'], function () {
 
     Route::get('/steden', 'ApiController@steden');
+    Route::get('/stad/{stad}', 'ApiController@stad');
+
     Route::get('/parking/{parking}', 'ApiController@parking');
+    Route::get('/parkings/lokatie/{lat}/{Lng}', 'ApiController@lokatie');
     Route::get('/parkings/{stad}', 'ApiController@parkings');
+
     Route::get('/twitter/{stad}', 'ApiController@twitter');
 
 });

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -16,6 +17,13 @@ class ApiController extends Controller
     {
         return response()->json(array(
             Stad::all()
+        ));
+    }
+
+    public function stad($stad)
+    {
+        return response()->json(array(
+            Stad::where('stad', $stad)->get()
         ));
     }
 
@@ -42,6 +50,16 @@ class ApiController extends Controller
         ));
 
         return $response;
+    }
+
+    public function lokatie($lat, $Lng)
+    {
+        return response()->json(array(
+            $parkings = DB::table('parkings')
+                ->whereBetween('latitude', [$lat - 0.007, $lat + 0.007])
+                ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
+                ->get()
+        ));
     }
 
 
