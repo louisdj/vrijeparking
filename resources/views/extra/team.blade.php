@@ -43,6 +43,16 @@
                         PR/Social Media
                     </div>
                 </div>
+
+                <div class="col-sm-3" align="center">
+                    <div class="row">
+                        <img src="/img/team/matthieu.jpg" width="200px" class="img-circle">
+                    </div>
+                    <div class="row"><br/>
+                        <b>Matthieu Calie</b> <br/>
+                        Backend advisor
+                    </div>
+                </div>
             </div>
 
 
