@@ -128,7 +128,6 @@
                             <td style="vertical-align:middle"><img onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="150px" height="100px"/></td>
                             <td style="vertical-align:middle">{{ $parking->naam }}</td>
                             <td style="vertical-align:middle">{{ $parking->adres }}</td>
-                            <td style="vertical-align:middle">(Geen live data)</td>
                             <td style="vertical-align:middle">
 
                             <?php
@@ -141,11 +140,6 @@
 
                             ?>
 
-                            </td>
-                            <td style="vertical-align:middle">
-                                <a href="/parking/{{ $parking->naam }}">
-                                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                                </a>
                             </td>
                         </tr>
                     @endif
