@@ -70,7 +70,7 @@ Route::group(['middleware' => 'web'], function () {
 Route::get('/update', 'ParkingController@enterData');
 
 
-Route::group(['prefix' => 'api'], function () {
+Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
 
     Route::get('/steden', 'ApiController@steden');
     Route::get('/stad/{stad}', 'ApiController@stad');
