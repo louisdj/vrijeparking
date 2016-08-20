@@ -23,14 +23,14 @@
 
             <hr/>
 
-            <div class="row">
+            <div class="row" style="background-size: 100% 100%; text-shadow: 2px 2px black; color:white; height: 320px; background-image: url('/img/social/banner.png');">
                 <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
                         <img src="/img/team/robbert.jpg" width="200px" class="img-circle">
                     </div>
                     <div class="row"><br/>
                         <b>Robbert Goeminne</b> <br/>
-                        Website/API/Twitter Robot(s)/Mobile Apps <br/>
+                        Website/Twitter Robot(s)/Mobile Apps <br/>
                         <a href="https://www.linkedin.com/in/robbertg" target="_blank"><img src="/img/social/linkedin.png" width="25px" alt=""/></a>
                         <a href="https://twitter.com/RobbertGoeminne" target="_blank"><img src="/img/social/twitter.png" width="25px" alt=""/></a>
                     </div>
