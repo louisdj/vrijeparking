@@ -24,33 +24,39 @@
             <hr/>
 
             <div class="row">
-                <div class="col-sm-3 col-md-offset-3" align="center">
+                <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
                         <img src="/img/team/robbert.jpg" width="200px" class="img-circle">
                     </div>
                     <div class="row"><br/>
                         <b>Robbert Goeminne</b> <br/>
-                        Website/API/Twitter Robot(s)/Mobile Apps
+                        Website/API/Twitter Robot(s)/Mobile Apps <br/>
+                        <a href="https://www.linkedin.com/in/robbertg" target="_blank"><img src="/img/social/linkedin.png" width="25px" alt=""/></a>
+                        <a href="https://twitter.com/RobbertGoeminne" target="_blank"><img src="/img/social/twitter.png" width="25px" alt=""/></a>
                     </div>
                 </div>
 
-                <div class="col-sm-3" align="center">
+                <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
                         <img src="/img/team/louis.jpg" width="200px" class="img-circle">
                     </div>
                     <div class="row"><br/>
                         <b>Louis De Jaeger</b> <br/>
-                        PR/Social Media
+                        PR/Social Media<br/>
+                       <a href="https://www.linkedin.com/in/louisdj/nl" target="_blank"><img src="/img/social/linkedin.png" width="25px" alt=""/></a>
+                       <a href="https://twitter.com/louisdj_15" target="_blank"><img src="/img/social/twitter.png" width="25px" alt=""/></a>
                     </div>
                 </div>
 
-                <div class="col-sm-3" align="center">
+                <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
                         <img src="/img/team/matthieu.jpg" width="200px" class="img-circle">
                     </div>
                     <div class="row"><br/>
                         <b>Matthieu Calie</b> <br/>
-                        Backend advisor
+                        Backend advisor<br/>
+                       <a href="https://be.linkedin.com/in/matthieucalie" target="_blank"><img src="/img/social/linkedin.png" width="25px" alt=""/></a>
+                       <a href="https://twitter.com/caliematthieu" target="_blank"><img src="/img/social/twitter.png" width="25px" alt=""/></a>
                     </div>
                 </div>
             </div>
