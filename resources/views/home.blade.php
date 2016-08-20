@@ -18,7 +18,7 @@
         </div>
     </header>
 
-    <section style="background-attachment: fixed; text-shadow: 2px 2px black; color:white; height: 500px; background-image: url('/img/app/app_banner.png');" >
+    <section style="background-attachment: fixed; background-size: 100% 100%; text-shadow: 2px 2px black; color:white; height: 500px; background-image: url('/img/app/app_banner.png');" >
         <div class="row">
               <div class="col-md-5 col-md-offset-3">
                     <h1>Mobiele App</h1><br>
@@ -52,7 +52,6 @@
                     <h2>Steden</h2><br/>
                 </div>
             </div>
-
 
             <div class="row" text-align="center">
                 <div class="col-md-4 portfolio-item">
@@ -89,6 +88,18 @@
         </div>
     </section>
 
-
+    <section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">
+        <div class="row" text-align="center" style="margin-top: -100px">
+            <div class="col-lg-12 text-center">
+                <h3>Mogelijk dankzij</h3>
+            </div>
+        </div>
+        <div class="row" style="text-align: center;">
+            <div class="col-lg-12 text-center">
+                <img src="/img/parkingboys2.png" alt=""/>
+                <img src="http://www.wetenschapsacademieblankenberge.be/images/logo_howest.png" alt=""/>
+            </div>
+        </div>
+    </section>
 
 @endsection

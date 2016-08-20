@@ -96,32 +96,59 @@
                         <th class="text-center">Link</th>
                     </tr>
                     @foreach($parkings as $parking)
-                    <tr class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
-                                @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
-                        <td style="vertical-align:middle"><img src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="150px" height="100px"/></td>
-                        <td style="vertical-align:middle">{{ $parking->naam }}</td>
-                        <td style="vertical-align:middle">{{ $parking->adres }}</td>
-                        <td style="vertical-align:middle">{{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}</td>
-                        <td style="vertical-align:middle">
+                    @if($parking->live_data == 1) {{-- 1 = livedata aanwezig--}}
+                        <tr class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
+                                    @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
+                            <td style="vertical-align:middle"><img src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="150px" height="100px"/></td>
+                            <td style="vertical-align:middle">{{ $parking->naam }}</td>
+                            <td style="vertical-align:middle">{{ $parking->adres }}</td>
+                            <td style="vertical-align:middle">{{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}</td>
+                            <td style="vertical-align:middle">
 
 
-                        <?php
+                            <?php
 
-                            $distance = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $mapCenter . "&destinations=". $parking->latitude . "," . $parking->longitude . "&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo"));
-                            $distanceResult = ($distance->rows[0]->elements[0]);
+                                $distance = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $mapCenter . "&destinations=". $parking->latitude . "," . $parking->longitude . "&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo"));
+                                $distanceResult = ($distance->rows[0]->elements[0]);
 
-                            echo $distanceResult->distance->text;
-                            echo "<br><small>" . $distanceResult->duration->text . "</small>";
+                                echo $distanceResult->distance->text;
+                                echo "<br><small>" . $distanceResult->duration->text . "</small>";
 
-                        ?>
+                            ?>
 
-                        </td>
-                        <td style="vertical-align:middle">
-                            <a href="/parking/{{ $parking->naam }}">
-                                <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                            </a>
-                        </td>
-                    </tr>
+                            </td>
+                            <td style="vertical-align:middle">
+                                <a href="/parking/{{ $parking->naam }}">
+                                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="vertical-align:middle"><img onerror="this.src='/img/parkings/placholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="150px" height="100px"/></td>
+                            <td style="vertical-align:middle">{{ $parking->naam }}</td>
+                            <td style="vertical-align:middle">{{ $parking->adres }}</td>
+                            <td style="vertical-align:middle">(Geen live data)</td>
+                            <td style="vertical-align:middle">
+
+                            <?php
+
+                                $distance = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $mapCenter . "&destinations=". $parking->latitude . "," . $parking->longitude . "&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo"));
+                                $distanceResult = ($distance->rows[0]->elements[0]);
+
+                                echo $distanceResult->distance->text;
+                                echo "<br><small>" . $distanceResult->duration->text . "</small>";
+
+                            ?>
+
+                            </td>
+                            <td style="vertical-align:middle">
+                                <a href="/parking/{{ $parking->naam }}">
+                                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    @endif
                     @endforeach
                 </table>
                 </div>
