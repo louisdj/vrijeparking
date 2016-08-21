@@ -50,7 +50,7 @@
 
                 <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
-                        <img src="/img/team/matthieu.jpg" width="200px" height="200px" class="img-circle" onmouseover="this.src='http://nextranks.com/data_images/cats/british-shorthair-cat/british-shorthair-cat-01.jpg'">
+                        <img src="/img/team/matthieu.jpg" width="200px" height="200px" class="img-circle" onmouseover="this.src='http://wallpaper.pickywallpapers.com/1024x768/red-cat-staring.jpg'">
                     </div>
                     <div class="row"><br/>
                         <b>Matthieu Calie</b> <br/>
