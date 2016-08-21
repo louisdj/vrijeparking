@@ -18,7 +18,7 @@
             <p>
                 De data waar VrijeParking van gebruik maakt wordt beschikbaar gestelt door een grote groep mensen bij zowel steden als bedrijven.
                 De mensen achter VrijeParking zelf, die instaan voor de verwerking en presentatie van deze data in de web-browser en mobiele app zijn hieronder vermeld.
-                Het team bestaat uit gemotiveerde laatste jaarsstudenten toegepaste informatica met een grote interesse in open data.
+                Het team bestaat uit afgestudeerden aan de richting Toegepaste Informatica van Howest te Brugge met een grote interesse in open data.
             </p>
 
             <hr/>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
-                        <img src="/img/team/robbert.jpg" width="200px" class="img-circle">
+                        <img src="/img/team/robbert.jpg" width="200px" height="200px" class="img-circle" onmouseover="this.src='http://www.operationkindness.org/opk/wp-content/uploads/2014/06/Adopt_Cat_Main.jpg'">
                     </div>
                     <div class="row"><br/>
                         <b>Robbert Goeminne</b> <br/>
@@ -38,7 +38,7 @@
 
                 <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
-                        <img src="/img/team/louis.jpg" width="200px" class="img-circle">
+                        <img src="/img/team/louis.jpg" width="200px" height="200px" class="img-circle" onmouseover="this.src='https://hannahspearssfx.files.wordpress.com/2013/04/a-cat-face-is-like-an-angel-soul.jpg'">
                     </div>
                     <div class="row"><br/>
                         <b>Louis De Jaeger</b> <br/>
@@ -50,7 +50,7 @@
 
                 <div class="col-sm-4" align="center" style="margin-top: 10px;">
                     <div class="row">
-                        <img src="/img/team/matthieu.jpg" width="200px" class="img-circle">
+                        <img src="/img/team/matthieu.jpg" width="200px" height="200px" class="img-circle" onmouseover="this.src='http://nextranks.com/data_images/cats/british-shorthair-cat/british-shorthair-cat-01.jpg'">
                     </div>
                     <div class="row"><br/>
                         <b>Matthieu Calie</b> <br/>
