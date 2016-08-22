@@ -128,7 +128,13 @@
                             <td style="vertical-align:middle"><img onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="150px" height="100px"/></td>
                             <td style="vertical-align:middle">{{ $parking->naam }}</td>
                             <td style="vertical-align:middle">{{ $parking->adres }}</td>
-                            <td style="vertical-align:middle">/</td>
+                            <td style="vertical-align:middle">
+                                @if($parking->totaal_plaatsen)
+                                    - / {{ $parking->totaal_plaatsen }}
+                                @else
+                                    - / -
+                                @endif
+                            </td>
                             <td style="vertical-align:middle">
 
                             <?php
