@@ -43,9 +43,34 @@
         <div class="container">
             <div class="row" style="margin-top: -75px;">
                 <div class="col-lg-12 text-center">
-                    <img class="img-responsive" src="/img/parkingBelgie.png" alt="kaartBelgië" style="margin: 0 auto"/>
+
+                    <h3 id="stad">&nbsp;</h3>
+
+                    <img class="img-responsive" id="kaart" usemap="#provinciemap" src="/img/parkingBelgie.png" alt="kaartBelgië" style="margin: 0 auto"/ >
+
+                    <map name="provinciemap">
+                      <area shape ="poly" href="/stad/kortrijk" coords ="22,156,65,275,122,239,159,256,185,240,159,84" onmouseover="changeSource('west-vlaanderen')" onmouseout="changeBack()" alt="Oost-Vlaanderen" />
+                      <area shape ="poly" href="/stad/gent" coords ="166,113,186,243,252,253,306,171,297,150,323,147,311,88" onmouseover="changeSource('oost-vlaanderen')" onmouseout="changeBack()" alt="West-Vlaanderen" />
+                      <area shape ="poly" href="/stad/brussel" coords ="310,230,330,243,348,238,339,204,318,209" onmouseover="changeSource('brussel')" onmouseout="changeBack()" alt="Brussel" />
+                    </map>
+
                 </div>
+
             </div>
+
+            <br/>
+
+            <script>
+                function changeSource(src) {
+                    document.getElementById("kaart").src = '/img/' + src + '.png';
+                    document.getElementById("stad").innerHTML = src;
+                }
+
+                function changeBack() {
+                    document.getElementById("kaart").src = "/img/parkingBelgie.png";
+                    document.getElementById("stad").innerHTML = "&nbsp";
+                }
+            </script>
 
             <div class="row">
                 <div class="col-lg-12 text-center">
