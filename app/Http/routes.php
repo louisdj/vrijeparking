@@ -48,6 +48,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/parking/{id}', 'ManagementController@parking');
         Route::post('/parking/{id}/update', 'ManagementController@parkingUpdate');
 
+        Route::get('/parking/new', 'ManagementController@newParking');
+
         //Blog stuff
         Route::get('/blog/new', 'BlogController@newBlogPost');
         Route::post('/blog/create', 'BlogController@create');
@@ -80,6 +82,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
     Route::get('/parkings/{stad}', 'ApiController@parkings');
 
     Route::get('/twitter/{stad}', 'ApiController@twitter');
+    Route::get('/chat/{parking}', 'ApiController@chat');
 
 });
 
