@@ -70,4 +70,13 @@ class ApiController extends Controller
             'parkings' => Parking::where('stad', $stad)->get()
         ));
     }
+
+    public function chat($parking)
+    {
+        $parking = Parking::where('naam', $parking)->first();
+
+        return response()->json(array(
+            'text' => 'Er zijn nog '. $parking->beschikbare_plaatsen .' plaatsen beschikbaar in parking ' . $parking->naam
+        ));
+    }
 }
