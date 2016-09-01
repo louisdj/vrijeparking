@@ -19,14 +19,14 @@ class ParkingController extends Controller
 {
     public function stad($stad)
     {
-        if($stad == "brussel") {
-            $url = DB::select("select url from data_sources where stad = ?", [$stad]);
-
-            $json = file_get_contents($url[0]->url);
-            $data = json_decode($json);
-
-            return view('parking.brussel.stad', compact('stad', 'data'));
-        }
+//        if($stad == "brussel") {
+//            $url = DB::select("select url from data_sources where stad = ?", [$stad]);
+//
+//            $json = file_get_contents($url[0]->url);
+//            $data = json_decode($json);
+//
+//            return view('parking.brussel.stad', compact('stad', 'data'));
+//        }
 
         $parkings = Parking::all()->where('stad', $stad);
         $stad = Stad::where('stad', $stad)->first();

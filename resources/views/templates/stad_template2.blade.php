@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
                             @foreach($parkings as $parking)
-                                @if(isset($parking->beschikbare_plaatsen))
+                                @if($parking->totaal_plaatsen != 0)
                                     <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'" class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
                                                 @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
                                         <td>
@@ -40,7 +40,20 @@
                                                 {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}
                                         </td>
                                     </tr>
+                                @else
+                                    <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'">
+                                        <td>
+                                            <img height="25px" src="/img/parkings/parking-icon.gif" alt=""/>
+                                            {{ isset($parking->naam) ? $parking->naam : "Niet beschikbaar" }}
+                                        </td>
+                                        <td>{{ $parking->adres }}</td>
+                                        <td>
+                                                {{--{{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}--}}
+                                                Geen realtime
+                                        </td>
+                                    </tr>
                                 @endif
+
                             @endforeach
                         </tbody>
                     </table>
@@ -87,6 +100,8 @@
 
                                 setMarkers(map);
                           }
+
+
 
                           var parkings = [
                               @foreach($parkings as $parking)
