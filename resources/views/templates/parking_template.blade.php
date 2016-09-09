@@ -17,8 +17,16 @@
         <div class="container" style="margin-top: -50px">
 
             @if($parking->bericht)
-                <div class="alert @if($parking->bericht_type == 0)alert-info @elseif($parking->bericht_type == 1)alert-success @else alert-warning  @endif" style="margin-right: -10px">
-                        {{ $parking->bericht }}
+                <div class="alert @if($parking->bericht_type == 0)alert-info
+                                  @elseif($parking->bericht_type == 1)alert-success
+                                  @else alert-warning
+                                  @endif alert-dismissible fade in" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button> <strong>Opgepast!</strong>
+
+                    {{ $parking->bericht }}
                 </div>
             @endif
 

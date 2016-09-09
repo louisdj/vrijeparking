@@ -32,7 +32,9 @@ class ApiController extends Controller
         $parking = Parking::where('naam', $parking)->first();
 
         return response()->json(array(
-            $parking
+            $parking,
+            $parking->openingsuren,
+            $parking->betaalmogelijkheden
         ));
     }
 

@@ -16,6 +16,23 @@
     <section id="portfolio">
         <div class="container">
             <div class="row">
+
+                @if($stad->bericht)
+
+                    <div class="alert @if($stad->bericht_type == 0)alert-info
+                                      @elseif($stad->bericht_type == 1)alert-success
+                                      @else alert-warning
+                                      @endif alert-dismissible fade in" role="alert">
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button> <strong>Opgepast!</strong>
+
+                        {{ $stad->bericht }}
+                    </div>
+
+                @endif
+
                 <h3>Overzicht parkings</h3>
                 <div class="col-md-8">
                     <table class="table table-striped table-bordered table-hover">
