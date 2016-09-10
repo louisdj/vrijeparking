@@ -45,10 +45,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth'], 'prefix' => 'beheer'], function() {
 
         Route::get('/', 'ManagementController@index');
-        Route::get('/parking/{id}', 'ManagementController@parking');
-        Route::post('/parking/{id}/update', 'ManagementController@parkingUpdate');
 
         Route::get('/parking/new', 'ManagementController@newParking');
+        Route::post('/parking/new', 'ManagementController@newParkingPost');
+
+        Route::get('/parking/{id}', 'ManagementController@parking');
+        Route::post('/parking/{id}/update', 'ManagementController@parkingUpdate');
+        Route::get('/parking/{id}/remove', 'ManagementController@parkingRemove');
 
         //Blog stuff
         Route::get('/blog/new', 'BlogController@newBlogPost');

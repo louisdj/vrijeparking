@@ -24,6 +24,9 @@
 
                     <h2>Parkings</h2>
 
+                    <a href="/beheer/parking/new"><button class="btn-primary"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nieuwe parking toevoegen</button></a>
+                    <br/><br/>
+
                     <ul class="tabs" data-persist="true">
                         @foreach($steden as $key => $stad)
                             <li><a href="#view{{ $key }}">{{ $stad->stad }}</a></li>
@@ -60,8 +63,6 @@
 
                                     </table>
                                 </p>
-
-                                 {{--<a href=""><button class="btn-primary"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nieuwe parking toevoegen</button></a>--}}
                             </div>
                         @endforeach
                     </div>

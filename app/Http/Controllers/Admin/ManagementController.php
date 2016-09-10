@@ -28,6 +28,43 @@ class ManagementController extends Controller
         return view('beheer.beheer_parking', compact('parking'));
     }
 
+    public function newParking()
+    {
+        return view('beheer.newparking');
+    }
+
+    public function newParkingPost(Request $request)
+    {
+        $parking = new Parking();
+
+        $parking->naam = $request->naam;
+        $parking->stad = $request->stad;
+        $parking->adres = $request->adres;
+
+        $imageName = $parking->naam . '.' .
+            $request->afbeelding->getClientOriginalExtension();
+
+        $request->afbeelding->move(
+            base_path() . '/public/img/parkings/'.$parking->stad.'/', $imageName
+        );
+
+        $parking->latitude = $request->latitude;
+        $parking->longitude = $request->longitude;
+
+        $parking->omschrijving = $request->omschrijving;
+        $parking->telefoon = $request->telefoon;
+        $parking->totaal_plaatsen = $request->totaal_plaatsen;
+
+
+        $parking->bericht = $request->bericht;
+        $parking->bericht_type = $request->type;
+        $parking->live_data = $request->live_data;
+
+        $parking->save();
+
+        return view('beheer.newparking');
+    }
+
     public function parkingUpdate($id, Request $request)
     {
         $parking = Parking::where('id', $id)->first();
@@ -42,5 +79,13 @@ class ManagementController extends Controller
         $parking->save();
 
         return view('beheer.beheer_parking', compact('parking'));
+    }
+
+    public function parkingRemove($id)
+    {
+        $parking = Parking::where('id', $id)->first();
+        $parking->delete();
+
+        return redirect('/beheer');
     }
 }

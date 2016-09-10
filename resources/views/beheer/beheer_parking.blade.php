@@ -71,7 +71,8 @@
                                 </p>
 
                                  <a href=""><button class="btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Update parking</button></a>
-                                 <a href=""><button class="btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Deactiveer parking</button></a>
+                                 <a href="/beheer/parking/{{ $parking->id }}/remove"><button type="button" class="btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Verwijder parking</button></a>
+
                                  </form>
                             </div>
                         </div>

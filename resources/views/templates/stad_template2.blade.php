@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                             @foreach($parkings as $parking)
-                                @if($parking->totaal_plaatsen != 0)
+                                @if($parking->totaal_plaatsen != 0 && $parking->beschikbare_plaatsen != 0)
                                     <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'" class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
                                                 @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
                                         <td>
