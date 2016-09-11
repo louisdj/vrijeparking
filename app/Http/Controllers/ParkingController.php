@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Betaalmogelijkheden;
+use App\Betaalmogelijkheid;
 use App\Openingsuren;
 use App\Parking;
 use App\Stad;
@@ -69,7 +69,7 @@ class ParkingController extends Controller
         }
 
         $openingsuren = Openingsuren::where('parking_id', $parking->id)->get();
-        $parking_betaalmogelijkheden = Betaalmogelijkheden::where('parking_id', $parking->id)->get();
+        $parking_betaalmogelijkheden = Betaalmogelijkheid::where('parking_id', $parking->id)->get();
 
         $tarievenDag = Tarief::where('parking_id', $parking->id)->where('moment', 'dag')->get();
         $tarievenNacht = Tarief::where('parking_id', $parking->id)->where('moment', 'nacht')->get();
