@@ -33,7 +33,8 @@
             <div class="row">
                 {{--<h3>Details</h3>--}}
                 <div class="col-md-4">
-                    <img src="/img/parkings/{{ $parking->stad }}/{{strtolower($parking->naam)}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
+                    {{--<img src="/img/parkings/{{ $parking->stad }}/{{strtolower($parking->naam)}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>--}}
+                    <img onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
 
                     <?php $mogelijkheden = array('Maestro', 'Bancontact', 'Visa', 'Mastercard', 'Cash', 'Iets', 'anders'); ?>
                     <br/><br/>
