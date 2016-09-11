@@ -109,6 +109,23 @@
                                     </table>
                                 </p>
 
+                                <h3>Betaalmiddelen</h3>
+                                <select name="betaalmiddelen[]" multiple>
+                                    <option value="1">Maestro</option>
+                                    <option value="2">Bancontact</option>
+                                    <option value="3">Visa</option>
+                                    <option value="4">Mastercard</option>
+                                    <option value="5">cash</option>
+                                </select>
+
+                                {{--<input type="checkbox" name="maestro" value="1"><label for="maestro">Maestro</label><br>--}}
+                                {{--<input type="checkbox" name="bancontact" value="2"><label for="bancontact">Bancontact</label><br>--}}
+                                {{--<input type="checkbox" name="visa" value="3"><label for="visa">visa</label><br>--}}
+                                {{--<input type="checkbox" name="mastercard" value="4"><label for="mastercard">mastercard</label><br>--}}
+                                {{--<input type="checkbox" name="cash" value="5"><label for="cash">cash</label>--}}
+
+                                <br/><br/>
+
                                  <a href=""><button class="btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Creëer parking</button></a>
                                  <a href=""><button class="btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Annuleren</button></a>
                                  </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Betaalmogelijkheid;
 use App\Blogpost;
 use App\Parking;
 use App\Stad;
@@ -41,12 +42,14 @@ class ManagementController extends Controller
         $parking->stad = $request->stad;
         $parking->adres = $request->adres;
 
-        $imageName = $parking->naam . '.' .
-            $request->afbeelding->getClientOriginalExtension();
+        if($request->afbeelding) {
+            $imageName = $parking->naam . '.' .
+                $request->afbeelding->getClientOriginalExtension();
 
-        $request->afbeelding->move(
-            base_path() . '/public/img/parkings/'.$parking->stad.'/', $imageName
-        );
+            $request->afbeelding->move(
+                base_path() . '/public/img/parkings/'.$parking->stad.'/', $imageName
+            );
+        }
 
         $parking->latitude = $request->latitude;
         $parking->longitude = $request->longitude;
@@ -61,6 +64,21 @@ class ManagementController extends Controller
         $parking->live_data = $request->live_data;
 
         $parking->save();
+
+        if($request->betaalmiddelen)
+        {
+            foreach($request->betaalmiddelen as $betaalmogelijkheid)
+            {
+                $betaalmiddel = new Betaalmogelijkheid();
+
+                $betaalmiddel->parking_id = $parking->id;
+                $betaalmiddel->betaling_id = $betaalmogelijkheid;
+
+                $betaalmiddel->save();
+            }
+        }
+
+
 
         return view('beheer.newparking');
     }
