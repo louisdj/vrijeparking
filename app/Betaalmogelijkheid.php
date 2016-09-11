@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Betaalmogelijkheid extends Model
 {
 
-    public function Betaalmiddel()
+    public function betaalmiddel()
     {
-        return $this->hasOne('App\Betaalmiddel');
+        return $this->hasOne('App\Betaalmiddel', 'id', 'betaalmiddel_id');
     }
 
     public $timestamps = false;

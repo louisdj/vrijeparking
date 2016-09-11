@@ -36,11 +36,11 @@
                     {{--<img src="/img/parkings/{{ $parking->stad }}/{{strtolower($parking->naam)}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>--}}
                     <img onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
 
-                    <?php $mogelijkheden = array('Maestro', 'Bancontact', 'Visa', 'Mastercard', 'Cash', 'Iets', 'anders'); ?>
                     <br/><br/>
 
                     @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
-                        <img src="/img/betaalmogelijkheden/{{ strtolower($mogelijkheden[$betaalmogelijkheid->betaling_id-1]) }}.png"
+
+                        <img src="/img/betaalmogelijkheden/{{ strtolower($betaalmogelijkheid->betaalmiddel->middel) }}.png"
                         width="45px" alt="" style="padding-right: 5px;" />
                     @endforeach
 
@@ -57,7 +57,11 @@
                     <br/><br/>
 
                     <h4>Contact</h4>
-                        {!! $parking->telefoon !!}
+                        @if($parking->telefoon)
+                            {!! $parking->telefoon !!}
+                        @else
+                            Geen telefoonnummer
+                        @endif
                     <br/><br/>
 
 
@@ -112,10 +116,11 @@
                 </div>
             </div>
 
+            @if(count($tarievenDag) > 0)
+
             <hr/>
 
             <h4>Tarieven</h4>
-            @if(count($tarievenDag) == 0) Niet beschikbaar @endif
             <h6>{!! $parking->dagtarief !!}</h6>
             <div class="table-responsive">
             <table class="table table-bordered">
@@ -151,6 +156,10 @@
                 </tr>
             </table>
             </div>
+
+            @endif
+
+            @if($historie != null)
 
             <hr/>
             <h4>Voorspelling</h4>
@@ -304,6 +313,8 @@
                     });
                 });
             </script>
+
+            @endif
 
             <hr/>
 

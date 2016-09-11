@@ -86,7 +86,7 @@
                 <h3>Twitter robot</h3>
                 <img src="https://pbs.twimg.com/profile_images/689562976177778691/n2cRcEoV.png" class="img-rounded img-responsive" alt="" width="75px" style="float:left; padding-right: 7px;"/>
 
-                <a href="https://twitter.com/VrijeParkingK" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @VrijeParkingG</a><br/>
+                <a href="https://twitter.com/VrijeParking{{ substr($stad->stad, 0,1) }}" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @VrijeParking{{ substr($stad->stad, 0,1) }}</a><br/>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
                 Aangezien stad {{ $stad->stad }} de realtime bezetting van zijn parkings ter beschikking stelt, kunnen wij zowel op onze website als op Twitter een continu reeël beeld
