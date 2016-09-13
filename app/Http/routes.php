@@ -6,6 +6,8 @@ Route::group(['middleware' => 'web'], function () {
             return view('home');
         });
 
+    Route::get('/autocomplete', 'ParkingController@complete');
+
     Route::get('/stad/{stad}', 'ParkingController@stad');
     Route::get('/parking/{parking}', 'ParkingController@parking');
 

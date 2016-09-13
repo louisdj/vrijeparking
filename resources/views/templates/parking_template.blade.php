@@ -49,7 +49,11 @@
                 <div class="col-md-6">
 
                     <h4>Omschrijving</h4>
-                        {{ $parking->omschrijving }}
+                        @if($parking->omschrijving)
+                            {{ $parking->omschrijving }}
+                        @else
+                            /
+                        @endif
                     <br/><br/>
 
                     <h4>Adres</h4>
@@ -60,7 +64,7 @@
                         @if($parking->telefoon)
                             {!! $parking->telefoon !!}
                         @else
-                            Geen telefoonnummer
+                            /
                         @endif
                     <br/><br/>
 

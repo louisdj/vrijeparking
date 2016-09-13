@@ -17,6 +17,26 @@ use Illuminate\Support\Facades\Session;
 
 class ParkingController extends Controller
 {
+    public function complete(Request $request)
+    {
+        $keywords = $request->get('term');
+//
+//        $suggestions = Parking::where('naam', 'LIKE', '%'.$keywords.'%')->get(['naam']);
+
+        $results = array();
+
+        $queries = DB::table('parkings')
+            ->where('naam', 'LIKE', '%'.$keywords.'%')
+            ->take(5)->get();
+
+        foreach ($queries as $query)
+        {
+            $results[] = [ 'id' => $query->id, 'value' => $query->naam];
+        }
+
+        return response()->json($results);
+    }
+
     public function stad($stad)
     {
 //        if($stad == "brussel") {
