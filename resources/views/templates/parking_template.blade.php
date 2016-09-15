@@ -39,7 +39,6 @@
                     <br/><br/>
 
                     @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
-
                         <img src="/img/betaalmogelijkheden/{{ strtolower($betaalmogelijkheid->betaalmiddel->middel) }}.png"
                         width="45px" alt="" style="padding-right: 5px;" />
                     @endforeach
@@ -90,6 +89,8 @@
 
                     @if($parking->totaal_plaatsen == 0)
                         Geen data
+                    @elseif($parking->live_data == 0)
+                       - / {{ $parking->totaal_plaatsen }}
                     @else
                         <div class="progress" style="height:20px; vertical-align: bottom; background-color: red;">
                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
