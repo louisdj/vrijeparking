@@ -40,9 +40,14 @@
 
                     @foreach($parking_betaalmogelijkheden as $betaalmogelijkheid)
                         <img src="/img/betaalmogelijkheden/{{ strtolower($betaalmogelijkheid->betaalmiddel->middel) }}.png"
-                        width="45px" alt="" style="padding-right: 5px;" />
+                        width="45px" alt="" style="padding-right: 5px;" data-placement="bottom" data-toggle="tooltip" title="{{ $betaalmogelijkheid->betaalmiddel->middel }}" />
                     @endforeach
 
+                    <script>
+                        $(document).ready(function(){
+                            $('[data-toggle="tooltip"]').tooltip();
+                        });
+                    </script>
 
                 </div>
                 <div class="col-md-6">
