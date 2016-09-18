@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Stad @yield('stadsNaam') </h2>
+                    <h2>Stad {{ $stad->stad }} </h2>
                 </div>
             </div>
         </div>
@@ -16,6 +16,23 @@
     <section id="portfolio">
         <div class="container">
             <div class="row">
+
+                @if($stad->bericht)
+
+                    <div class="alert @if($stad->bericht_type == 0)alert-info
+                                      @elseif($stad->bericht_type == 1)alert-success
+                                      @else alert-warning
+                                      @endif alert-dismissible fade in" role="alert">
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button> <strong>Opgepast!</strong>
+
+                        {{ $stad->bericht }}
+                    </div>
+
+                @endif
+
                 <h3>Overzicht parkings</h3>
                 <div class="col-md-8">
                     <table class="table table-striped table-bordered table-hover">
@@ -27,18 +44,56 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @yield('parkingLijst')
+                            @foreach($parkings as $parking)
+                                @if($parking->totaal_plaatsen != 0 && $parking->beschikbare_plaatsen != 0)
+                                    <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'" class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
+                                                @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
+                                        <td>
+                                            <img height="25px" src="/img/parkings/parking-icon.gif" alt=""/>
+                                            {{ isset($parking->naam) ? $parking->naam : "Niet beschikbaar" }}
+                                        </td>
+                                        <td>{{ $parking->adres }}</td>
+                                        <td>
+                                                {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'">
+                                        <td>
+                                            <img height="25px" src="/img/parkings/parking-icon.gif" alt=""/>
+                                            {{ isset($parking->naam) ? $parking->naam : "Niet beschikbaar" }}
+                                        </td>
+                                        <td>{{ $parking->adres }}</td>
+                                        <td>
+                                                {{--{{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}--}}
+                                                Geen realtime
+                                        </td>
+                                    </tr>
+                                @endif
+
+                            @endforeach
                         </tbody>
                     </table>
                     <h6>* Beschikbaarheid: <span style="color: #e74c3c">minder dan 10%</span>, <span style="color: #f39c12">minder dan 30%</span> </h6>
                 </div>
                 <div class="col-md-4">
-                    @yield('beschikbaarheid')
+                    <div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
                 </div>
 
             </div>
 
-            @yield('twitter')
+                <hr/>
+                <h3>Twitter robot</h3>
+                <img src="https://pbs.twimg.com/profile_images/689562976177778691/n2cRcEoV.png" class="img-rounded img-responsive" alt="" width="75px" style="float:left; padding-right: 7px;"/>
+
+                <a href="https://twitter.com/VrijeParking{{ substr($stad->stad, 0,1) }}" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @VrijeParking{{ substr($stad->stad, 0,1) }}</a><br/>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                Aangezien stad {{ $stad->stad }} de realtime bezetting van zijn parkings ter beschikking stelt, kunnen wij zowel op onze website als op Twitter een continu reeël beeld
+                geven van de beschikbare parking. Op twitter doen wij dit aan de hand van een robot die de data ophaalt per kwartier en vervolgens hier updates over geeft.
+                Wanneer een parking minder dan 30% beschikbaarheid heeft wordt dit meegegeven. Ook wanneer de parking terug <b>meer</b> dan 30% heeft wordt dit meegedeeld.
+                Dit alles met afwisseling van <b>"Summary tweets"</b> die een opsomming geven en tenslotte nog tweets die melden als een parking compleet volzet is.
+
 
             <hr/>
 
@@ -55,23 +110,20 @@
                           {
                            var mapOptions = {
                              zoom: 14,
-                             center: new google.maps.LatLng(@yield('centraleMapCoordinaten')),
+                             center: new google.maps.LatLng({{ $stad->coordinaten }}),
                              scrollwheel: false
                            };
                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-//                           var marker = new google.maps.Marker({
-//                               position: new google.maps.LatLng(51.0557644,3.7220077),
-//                               title:"Hello World!"
-//                           });
-//
-//                           // To add the marker to the map, call setMap();
-//                           marker.setMap(map);
                                 setMarkers(map);
                           }
 
+
+
                           var parkings = [
-                              @yield('parkingsOpKaartLijst')
+                              @foreach($parkings as $parking)
+                                    ["{{ isset($parking->naam) ? $parking->naam : "Niet beschikbaar"   }}" , {{ $parking->latitude  }}, {{ $parking->longitude  }}, "/parking/{{ isset($parking->naam) ? strtolower($parking->naam) : "Niet beschikbaar"  }}"],
+                                @endforeach
                               ['Maroubra Beach', -33.950198, 151.259302, 1]
                         ];
 
@@ -139,12 +191,22 @@
 
     <script>
             var bezet =
-                    @yield('bezetting')
+                    @foreach($parkings as $parking)
+                        @if(isset($parking->beschikbare_plaatsen))
+                             {{ $parking->totaal_plaatsen - $parking->beschikbare_plaatsen }} +
+                        @endif
+                    @endforeach
               0;
 
             var totaal =
-                    @yield('totaal')
+                    @foreach($parkings as $parking)
+                        @if(isset($parking->beschikbare_plaatsen))
+                          {{ $parking->totaal_plaatsen }} +
+                        @endif
+                    @endforeach
               0;
         </script>
+
+        <script src="/js/chart.js"></script>
 
 @endsection

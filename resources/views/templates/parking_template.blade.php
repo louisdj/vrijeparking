@@ -49,6 +49,22 @@
                         });
                     </script>
 
+                    <br/>
+
+                    @if($parking->bewaakt)
+                        <img src="/img/parkingvoorzieningen/bewaker.png" width="23px" data-toggle="tooltip" title="Bewaakt" />
+                    @endif
+
+                    @if($parking->gehandicapten_plaatsen)
+                        <img src="/img/parkingvoorzieningen/gehandicapt.png" width="23px" alt="" data-toggle="tooltip" title="Plaatsen gehandicapten" /> {{ $parking->gehandicapten_plaatsen }}
+                    @endif
+
+                    @if($parking->maximale_hoogte)
+                        <br/> <b>Hoogte:</b> {{ $parking->maximale_hoogte }}m
+                    @endif
+
+
+
                 </div>
                 <div class="col-md-6">
 
