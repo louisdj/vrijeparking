@@ -23,7 +23,7 @@ class Parking extends Model
 
     public function betaalmogelijkheden()
     {
-        return $this->hasMany('App\Betaalmogelijkheden');
+        return $this->hasMany('App\Betaalmogelijkheid');
     }
 
     protected $table = 'parkings';
