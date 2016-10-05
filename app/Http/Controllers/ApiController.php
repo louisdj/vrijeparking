@@ -64,6 +64,16 @@ class ApiController extends Controller
         ));
     }
 
+    public function vindStad($lat, $Lng)
+    {
+        $json = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng='. $lat .',' . $Lng . '');
+        $data = json_decode($json);
+
+        return response()->json(array(
+            $data->results[2]->formatted_address
+        ));
+    }
+
 
     public function twitter($stad)
     {

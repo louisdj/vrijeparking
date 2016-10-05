@@ -6,6 +6,14 @@ Route::group(['middleware' => 'web'], function () {
             return view('home');
         });
 
+    Route::get('/test', function() {
+        return view('/test/pvnummers_original');
+    });
+
+    Route::post('/test', function() {
+        return view('/test/pvnummers_original');
+    });
+
     Route::get('/autocomplete', 'ParkingController@complete');
 
     Route::get('/stad/{stad}', 'ParkingController@stad');
@@ -85,6 +93,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
     Route::get('/parking/{parking}', 'ApiController@parking');
     Route::get('/parkings/lokatie/{lat}/{Lng}', 'ApiController@lokatie');
     Route::get('/parkings/{stad}', 'ApiController@parkings');
+
+    Route::get('/vindStad/{lat}/{Lng}', 'ApiController@vindStad');
 
     Route::get('/twitter/{stad}', 'ApiController@twitter');
     Route::get('/chat/{parking}', 'ApiController@chat');
