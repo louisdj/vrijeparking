@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\mobiele_stad;
 use App\Parking;
 use App\Stad;
 use Illuminate\Http\Request;
@@ -71,9 +72,22 @@ class ApiController extends Controller
         $json = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng='. $lat .',' . $Lng . '');
         $data = json_decode($json);
 
-        return response()->json(array(
-            $data->results[2]->formatted_address
-        ));
+
+
+        $stad = mobiele_stad::where('naam', substr($data->results[1]->formatted_address, 0, strpos($data->results[1]->formatted_address, ',')))->first();
+
+        if(!empty($stad)) {
+            return response()->json(array(
+                'status' => !empty($stad),
+                'naam' => $data->results[1]->formatted_address,
+                'code' => $stad->code,
+                'code_compleet' => $stad->code_compleet
+            ));
+        } else {
+            return response()->json(array(
+                'status' => 'false'
+            ));
+        }
     }
 
 
