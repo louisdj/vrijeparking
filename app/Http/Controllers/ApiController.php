@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Log;
 use App\mobiele_stad;
 use App\Parking;
 use App\Stad;
@@ -16,9 +17,13 @@ class ApiController extends Controller
 {
     public function steden()
     {
+        Log::create([]);
+
         return response()->json(array(
             Stad::all()
         ));
+
+
     }
 
     public function stad($stad)
