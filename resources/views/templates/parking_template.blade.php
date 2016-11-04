@@ -162,9 +162,7 @@
                             {{--@endif </th>--}}
 
                         <th>
-                            @if(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:00') !== false)
-                                Gratis
-                            @elseif(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:') !== false)
+                            @if(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:') !== false)
                                 {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}m
                             @else
                                 {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u
@@ -186,9 +184,7 @@
                 <tr class="info">
                     @foreach($tarievenNacht as $tarief)
                         <th>
-                            @if(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:00') !== false)
-                                Gratis
-                            @elseif(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:') !== false)
+                            @if(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:') !== false)
                                 {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}m
                             @else
                                 {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u
