@@ -152,11 +152,24 @@
             <table class="table table-bordered">
                 <tr class="info">
                     @foreach($tarievenDag as $tarief)
-                        <th>@if(str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) >= 15)
-                             {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}m
+
+                        {{--{{ date('H:i', strtotime($tarief->tijdsduur)) }}--}}
+
+                        {{--<th>@if(str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) >= 15)--}}
+                             {{--{{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}m--}}
+                            {{--@else--}}
+                            {{--{{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u--}}
+                            {{--@endif </th>--}}
+
+                        <th>
+                            @if(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:00') !== false)
+                                Gratis
+                            @elseif(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:') !== false)
+                                {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}m
                             @else
-                            {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u
-                            @endif </th>
+                                {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u
+                            @endif
+                        </th>
                     @endforeach
                 </tr>
                 <tr>
@@ -172,7 +185,15 @@
             <table class="table table-bordered">
                 <tr class="info">
                     @foreach($tarievenNacht as $tarief)
-                        <th>{{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u</th>
+                        <th>
+                            @if(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:00') !== false)
+                                Gratis
+                            @elseif(strpos(date('H:i', strtotime($tarief->tijdsduur)), '00:') !== false)
+                                {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}m
+                            @else
+                                {{ str_replace(['00:',':00'], '', date('H:i', strtotime($tarief->tijdsduur))) }}u
+                            @endif
+                        </th>
                     @endforeach
                 </tr>
                 <tr>

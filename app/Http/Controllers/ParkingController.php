@@ -91,8 +91,8 @@ class ParkingController extends Controller
         $openingsuren = Openingsuren::where('parking_id', $parking->id)->get();
         $parking_betaalmogelijkheden = Betaalmogelijkheid::where('parking_id', $parking->id)->get();
 
-        $tarievenDag = Tarief::where('parking_id', $parking->id)->where('moment', 'dag')->get();
-        $tarievenNacht = Tarief::where('parking_id', $parking->id)->where('moment', 'nacht')->get();
+        $tarievenDag = Tarief::where('parking_id', $parking->id)->where('moment', 'dag')->orderBy('tijdsduur')->get();
+        $tarievenNacht = Tarief::where('parking_id', $parking->id)->where('moment', 'nacht')->orderBy('tijdsduur')->get();
 
 
         return view('templates.parking_template',
@@ -168,6 +168,21 @@ class ParkingController extends Controller
 
     //Wordt gebruikt om eenvoudig alle data vd "Parkings" tabel te inserten
     public function enterData() {
+
+        $json = file_get_contents("https://oostende.icordis.be/opendata/?id=36&type=json");
+        $data = json_decode($json);
+
+//        dd($data->parkings[0]);
+
+        foreach($data->parkings as $parking) {
+            DB::insert("insert into parkings(naam,stad,adres, latitude, longitude) values(?, ?, ?, ?, ?)" ,
+                [$parking[0],
+                    'Oostende',
+                    $parking[3],
+                    $parking[2],
+                    $parking[1]]);
+        }
+
 
 //        $json = file_get_contents("http://data.irail.be/Parkings/brussels.json");
 //        $data = json_decode($json);
