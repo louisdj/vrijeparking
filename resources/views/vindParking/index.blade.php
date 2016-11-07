@@ -88,9 +88,6 @@
 
                     <hr/>
 
-                    @if(isset($parkings) && count($parkings) > 0)
-                    @foreach($parkings as $parking)
-
                     <style>
                         .post-container {
                             margin: 10px 0px 0 0;
@@ -102,7 +99,7 @@
                         }
 
                         .post-container:hover {
-                            border: 4px solid;
+                            border: 4px solid #333;
                             cursor: pointer;
                         }
 
@@ -125,6 +122,9 @@
                             font-size: 200%
                         }
                     </style>
+
+                    @if(isset($parkings) && count($parkings) > 0)
+                    @foreach($parkings as $parking)
 
                     <div class="post-container"
                         onmouseover="map.setCenter(new google.maps.LatLng({{ $parking->latitude }},{{ $parking->longitude }}))"
@@ -161,6 +161,9 @@
                     </div>
 
                     @endforeach
+
+                    <br/>
+
                     @endif
 
                     @if(isset($parkings) && count($parkings) == 0)
