@@ -26,7 +26,7 @@
                         <ul>
                             <li>Realtime beschikbare plaatsen</li>
                             <li>Eenvoudige navigatie naar parkings</li>
-                            <li>Eenvoudig betalen voor straatparkeren met 4411</li>
+                            <li>Assistentie bij betalen voor straatparking</li>
                             <li>Vind parkings in jouw buurt</li>
                         </ul>
                     </h3>
