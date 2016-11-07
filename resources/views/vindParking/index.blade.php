@@ -91,7 +91,7 @@
                     <style>
                         .post-container {
                             margin: 10px 0px 0 0;
-                            border: 2px solid #333;
+                            border: 4px solid #333;
                             border-radius: 10px;
                             overflow: auto;
                             padding: 5px;
@@ -99,7 +99,8 @@
                         }
 
                         .post-container:hover {
-                            border: 4px solid #333;
+                            /*border: 4px solid #333;*/
+                            background-color: darkorange;
                             cursor: pointer;
                         }
 
@@ -131,8 +132,8 @@
                         onclick="window.open('/parking/{{ $parking->naam }}')"
                         style="
                             @if($parking->live_data)
-                                @if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) border: 2px solid red
-                                @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) border: 2px solid orange
+                                @if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) border: 4px solid red
+                                @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) border: 4px solid orange
                                 @endif
                             @endif"
                         >
