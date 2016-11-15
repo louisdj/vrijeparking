@@ -75,11 +75,22 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/klantenpaneel/', 'KlantenPaneelController@index');
         Route::get('/klantenpaneel/parking/{id}', 'KlantenPaneelController@parking');
-    });
 
+    });
 
 });
 
+
+Route::group(['prefix' => 'community'], function () {
+
+    Route::get('/', 'CommunityController@index');
+
+    Route::get('/toevoegen', 'CommunityController@toevoegen');
+    Route::post('/toevoegen', 'CommunityController@toevoegenPost');
+
+    Route::get('/lijst', 'CommunityController@lijst');
+
+});
 
 //Working with DataSources
 Route::get('/update', 'ParkingController@enterData');
