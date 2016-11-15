@@ -32,7 +32,7 @@
                     </h3>
                     <br/>
                     <a href="https://play.google.com/store/apps/details?id=com.ionicframework.vrijeparking374441"><img src="/img/app/android.png" width="200px" alt=""/></a>
-                    <img src="/img/app/ios.png" style="opacity: 0.2" width="200px" alt=""/>
+                    <a href="https://itunes.apple.com/nl/app/vrijeparking/id1175461339?mt=8"><img src="/img/app/ios.png" width="200px" alt=""/></a>
               </div>
 
         </div>
