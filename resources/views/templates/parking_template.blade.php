@@ -310,7 +310,7 @@
                                     enabled: false
                                 },
                                 pointInterval: 300000, // one hour
-                                pointStart: Date.UTC({{ date('Y,m,d', strtotime(' -1 month 1 week')) }}, 0, 0, 0)
+                                pointStart: Date.UTC({{ date('Y,m,d', strtotime(' -1 week')) }}, 0, 0, 0)
                             }
                         },
                         series: [
