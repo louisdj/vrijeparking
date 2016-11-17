@@ -20,7 +20,7 @@ class ApiController extends Controller
         Log::create([]);
 
         return response()->json(array(
-            Stad::all()->where('live_data', 1)
+            Stad::where('live_data', 1)->get()
         ));
 
 
