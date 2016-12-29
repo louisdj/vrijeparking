@@ -105,7 +105,7 @@
                     </li>
 
                     <li class="page-scroll">
-                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VJKUX5G7PBKNY">
+                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DVRBJCU2EQAL8">
                             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Doneren
                         </a>
                     </li>
