@@ -117,7 +117,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="/blog"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ trans('navbar.blog') }}</a></li>
                             <li><a href="/team"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ trans('navbar.team') }}</a></li>
-                            <li><a href="/community"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Community</a></li>
+                            {{--<li><a href="/community"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Community</a></li>--}}
                         </ul>
                     </li>
 
