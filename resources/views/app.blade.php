@@ -104,6 +104,12 @@
                         <a href="/vindparking">{{ trans('navbar.findParking') }}</a>
                     </li>
 
+                    <li class="page-scroll">
+                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VJKUX5G7PBKNY">
+                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Doneren
+                        </a>
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span> {{ trans('navbar.extra') }} <span class="caret"></span>
@@ -111,6 +117,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="/blog"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ trans('navbar.blog') }}</a></li>
                             <li><a href="/team"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ trans('navbar.team') }}</a></li>
+                            <li><a href="/community"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Community</a></li>
                         </ul>
                     </li>
 
