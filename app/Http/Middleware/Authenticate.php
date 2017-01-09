@@ -25,6 +25,10 @@ class Authenticate
             }
         }
 
+        if (Auth::check()) {
+            return redirect()->intended('/');
+        }
+
         return $next($request);
     }
 }

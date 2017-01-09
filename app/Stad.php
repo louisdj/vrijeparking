@@ -14,5 +14,10 @@ class Stad extends Model
         'fetch_class',
     ];
 
+    public function aantal_parkings()
+    {
+        return Parking::where('stad', $this->stad)->get()->count();
+    }
+
     public $timestamps = false;
 }

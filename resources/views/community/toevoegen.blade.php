@@ -19,6 +19,23 @@
             <div class="row">
                 <div style="width: 97%; margin: 0 auto; padding: 20px 0 40px;">
 
+                    @if(!Auth::check())
+
+                    <div class="alert alert-warning">
+                      <strong>Opgelet!</strong> Inloggen is niet vereist maar het geeft u krediet voor uw werk.
+                      <a href="/login" class="alert-link">Hier inloggen</a>.
+                    </div>
+
+                    @endif
+
+                    @if(!empty($message))
+
+                    <div class="alert alert-success">
+                      <strong>Succes!</strong> {{ $message }}
+                    </div>
+
+                    @endif
+
                     <div class="tabcontents">
                         <div id="view">
                             <form action="/community/toevoegen" method="post" enctype="multipart/form-data">

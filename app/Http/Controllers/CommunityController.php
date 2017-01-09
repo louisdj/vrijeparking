@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Parking;
 use App\Parking_Suggestie;
+use App\Stad;
 use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Auth;
 
 class CommunityController extends Controller
 {
@@ -18,7 +20,9 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        return view('community.index');
+        $steden = Stad::all();
+
+        return view('community.index', compact('steden'));
     }
 
     public function toevoegen()
@@ -50,9 +54,12 @@ class CommunityController extends Controller
         $parking->telefoon = $request->telefoon;
         $parking->totaal_plaatsen = $request->totaal_plaatsen;
 
+        $parking->created_by_id = Auth::user()->id;
+
         $parking->save();
 
-        return view('community.toevoegen');
+        return view('community.toevoegen')
+            ->with('message', 'Parking succesvol aangemaakt. Wij controleren deze binnenkort.');
     }
 
     public function lijst()

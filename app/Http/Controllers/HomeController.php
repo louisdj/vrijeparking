@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Stad;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,6 +17,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $offline_steden = Stad::where('live_data', 0)->get();
+
+        return view('home', compact('offline_steden'));
     }
 }

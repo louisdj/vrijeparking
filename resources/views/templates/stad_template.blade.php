@@ -34,7 +34,7 @@
                 @endif
 
                 <h3>Overzicht parkings</h3>
-                <div class="col-md-8">
+                <div class="@if($stad->live_data == 1) col-md-8 @else col-md-12 @endif">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                           <tr>
@@ -76,12 +76,16 @@
                     </table>
                     <h6>* Beschikbaarheid: <span style="color: #e74c3c">minder dan 10%</span>, <span style="color: #f39c12">minder dan 30%</span> </h6>
                 </div>
-                <div class="col-md-4">
-                    <div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
-                </div>
+
+                @if($stad->live_data == 1)
+                    <div class="col-md-4">
+                        <div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+                    </div>
+                @endif
 
             </div>
 
+            @if($stad->live_data == 1)
                 <hr/>
                 <h3>Twitter robot</h3>
                 <img src="https://pbs.twimg.com/profile_images/689562976177778691/n2cRcEoV.png" class="img-rounded img-responsive" alt="" width="75px" style="float:left; padding-right: 7px;"/>
@@ -93,7 +97,7 @@
                 geven van de beschikbare parking. Op twitter doen wij dit aan de hand van een robot die de data ophaalt per kwartier en vervolgens hier updates over geeft.
                 Wanneer een parking minder dan 30% beschikbaarheid heeft wordt dit meegegeven. Ook wanneer de parking terug <b>meer</b> dan 30% heeft wordt dit meegedeeld.
                 Dit alles met afwisseling van <b>"Summary tweets"</b> die een opsomming geven en tenslotte nog tweets die melden als een parking compleet volzet is.
-
+            @endif
 
             <hr/>
 

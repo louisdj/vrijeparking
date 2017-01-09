@@ -2,9 +2,7 @@
 
 Route::group(['middleware' => 'web'], function () {
 
-    Route::get('/', function () {
-            return view('home');
-        });
+    Route::get('/', 'HomeController@index');
 
     Route::get('/test', function() {
         return view('/test/pvnummers_original');
@@ -28,6 +26,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/blog/{titel}', 'ExtraController@blogPost');
 
     Route::get('/antwerpen', 'ParkingController@antwerpen');
+    Route::get('/bedankt', function() {
+        return view('doneren.bedankt');
+    });
 
 
     Route::get('/taal/{locale}', function ($locale)
@@ -46,8 +47,8 @@ Route::group(['middleware' => 'web'], function () {
     $this->get('logout', 'Auth\AuthController@logout');
 
     // Registration Routes... disabled for now
-//    $this->get('register', 'Auth\AuthController@showRegistrationForm');
-//    $this->post('register', 'Auth\AuthController@register');
+    $this->get('register', 'Auth\AuthController@showRegistrationForm');
+    $this->post('register', 'Auth\AuthController@register');
 
 
 
@@ -78,19 +79,20 @@ Route::group(['middleware' => 'web'], function () {
 
     });
 
+    Route::group(['prefix' => 'community'], function () {
+
+        Route::get('/', 'CommunityController@index');
+
+        Route::get('/toevoegen', 'CommunityController@toevoegen');
+        Route::post('/toevoegen', 'CommunityController@toevoegenPost');
+
+        Route::get('/lijst', 'CommunityController@lijst');
+
+    });
+
 });
 
 
-Route::group(['prefix' => 'community'], function () {
-
-    Route::get('/', 'CommunityController@index');
-
-    Route::get('/toevoegen', 'CommunityController@toevoegen');
-    Route::post('/toevoegen', 'CommunityController@toevoegenPost');
-
-    Route::get('/lijst', 'CommunityController@lijst');
-
-});
 
 //Working with DataSources
 Route::get('/update', 'ParkingController@enterData');

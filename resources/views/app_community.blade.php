@@ -76,7 +76,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Vrije Parking community</a>
+            <a class="navbar-brand" href="/">VP community</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -97,6 +97,23 @@
                 <li class="page-scroll">
                     <a href="/community/lijst">Communitylijst</a>
                 </li>
+
+                @if(Auth::check())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/logout">Uitloggen</a>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="page-scroll">
+                        <a href="/login">Inloggen</a>
+                    </li>
+                @endif
+
+
 
                 {{--<li class="dropdown">--}}
                     {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Config::get('languages')[App::getLocale()] }} <b class="caret"></b></a>--}}

@@ -108,11 +108,12 @@
 
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Realtime Steden</h2><br/>
+                    <h2>Live Parking</h2><br/>
                 </div>
             </div>
 
             <div class="row" text-align="center">
+                <div class="col-md-2"></div>
                 <div class="col-md-4 portfolio-item">
                     <a href="/stad/gent" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
@@ -123,16 +124,16 @@
                         <img src="img/gent.jpg" alt="">
                     </a>
                 </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="/stad/brussel" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-3x">Brussel</i>
-                            </div>
-                        </div>
-                        <img src="img/brussel.jpg" alt="">
-                    </a>
-                </div>
+                {{--<div class="col-sm-4 portfolio-item">--}}
+                    {{--<a href="/stad/brussel" class="portfolio-link" data-toggle="modal">--}}
+                        {{--<div class="caption">--}}
+                            {{--<div class="caption-content">--}}
+                                {{--<i class="fa fa-3x">Brussel</i>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<img src="img/brussel.jpg" alt="">--}}
+                    {{--</a>--}}
+                {{--</div>--}}
                 <div class="col-sm-4 portfolio-item">
                     <a href="/stad/kortrijk" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
@@ -146,41 +147,38 @@
             </div>
 
 
-            {{--<div class="row" style="margin-top:100px;">--}}
-                {{--<div class="col-lg-12 text-center">--}}
-                    {{--<h2>Steden</h2><br/>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            <div class="row" style="margin-top:100px;">
+                <div class="col-lg-12 text-center">
+                    <h3>Andere Steden</h3><br/>
+                </div>
+            </div>
 
-            {{--<div class="row" text-align="center">--}}
-                {{--<div class="col-md-2" style="text-align: center">--}}
-                    {{--Bredene <br/>--}}
-                    {{--<img width="100%" src="http://www.freepptbackgrounds.net/wp-content/uploads/2015/02/Black-City-View-PPT-Backgrounds.jpg" alt=""/>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-2" style="text-align: center">--}}
-                    {{--Bredene <br/>--}}
-                    {{--<img width="100%" src="http://www.freepptbackgrounds.net/wp-content/uploads/2015/02/Black-City-View-PPT-Backgrounds.jpg" alt=""/>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-2" style="text-align: center">--}}
-                    {{--Bredene <br/>--}}
-                    {{--<img width="100%" src="http://www.freepptbackgrounds.net/wp-content/uploads/2015/02/Black-City-View-PPT-Backgrounds.jpg" alt=""/>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-2" style="text-align: center">--}}
-                    {{--Bredene <br/>--}}
-                    {{--<img width="100%" src="http://www.freepptbackgrounds.net/wp-content/uploads/2015/02/Black-City-View-PPT-Backgrounds.jpg" alt=""/>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-2" style="text-align: center">--}}
-                    {{--Bredene <br/>--}}
-                    {{--<img width="100%" src="http://www.freepptbackgrounds.net/wp-content/uploads/2015/02/Black-City-View-PPT-Backgrounds.jpg" alt=""/>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-2" style="text-align: center">--}}
-                    {{--Bredene <br/>--}}
-                    {{--<img width="100%" src="http://www.freepptbackgrounds.net/wp-content/uploads/2015/02/Black-City-View-PPT-Backgrounds.jpg" alt=""/>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            <style>
+                a:hover {
+                    opacity: 0.7;
+                }
+            </style>
+
+            <div class="row" text-align="center" style="text-align: center">
+                @foreach($offline_steden as $stad)
+                    @if($stad->aantal_parkings() > 3)
+                        <div class="col-md-2" style="text-align: center; display:inline-block; float:none;">
+                            <a href="/stad/{{ $stad->stad }}" style="color:black; text-underline: none; font-weight:bold;">
+                                @if($stad->afbeelding)
+                                    <img width="100%" src="{{ $stad->afbeelding }}" alt="" style="border-radius:100px;"/>
+                                @else
+                                    <img width="100%" src="http://www.proprofs.com/quiz-school/user_upload/ckeditor/F1BH.jpg" alt=""/>
+                                @endif
+                                <br/>{{ $stad->stad }}
+                            </a>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
 
         </div>
     </section>
+
 
     {{--<section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">--}}
         {{--<div class="row" text-align="center" style="margin-top: -100px">--}}

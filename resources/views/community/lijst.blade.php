@@ -30,9 +30,14 @@
                 @foreach($lijst as $key => $user )
 
                     <tr>
-                        <td>{{ $key }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>23</td>
+                        <td>{{ $key + 1 }}</td>
+                        <td>
+                            @if($key + 1 == 1)
+                                <img src="{{ asset('img/medals/gold-medal.png') }}" alt=""/>
+                            @endif
+                            {{ $user->name }}
+                        </td>
+                        <td>{{ $user->aantal_parkings() }}</td>
                     </tr>
 
                 @endforeach

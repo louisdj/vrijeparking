@@ -54,7 +54,7 @@
                     </div>
                     <div class="row"><br/>
                         <b>Matthieu Calie</b> <br/>
-                        Backend advisor<br/>
+                        Backend<br/>
                        <a href="https://be.linkedin.com/in/matthieucalie" target="_blank"><img src="/img/social/linkedin.png" width="25px" alt=""/></a>
                        <a href="https://twitter.com/caliematthieu" target="_blank"><img src="/img/social/twitter.png" width="25px" alt=""/></a>
                     </div>
