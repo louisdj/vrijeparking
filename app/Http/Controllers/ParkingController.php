@@ -48,7 +48,7 @@ class ParkingController extends Controller
 //            return view('parking.brussel.stad', compact('stad', 'data'));
 //        }
 
-        $parkings = Parking::all()->where('stad', $stad);
+        $parkings = Parking::all()->where('stad', strtolower($stad));
         $stad = Stad::where('stad', $stad)->first();
 
         return view('templates.stad_template', compact('stad', 'parkings'));
