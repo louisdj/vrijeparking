@@ -16,7 +16,7 @@ class Stad extends Model
 
     public function aantal_parkings()
     {
-        return Parking::where('stad', $this->stad)->get()->count();
+        return Parking::where('stad', strtolower($this->stad))->get()->count();
     }
 
     public $timestamps = false;
