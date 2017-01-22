@@ -161,7 +161,7 @@
 
             <div class="row" text-align="center" style="text-align: center">
                 @foreach($offline_steden as $stad)
-                    @if($stad->aantal_parkings() > 3)
+                    @if($stad->aantal_parkings() >= 2)
                         <div class="col-md-2" style="text-align: center; display:inline-block; float:none;">
                             <a href="/stad/{{ $stad->stad }}" style="color:black; text-underline: none; font-weight:bold;">
                                 @if($stad->afbeelding)
