@@ -91,12 +91,22 @@
                             {{ trans('navbar.parkings') }} <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu">
+                            <li style="background-color: lightgrey"><a><b>Live data</b></a>  </li>
                             <li><a href="/stad/gent"><img src="/img/transpa_ParkingGent.png" alt="parkingGent" width="20px"/> Stad Gent</a></li>
                             {{--<li role="separator" class="divider"></li>--}}
-                            <li><a href="/stad/brussel"><img src="/img/transpa_ParkingBrussel.png" alt="parkingBrussel" width="20px"/> Stad Brussel</a></li>
-                            {{--<li role="separator" class="divider"></li>--}}
                             <li><a href="/stad/kortrijk"><img src="/img/transpa_ParkingKortrijk.png" alt="parkingKortrijk" width="20px"/> Stad Kortrijk</a></li>
-                            {{--Looking at source code huh? Kortrijk komt misschien binnenkort--}}
+
+                            {{--<li role="separator" class="divider"></li>--}}
+
+                            <li style="background-color: lightgrey;"><a><b>Andere steden</b></a>  </li>
+
+
+                            @foreach($offline_steden as $stad)
+                                @if($stad->aantal_parkings() >= 2)
+                                    <li><a href="/stad/{{ $stad->stad }}">  {{ $stad->stad }}</a></li>
+                                @endif
+                            @endforeach
+
                           </ul>
                     </li>
 

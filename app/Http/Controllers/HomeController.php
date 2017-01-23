@@ -17,8 +17,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $offline_steden = Stad::where('live_data', 0)->get();
-
-        return view('home', compact('offline_steden'));
+        return view('home');
     }
 }
