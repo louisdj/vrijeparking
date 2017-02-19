@@ -47,7 +47,7 @@
 
                     @foreach($parkings as $parking)
 
-                    @if($parking->live-data == 1)
+                    @if($parking->live_data == 1)
                         <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;
                         background-color: @if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) lightcoral;
                                                                                           @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) orange; @endif">
