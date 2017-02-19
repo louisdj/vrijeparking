@@ -2,6 +2,14 @@
 
 @section('content')
 
+    <style>
+        #parking:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    </style>
+
+
     <header style="margin-top:-50px;">
         <div class="container">
             <div class="row">
@@ -13,9 +21,9 @@
     </header>
 
     <!-- Portfolio Grid Section -->
-    <section id="portfolio">
+    <section id="portfolio" style="margin-top: -50px;">
         <div class="container">
-            <div class="row">
+            <div class="row" >
 
                 @if($stad->bericht)
 
@@ -34,7 +42,33 @@
                 @endif
 
                 <h3>Overzicht parkings</h3>
-                <div class="@if($stad->live_data == 1) col-md-8 @else col-md-12 @endif">
+
+                <div class="row hidden-md hidden-sm hidden-xs">
+
+                    @foreach($parkings as $parking)
+
+                        <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;
+                        background-color: @if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) lightcoral;
+                                                                                          @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) orange; @endif">
+                            <h5>{{ $parking->naam }}</h5>
+                            <div class="row" style="text-align: center;">
+                                <div class="col-xs-6 col-sm-12" >
+                                    <img onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="100%" height="115px;" style="border-radius: 20px;"/>
+                                </div>
+                            </div>
+                            <h5>
+                                {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}
+                            </h5>
+                        </div>
+
+                    @endforeach
+
+
+
+                </div>
+
+
+                <div class="@if($stad->live_data == 1) col-md-12  @else col-md-12 @endif visible-md visible-sm visible-xs">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                           <tr>
@@ -74,30 +108,42 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <h6>* Beschikbaarheid: <span style="color: #e74c3c">minder dan 10%</span>, <span style="color: #f39c12">minder dan 30%</span> </h6>
+
                 </div>
 
-                @if($stad->live_data == 1)
-                    <div class="col-md-4">
-                        <div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
-                    </div>
-                @endif
+                <h6>* Beschikbaarheid: <span style="color: #e74c3c">minder dan 10%</span>, <span style="color: #f39c12">minder dan 30%</span> </h6>
+
 
             </div>
 
+            <div class="row">
+
+
             @if($stad->live_data == 1)
                 <hr/>
-                <h3>Twitter robot</h3>
-                <img src="https://pbs.twimg.com/profile_images/689562976177778691/n2cRcEoV.png" class="img-rounded img-responsive" alt="" width="75px" style="float:left; padding-right: 7px;"/>
 
-                <a href="https://twitter.com/VrijeParking{{ substr($stad->stad, 0,1) }}" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @VrijeParking{{ substr($stad->stad, 0,1) }}</a><br/>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <div class="col-md-8">
 
-                Aangezien stad {{ $stad->stad }} de realtime bezetting van zijn parkings ter beschikking stelt, kunnen wij zowel op onze website als op Twitter een continu reeël beeld
-                geven van de beschikbare parking. Op twitter doen wij dit aan de hand van een robot die de data ophaalt per kwartier en vervolgens hier updates over geeft.
-                Wanneer een parking minder dan 30% beschikbaarheid heeft wordt dit meegegeven. Ook wanneer de parking terug <b>meer</b> dan 30% heeft wordt dit meegedeeld.
-                Dit alles met afwisseling van <b>"Summary tweets"</b> die een opsomming geven en tenslotte nog tweets die melden als een parking compleet volzet is.
+                    <h3>Twitter robot</h3>
+                    <img src="https://pbs.twimg.com/profile_images/689562976177778691/n2cRcEoV.png" class="img-rounded img-responsive" alt="" width="75px" style="float:left; padding-right: 7px;"/>
+
+                    <a href="https://twitter.com/VrijeParking{{ substr($stad->stad, 0,1) }}" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @VrijeParking{{ substr($stad->stad, 0,1) }}</a><br/>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                    Aangezien stad {{ $stad->stad }} de realtime bezetting van zijn parkings ter beschikking stelt, kunnen wij zowel op onze website als op Twitter een continu reeël beeld
+                    geven van de beschikbare parking. Op twitter doen wij dit aan de hand van een robot die de data ophaalt per kwartier en vervolgens hier updates over geeft.
+                    Wanneer een parking minder dan 30% beschikbaarheid heeft wordt dit meegegeven. Ook wanneer de parking terug <b>meer</b> dan 30% heeft wordt dit meegedeeld.
+                    Dit alles met afwisseling van <b>"Summary tweets"</b> die een opsomming geven en tenslotte nog tweets die melden als een parking compleet volzet is.
+
+                </div>
             @endif
+
+            @if($stad->live_data == 1)
+                <div class="col-md-4" style="border-left: 1px solid lightgrey;">
+                    <div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+                </div>
+            @endif
+        </div>
 
             <hr/>
 
