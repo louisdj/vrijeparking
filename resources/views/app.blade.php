@@ -114,12 +114,6 @@
                         <a href="/vindparking">{{ trans('navbar.findParking') }}</a>
                     </li>
 
-                    <li class="page-scroll">
-                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DVRBJCU2EQAL8">
-                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Doneren
-                        </a>
-                    </li>
-
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span> {{ trans('navbar.extra') }} <span class="caret"></span>
