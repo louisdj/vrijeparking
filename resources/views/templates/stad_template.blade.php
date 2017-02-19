@@ -47,6 +47,7 @@
 
                     @foreach($parkings as $parking)
 
+                    @if($parking->live-data == 1)
                         <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;
                         background-color: @if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) lightcoral;
                                                                                           @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) orange; @endif">
@@ -60,6 +61,19 @@
                                 {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }}
                             </h5>
                         </div>
+                    @else
+                        <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;">
+                            <h5>{{ $parking->naam }}</h5>
+                            <div class="row" style="text-align: center;">
+                                <div class="col-xs-6 col-sm-12" >
+                                    <img onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="100%" height="115px;" style="border-radius: 20px;"/>
+                                </div>
+                            </div>
+                            <h5>
+                                Geen realtime
+                            </h5>
+                        </div>
+                    @endif
 
                     @endforeach
 
