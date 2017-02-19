@@ -66,7 +66,7 @@
                             <h5>{{ $parking->naam }}</h5>
                             <div class="row" style="text-align: center;">
                                 <div class="col-xs-6 col-sm-12" >
-                                    <img src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="100%" height="115px;" style="border-radius: 20px;"/>
+                                    <img onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e",$parking->naam)) }}.jpg" alt="" width="100%" height="115px;" style="border-radius: 20px;"/>
                                 </div>
                             </div>
                             <h5>
