@@ -141,8 +141,8 @@
                             <img class="img-circle" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" onerror="this.src='/img/parkings/placeholder.jpg'"/>
                         </div>
                         <div class="post-content">
-                            <h3 class="post-title">{{ $parking->naam }}</h3>
-                            <h4>{{ $parking->adres }}</h4>
+                            <h4 class="post-title">{{ $parking->naam }}</h4>
+                            <h5>{{ $parking->adres }}</h5>
                             <kbd>
                                 @if($parking->live_data)
                                     {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }} beschikbaar
@@ -177,7 +177,9 @@
 
                   </div>
 
-                  <div class="col-md-9" style="background-color:orange;">
+                  <div class="col-md-9" style="background-color:orange; background: orange no-repeat center/20% url('http://bestanimations.com/Science/Gears/silver-gear-cogs-animation-5.gif')">
+
+
                         <script>
                           var map;
 
