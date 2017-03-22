@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class ManagementController extends Controller
 {
@@ -36,6 +37,8 @@ class ManagementController extends Controller
 
     public function newParkingPost(Request $request)
     {
+        dd("test");
+
         $parking = new Parking();
 
         $parking->naam = $request->naam;
@@ -62,6 +65,7 @@ class ManagementController extends Controller
         $parking->bericht = $request->bericht;
         $parking->bericht_type = $request->type;
         $parking->live_data = $request->live_data;
+
 
         $parking->save();
 

@@ -76,7 +76,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Vrije Parking.be</a>
+                <a class="navbar-brand hidden-md hidden-sm hidden-xs" href="/">Vrije Parking.be</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -108,6 +108,10 @@
                             @endforeach
 
                           </ul>
+                    </li>
+
+                    <li>
+                        <a href="/mindervaliden"><i class="fa fa-wheelchair" aria-hidden="true"></i> Voorbehouden parking</a>
                     </li>
 
                     <li class="page-scroll">
@@ -147,6 +151,7 @@
 
     @yield('content')
 
+    @if(isset($nofooter) && $nofooter == 'true')
     <!-- Footer -->
     <footer class="text-center">
         <div class="footer-above">
@@ -183,6 +188,8 @@
             </div>
         </div>
     </footer>
+
+    @endif
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-top page-scroll visible-xs visible-sm">

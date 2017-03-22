@@ -25,11 +25,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/blog/{titel}', 'ExtraController@blogPost');
 
-    Route::get('/antwerpen', 'ParkingController@antwerpen');
-    Route::get('/bedankt', function() {
-        return view('doneren.bedankt');
-    });
-
 
     Route::get('/taal/{locale}', function ($locale)
     {
@@ -89,6 +84,13 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/lijst', 'CommunityController@lijst');
 
     });
+
+
+
+    Route::get('/mindervaliden', 'ParkingController@mindervalidenstart');
+    Route::get('/mindervaliden/{coords?}', 'ParkingController@mindervaliden');
+    Route::post('/mindervaliden/', 'ParkingController@mindervaliden');
+
 
 });
 

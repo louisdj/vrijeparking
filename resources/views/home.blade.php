@@ -180,18 +180,18 @@
     </section>
 
 
-    {{--<section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">--}}
-        {{--<div class="row" text-align="center" style="margin-top: -100px">--}}
-            {{--<div class="col-lg-12 text-center">--}}
-                {{--<h3>Mogelijk dankzij</h3>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="row" style="text-align: center;">--}}
-            {{--<div class="col-lg-12 text-center">--}}
-                {{--<img src="/img/parkingboys2.png" alt=""/>--}}
-                {{--<img src="http://www.wetenschapsacademieblankenberge.be/images/logo_howest.png" alt=""/>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</section>--}}
+    <section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">
+        <div class="row" text-align="center" style="margin-top: -100px">
+            <div class="col-lg-12 text-center">
+                <h3>Mogelijk dankzij</h3>
+            </div>
+        </div>
+        <div class="row" style="text-align: center;">
+            <div class="col-lg-12 text-center">
+                <img src="/img/parkingboys2.png" alt=""/>
+                <img src="http://www.wetenschapsacademieblankenberge.be/images/logo_howest.png" alt=""/>
+            </div>
+        </div>
+    </section>
 
 @endsection
