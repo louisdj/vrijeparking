@@ -111,7 +111,7 @@
                     </li>
 
                     <li>
-                        <a href="/mindervaliden"><i class="fa fa-wheelchair" aria-hidden="true"></i> Voorbehouden parking</a>
+                        {{--<a href="/mindervaliden"><i class="fa fa-wheelchair" aria-hidden="true"></i> Voorbehouden parking</a>--}}
                     </li>
 
                     <li class="page-scroll">
@@ -151,7 +151,7 @@
 
     @yield('content')
 
-    @if(isset($nofooter) && $nofooter == 'true')
+    @if(!isset($nofooter))
     <!-- Footer -->
     <footer class="text-center">
         <div class="footer-above">
@@ -181,7 +181,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; VrijeParking.be 2016 <br/>
+                        Copyright &copy; VrijeParking.be {{ date('Y') }} <br/>
                         <a HREF="mailto:Contact@vrijeparking.be">Contact@vrijeparking.be</a>
                     </div>
                 </div>
