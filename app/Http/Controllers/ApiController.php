@@ -106,13 +106,49 @@ class ApiController extends Controller
 
     public function chat($parking)
     {
-        $parking = Parking::where('naam', $parking)->first();
+        $parking = Parking::where('naam', 'like' , '%'.$parking.'%')->first();
 
         return response()->json(array(
             'messages' => array(
                 [
                     'text' => 'Er zijn nog '. $parking->beschikbare_plaatsen .' plaatsen beschikbaar in parking ' . $parking->naam
                 ])
+        ));
+    }
+
+    public function chat_stad($stad)
+    {
+        $parkings = Parking::where('stad', $stad)->get();
+
+        $array = [];
+
+        foreach($parkings as $parking)
+        {
+            $var = array('url' => 'http://www.vrijeparking.be/api/chat/'.$parking->stad.'/'.$parking->naam, 'type' => 'json_plugin_url', 'title' => ''.$parking->naam.'');
+
+            array_push($array, $var);
+        }
+
+
+        return response()->json(array(
+            'messages' => array(
+                'attachment' => [
+                    'payload' => [
+                        'template_type' => 'button',
+                        'text' => 'Kies uw parking',
+                        'buttons' =>
+
+                                $array
+//                                'url' => 'http://www.vrijeparking.be/api/chat/stad/parking',
+//                                'type' => 'json_plugin_url',
+//                                'title' => 'naam'
+
+
+
+                    ],
+                    'type' => 'template'
+                    ]
+            )
         ));
     }
 }
