@@ -104,7 +104,7 @@ class ApiController extends Controller
         ));
     }
 
-    public function chat($parking)
+    public function chat($stad, $parking)
     {
         $parking = Parking::where('naam', 'like' , '%'.$parking.'%')->first();
 
