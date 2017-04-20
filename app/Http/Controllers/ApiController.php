@@ -109,7 +109,9 @@ class ApiController extends Controller
         $parking = Parking::where('naam', $parking)->first();
 
         return response()->json(array(
+            'messages' => [
             'text' => 'Er zijn nog '. $parking->beschikbare_plaatsen .' plaatsen beschikbaar in parking ' . $parking->naam
+                ]
         ));
     }
 }
