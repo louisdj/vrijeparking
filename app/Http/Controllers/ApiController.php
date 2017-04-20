@@ -106,7 +106,7 @@ class ApiController extends Controller
 
     public function chat($stad, $parking)
     {
-        $parking = Parking::where('naam', 'like' , '%'.$parking.'%')->first();
+        $parking = Parking::where('naam', 'like' , '%'.$parking.'%')->where('stad', $stad)->first();
 
         return response()->json(array(
             'messages' => array(
