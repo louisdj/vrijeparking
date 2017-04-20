@@ -18,7 +18,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/parking/{parking}', 'ParkingController@parking');
 
     Route::get('/vindparking', 'ParkingController@vindparking');
+    Route::get('/vindparking2', 'ParkingController@vindparking2');
     Route::post('/vindparking', 'ParkingController@vindparkingpost');
+    Route::post('/vindparking2', 'ParkingController@vindparkingpost2');
 
     Route::get('/team', 'ExtraController@team');
     Route::get('/blog', 'ExtraController@blog');
@@ -112,8 +114,11 @@ Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
     Route::get('/vindStad/{lat}/{Lng}', 'ApiController@vindStad');
 
     Route::get('/twitter/{stad}', 'ApiController@twitter');
-    Route::get('/chat/{parking}', 'ApiController@chat');
+
+    Route::get('/chat/{stad}', 'ApiController@chat_stad');
+    Route::get('/chat/{stad}/{parking}', 'ApiController@chat');
 
 });
+
 
 Route::get('/graph', 'ParkingController@graph');
