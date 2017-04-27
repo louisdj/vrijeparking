@@ -40,15 +40,6 @@ class ParkingController extends Controller
 
     public function stad($stad)
     {
-//        if($stad == "brussel") {
-//            $url = DB::select("select url from data_sources where stad = ?", [$stad]);
-//
-//            $json = file_get_contents($url[0]->url);
-//            $data = json_decode($json);
-//
-//            return view('parking.brussel.stad', compact('stad', 'data'));
-//        }
-
         $parkings = Parking::all()->where('stad', strtolower($stad));
         $stad = Stad::where('stad', $stad)->first();
 
@@ -159,15 +150,141 @@ class ParkingController extends Controller
     }
 
 
+    public function vindparking2() {
+
+        $lat = "50.7755478";
+        $Lng = "3.6038558";
+
+        return view('vindParking.index2', ['parkings' => [],'lat' => $lat, 'Lng' => $Lng, 'start' => "ja", 'zoom' => 9, 'nofooter' => 'true']);
+    }
+
+    public function vindparkingpost2(Request $request, $coords = 0)
+    {
+        //Als er op de kaart geklikt wordt
+        if($coords != 0)
+        {
+            $lat = substr($coords, 0, strpos($coords, ','));
+            $Lng = substr($coords, strpos($coords, ',') + 1);
+
+
+            $parkings = DB::table('parkings')
+                ->whereBetween('latitude', [$lat - 0.007, $lat + 0.007])
+                ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
+                ->get();
+
+            if(count($parkings) > 0) {
+
+                $origins_string = "";
+
+                foreach ($parkings as $parking) {
+                    $origins_string .= "" . $parking->latitude . "," . $parking->longitude . "|";
+                }
+
+                $json = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $lat . ',' . $Lng . '&destinations=' . $origins_string . '&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo');
+
+                $data = json_decode($json);
+
+                $afstanden = $data->rows[0]->elements;
+
+                foreach ($afstanden as $key => $afstand) {
+                    $parkings[$key]->afstand = $afstand->distance->value;
+                }
+
+
+                uasort($parkings, array($this, 'sort_by_order'));
+
+            } else {
+                $parkings = [];
+            }
+
+
+            return view('mindervaliden.index2', compact('mindervalidenplaatsen', 'lat', 'Lng'));
+        }
+
+
+        //Als er niets werd ingevuld in het zoekveld
+        if($request->location == null && $request->coordinates == null)
+        {
+            dd("ello");
+
+            return view('mindervaliden.index2', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
+        }
+        //Als men een adres manueel intypt zonder selectie van google adviezen
+        else if($request->coordinates == null)
+        {
+            dd("sup");
+
+            $searchFor = str_replace(",","+", $request->location);
+            $searchFor = str_replace(" ","+", $searchFor);
+
+            $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
+            $data = json_decode($json);
+
+            if($data->status == "ZERO_RESULTS") {
+                return view('mindervaliden.index2', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
+            } else {
+                $lat = $data->results[0]->geometry->location->lat;
+                $Lng = $data->results[0]->geometry->location->lng;
+            }
+
+        }
+        //Als de coordinaten via google selectie omgezet worden en doorgestuurd
+        else
+        {
+            $lat = substr($request->coordinates, 0, strpos($request->coordinates, ','));
+            $Lng = substr($request->coordinates, strpos($request->coordinates, ',') + 1);
+        }
+
+        $parkings = DB::table('parkings')
+            ->whereBetween('latitude', [$lat - 0.007, $lat + 0.007])
+            ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
+            ->get();
+
+        if(count($parkings) > 0)
+        {
+
+            $origins_string = "";
+
+            foreach ($parkings as $parking) {
+                $origins_string .= "" . $parking->latitude . "," . $parking->longitude . "|";
+            }
+
+            $json = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $lat . ',' . $Lng . '&destinations=' . $origins_string . '&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo');
+
+            $data = json_decode($json);
+
+            $afstanden = $data->rows[0]->elements;
+
+            foreach ($afstanden as $key => $afstand) {
+                $parkings[$key]->afstand = $afstand->distance->value;
+            }
+
+
+            uasort($parkings, array($this, 'sort_by_order'));
+
+        } else {
+            $parkings = [];
+        }
+
+        $zoom = 16;
+        $nofooter = "jep";
+
+
+        return view('vindParking.index2', compact('parkings', 'lat', 'Lng', 'zoom', 'nofooter'));
+    }
+
+
     public function mindervalidenstart()
     {
         $plaatsen = count(DB::table('voorbehouden_plaatsen')->get());
+        $nofooter = "jep";
 
-        return view('mindervaliden.start', compact('plaatsen'));
+        return view('mindervaliden.start', compact('plaatsen', 'nofooter'));
     }
 
     public function mindervaliden(Request $request, $coords = 0)
     {
+        $nofooter = "jep";
 
         //Als er op de kaart geklikt wordt
         if($coords != 0)
@@ -207,7 +324,7 @@ class ParkingController extends Controller
             }
 
 
-            return view('mindervaliden.index', compact('mindervalidenplaatsen', 'lat', 'Lng'));
+            return view('mindervaliden.index', compact('mindervalidenplaatsen', 'lat', 'Lng', 'nofooter'));
         }
 
 
@@ -226,8 +343,13 @@ class ParkingController extends Controller
             $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
             $data = json_decode($json);
 
-            $lat = $data->results[0]->geometry->location->lat;
-            $Lng = $data->results[0]->geometry->location->lng;
+            if($data->status == "ZERO_RESULTS") {
+                return view('mindervaliden.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
+            } else {
+                $lat = $data->results[0]->geometry->location->lat;
+                $Lng = $data->results[0]->geometry->location->lng;
+            }
+
         }
         //Als de coordinaten via google selectie omgezet worden en doorgestuurd
         else
@@ -268,10 +390,7 @@ class ParkingController extends Controller
         }
 
 
-//        $mindervalidenplaatsen = mindervalidenplaats::all();
-
-
-        return view('mindervaliden.index', compact('mindervalidenplaatsen', 'lat', 'Lng'));
+        return view('mindervaliden.index', compact('mindervalidenplaatsen', 'lat', 'Lng', 'nofooter'));
     }
 
     private static function sort_by_order ($a, $b)
@@ -287,22 +406,59 @@ class ParkingController extends Controller
     }
 
     //Wordt gebruikt om eenvoudig alle data vd "Parkings" tabel te inserten
-    public function enterData() {
+    public function enterData()
+    {
 
-        $xml=simplexml_load_file("https://datatank.stad.gent/4/mobiliteit/parkeerplaatsenpersonenmeteenbeperking.kml") or die("Error: Cannot create object");
+        $json = file_get_contents("C:/parkeerplaatsenpersonenmeteenbeperking.geojson");
+        $data = json_decode($json);
 
-        dd($xml);
+            foreach($data->features as $parking)
+            {
+                $coordinaten = $parking->geometry->coordinates;
+                $lat = $coordinaten[1];
+                $long = $coordinaten[0];
 
-        foreach($xml as $parking)
-        {
+                $eigenschappen = $parking->properties;
+
+                DB::insert("insert into voorbehouden_plaatsen(ID_WESTKANS, ADRES_STRAAT, ADRES_NR, POSTCODE, PARKING_BREEDTE_DATA, PARKING_LENGTE_DATA, GEMEENTE, DEELGEMEENTE, longitude, latitude) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ,
+                    [$eigenschappen->xKey,
+                        $eigenschappen->gmStraat,
+                        0,
+                        9000,
+                        $eigenschappen->Afmeting2,
+                        $eigenschappen->Afmeting1,
+                        $eigenschappen->voGemeente,
+                        '',
+                        $long,
+                        $lat]);
+            }
+    }
 
 
-            echo $parking;
-            echo $parking['capaciteit'];
 
-            echo "</br>";
-        }
-
+//        $xml=simplexml_load_file("https://datatank.stad.gent/4/mobiliteit/parkeerplaatsenpersonenmeteenbeperking.kml") or die("Error: Cannot create object");
+//        $placemarks = $xml->Document->Folder->Placemark;
+//
+//        for ($i = 0; $i < sizeof($placemarks); $i++)
+//        {
+//            $coordinaten = explode(",", $placemarks[$i]->Point->coordinates);
+//
+//            $lat = $coordinaten[1];
+//            $long = $coordinaten[0];
+//
+//            $parking = ($placemarks[$i]->ExtendedData->SchemaData->SimpleData);
+//
+//
+//           DB::insert("insert into mindervaliden(latitude, longitude, adres, breedte, lengte)
+//          values(?, ?, ?, ?, ?)" ,
+//                [$lat,
+//                    $long,
+//                    $parking[21] . " 9000" . " " . $parking[28],
+//                    $parking[7],
+//                    $parking[6]
+//                ]);
+//
+//        }
 
 //        $json = file_get_contents("http://web10.weopendata.com/measurements/vpp.json");
 //        $data = json_decode($json);
@@ -434,5 +590,5 @@ class ParkingController extends Controller
 //                ['parking_id' => $parkingId->id, 'bezetting' => $parking['bezet']]
 //            ]);
 //        }
-    }
+
 }

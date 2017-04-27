@@ -52,12 +52,13 @@ $(document).ready(function(){
 </script>
 
 
-<div id="sidebar" class="sidebar collapsed" style="margin-top: 110px; z-index: 500;">
+<div id="sidebar" class="sidebar @if(!isset($start)) collapsed @endif" style="margin-top: 110px; z-index: 500;">
     <!-- Nav tabs -->
     <div class="sidebar-tabs" style="border-right: 1px solid grey">
         <ul role="tablist">
             <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-            <li><a href="#zoeken" role="tab"><i class="fa fa-search"></i></a></li>
+            <li class=" @if(isset($start)) active @endif "><a href="#zoeken" role="tab"><i class="fa fa-search"></i></a></li>
+            <li><a href="#zones" role="tab"><i class="fa fa-road"></i></a></li>
         </ul>
 
         {{--<ul role="tablist">--}}
@@ -74,28 +75,39 @@ $(document).ready(function(){
             </h1>
 
             <p>
-
                 <table style="width: 100%">
 
-                @if(count($mindervalidenplaatsen) > 0)
+                @if(count($parkings) > 0)
 
                 <?php $count = 0 ?>
 
-                    @foreach($mindervalidenplaatsen as $parking)
+                    @foreach($parkings as $parking)
 
                         <tr style="padding-right: 15px; border-bottom: 1px dotted grey;" onclick="mymap.setView([{{ $parking->latitude }}+0.0015, {{ $parking->longitude }}],17); markers[{{ $count }}].openPopup();">
                             <a href="#">
-                                <td style="padding-left: 5px; padding-right: 15px;">
-                                    <img width="70px" height="70px" style="border-radius: 40px;" src="@if($parking->URL_PICTURE_MAIN != "") {{ $parking->URL_PICTURE_MAIN }} @else /img/parkings/mindervaliden/mindervalide_icoon.png @endif" alt=""/>
+                                <td style="padding-left: 5px; padding-right: 15px; text-align: center;">
+                                    <img width="70px" height="70px" style="border-radius: 50%;" src="/img/parkings/gent/{{ $parking->naam }}.jpg" onerror="this.src='/img/parkings/parking-icon.gif'" alt=""/>
+
                                 </td>
                                 <td>
-                                    <h3>{{ $parking->ADRES_STRAAT }} {{ $parking->ADRES_NR }} {{ $parking->GEMEENTE }}</h3>
-                                    <h5><b>Op {{ $parking->afstand }} meter wandelafstand</b></h5>
+                                    <h3>{{ $parking->naam }}</h3>
+                                    <h5>{{ $parking->adres }} {{ $parking->stad }}</h5>
+                                    <kbd>
+                                        @if($parking->live_data)
+                                            {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }} beschikbaar
+                                        @else
+                                            Niet live
+                                        @endif
+                                    </kbd>
+                                    <span>
+                                        &nbsp;&nbsp;&nbsp;{{ $parking->afstand }} meter <i class="fa fa-blind" aria-hidden="true"></i>
+                                    </span>
+                                    <br/><br/>
                                 </td>
                             </a>
                         </tr>
 
-                        @if($count < count($mindervalidenplaatsen))  <?php $count++ ?>  @endif
+                        @if($count < count($parkings))  <?php $count++ ?>  @endif
                     @endforeach
 
                 @else
@@ -112,25 +124,25 @@ $(document).ready(function(){
 
         </div>
 
-        <div class="sidebar-pane" id="zoeken">
+        <div class="sidebar-pane active" id="zoeken">
             <h1 class="sidebar-header">
                  &nbsp;&nbsp; Zoeken <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
             </h1>
 
             <div style="padding-left: 10px; text-align:center;">
-                <form action="/mindervaliden" method="post">
+                <form action="/vindparking2" method="post">
 
                       <p style="padding-top: 5px; margin-bottom: -20px;">
-                            <img src="/img/parkings/mindervaliden/mindervalide_icoon.png" width="100px" alt=""/>
+                            <img src="http://www.freeiconspng.com/uploads/parking-icon-png-0.png" width="100px" alt=""/>
                       </p>
                       <p>
-                            <h3 style="color: dodgerblue">Vind parking voor mindervaliden</h3>
+                            <h3 style="color: dodgerblue">Vind parking in Vlaanderen</h3>
                             Vertrek niet langer onvoorbereid naar uw bestemming.
                             <br/>
                       </p>
                       <p>
 
-                            <input name="location" id="searchTextField" type="text" class="form-control" required label="Zoeken..."/>
+                            <input name="location" id="searchTextField" type="text" class="form-control" label="Zoeken..." required />
                             <input name="coordinates" type="hidden" id="coordinates"  />
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
@@ -144,12 +156,37 @@ $(document).ready(function(){
 
         </div>
 
+        <div class="sidebar-pane" id="zones">
+            <h1 class="sidebar-header">
+                &nbsp;&nbsp; Overzicht parkeerzones
+                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+
+            <p>
+                <table style="width: 100%">
+
+                        {{--<tr style="padding-right: 15px; border-bottom: 1px dotted grey;" onclick="mymap.setView([{{ null }}+0.0015, {{ null }}],17); markers[{{ $count }}].openPopup();">--}}
+                        <tr style="padding-right: 15px; border-bottom: 1px dotted grey;">
+                            <a href="#">
+                                <td style="padding-left: 5px; padding-right: 15px;">
+                                    {{--<img width="70px" height="70px" style="border-radius: 40px;" src="/img/parkings/gent/.jpg" alt=""/>--}}
+                                </td>
+                                <td>
+                                    <h3>Zone 3 - Blauw</h3>
+                                    <h5><b>Parkeerschijf leggen voor 3u</b></h5>
+                                </td>
+                            </a>
+                        </tr>
+
+                </table>
+            </p>
+        </div>
+
         <div class="sidebar-pane" id="settings">
             <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
         </div>
     </div>
 </div>
-
 
 
 <div id="mapid" class="sidebar-map"></div>
@@ -159,7 +196,7 @@ $(document).ready(function(){
 
 <script>
 
-	var mymap = L.map('mapid').setView([{{ $lat }}, {{ $Lng }}], 17);
+	var mymap = L.map('mapid').setView([{{ $lat }}, {{ $Lng }}],{{ $zoom }});
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
@@ -174,49 +211,28 @@ $(document).ready(function(){
         popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
     });
 
-	L.marker([{{ $lat  }}, {{ $Lng }}], {icon: lokatie}).addTo(mymap).bindPopup('Uw locatie').openPopup();
-	L.circle([{{$lat}}, {{$Lng}}], { radius: 875,
-                                                   fillColor: "#ff7800",
-                                                   color: "#000",
-                                                   weight: 1,
-                                                   opacity: 1,
-                                                   fillOpacity: 0.1}).addTo(mymap);
+    @if(!isset($start))
+	    L.marker([{{ $lat  }}, {{ $Lng }}], {icon: lokatie}).addTo(mymap).bindPopup('Uw locatie').openPopup();
+    @endif
 
 	var sidebar = L.control.sidebar('sidebar').addTo(mymap);
 	var markers = [];
 
-	@foreach($mindervalidenplaatsen as $parking)
-	    @if($parking->PARKING_BREEDTE_DATA != 0)
+	@foreach($parkings as $parking)
 
             var marker = L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}])
-            .bindPopup('<h5 style="margin-bottom: 2px;">{{ $parking->ADRES_STRAAT }} @if($parking->URL_PICTURE_MAIN != 0) {{ $parking->ADRES_NR }} @endif {{ $parking->GEMEENTE }}</h5>' +
-            '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <b><u>Breedte:</u> </b> {{ $parking->PARKING_BREEDTE_DATA }}cm<br>' +
-             '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <b><u>Lengte:</u> </b> {{ $parking->PARKING_LENGTE_DATA }}cm<br> ' +
-                @if($parking->PARKING_ONDERGROND_MATERIAAL != "")'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <b><u>Ondergrond</u></b>: {{ $parking->PARKING_ONDERGROND_MATERIAAL }}<br>' + @endif
-                @if($parking->PARKING_ORIENTATIE != "")'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <b><u>Orientatie</u></b>:' +
-                 ' @if($parking->PARKING_ORIENTATIE == "E") Evenwijdig met de baan @elseif($parking->PARKING_ORIENTATIE == "L") Loodrecht op de baan @elseif($parking->PARKING_ORIENTATIE == "S") Schuin (45°) @else {{ $parking->PARKING_ORIENTATIE }} @endif'
-                 + @endif
+            .bindPopup('<h3 style="margin-bottom: 2px;">{{ $parking->naam }}</h3>' +
+            '<h5><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> {{ str_replace("\n", "", $parking->adres) }}  {{ $parking->stad }}</h5>' +
+             {{--'<img src="/img/parkings/gent/{{ $parking->naam }}.jpg" width="99%"> ' +--}}
 
-                 @if($parking->URL_PICTURE_MAIN != "")
+             ' @if($parking->live_data) {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }} beschikbaar @else Niet live @endif ' +
 
-                '<img style="margin-top: 5px;" width="100%" src="{{ $parking->URL_PICTURE_MAIN }}" alt=""/>' +
-
-                @else
-
-                '<br><small>Geen foto beschikbaar</small>' +
-
-                @endif
-
-                '<input type="button" data-toggle="modal" data-target="#myModal" onclick="route({{ $parking->latitude  }}, {{ $parking->longitude }}, \'{{ $parking->ADRES_STRAAT }} {{ $parking->ADRES_NR }} {{ $parking->GEMEENTE }}\')" style="margin-top: 4px; width:100%" class="btn btn-success" value="Krijg route">')
+                '<input type="button" data-toggle="modal" data-target="#myModal" onclick="route({{ $parking->latitude  }}, {{ $parking->longitude }}, \'{{ str_replace("\n", "", $parking->adres) }} {{ $parking->stad }}\')" style="margin-top: 4px; width:100%" class="btn btn-success" value="Parking bekijken">')
             .addTo(mymap);
 
-        @else
-            var marker = L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}])
-            .bindPopup('<h5 style="margin-bottom: 2px;">{{ $parking->ADRES_STRAAT }} {{ $parking->ADRES_NR }} {{ $parking->GEMEENTE }}</h5>' +
-            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <b>Geen details</b><br>' +
-                '<input type="button" data-toggle="modal" data-target="#myModal" onclick="route({{ $parking->latitude  }}, {{ $parking->longitude }}, \'{{ $parking->ADRES_STRAAT }} {{ $parking->ADRES_NR }} {{ $parking->GEMEENTE }}\')" style="margin-top: 4px; width:100%" class="btn btn-success" value="Krijg route">')
-            .addTo(mymap);
-        @endif
+            {{--var marker = L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}])--}}
+                        {{--.bindPopup(' {{ $parking->adres }}')--}}
+                        {{--.addTo(mymap);--}}
 
 	    markers.push(marker);
 

@@ -75,36 +75,36 @@
 
     <section id="portfolio">
         <div class="container">
-            <div class="row" style="margin-top: -75px;">
-                <div class="col-lg-12 text-center">
+            {{--<div class="row" style="margin-top: -75px;">--}}
+                {{--<div class="col-lg-12 text-center">--}}
 
-                    <h3 id="stad">&nbsp;</h3>
+                    {{--<h3 id="stad">&nbsp;</h3>--}}
 
-                    <img class="img-responsive" id="kaart" usemap="#provinciemap" src="/img/parkingBelgie.png" alt="kaartBelgië" style="margin: 0 auto"/ >
+                    {{--<img class="img-responsive" id="kaart" usemap="#provinciemap" src="/img/parkingBelgie.png" alt="kaartBelgië" style="margin: 0 auto"/ >--}}
 
-                    <map name="provinciemap">
-                      <area shape ="poly" href="/stad/kortrijk" coords ="22,156,65,275,122,239,159,256,185,240,159,84" onmouseover="changeSource('west-vlaanderen')" onmouseout="changeBack()" alt="Oost-Vlaanderen" />
-                      <area shape ="poly" href="/stad/gent" coords ="166,113,186,243,252,253,306,171,297,150,323,147,311,88" onmouseover="changeSource('oost-vlaanderen')" onmouseout="changeBack()" alt="West-Vlaanderen" />
-                      <area shape ="poly" href="/stad/brussel" coords ="310,230,330,243,348,238,339,204,318,209" onmouseover="changeSource('brussel')" onmouseout="changeBack()" alt="Brussel" />
-                    </map>
+                    {{--<map name="provinciemap">--}}
+                      {{--<area shape ="poly" href="/stad/kortrijk" coords ="22,156,65,275,122,239,159,256,185,240,159,84" onmouseover="changeSource('west-vlaanderen')" onmouseout="changeBack()" alt="Oost-Vlaanderen" />--}}
+                      {{--<area shape ="poly" href="/stad/gent" coords ="166,113,186,243,252,253,306,171,297,150,323,147,311,88" onmouseover="changeSource('oost-vlaanderen')" onmouseout="changeBack()" alt="West-Vlaanderen" />--}}
+                      {{--<area shape ="poly" href="/stad/brussel" coords ="310,230,330,243,348,238,339,204,318,209" onmouseover="changeSource('brussel')" onmouseout="changeBack()" alt="Brussel" />--}}
+                    {{--</map>--}}
 
-                </div>
+                {{--</div>--}}
 
-            </div>
+            {{--</div>--}}
 
-            <br/>
+            {{--<br/>--}}
 
-            <script>
-                function changeSource(src) {
-                    document.getElementById("kaart").src = '/img/' + src + '.png';
-                    document.getElementById("stad").innerHTML = src;
-                }
+            {{--<script>--}}
+                {{--function changeSource(src) {--}}
+                    {{--document.getElementById("kaart").src = '/img/' + src + '.png';--}}
+                    {{--document.getElementById("stad").innerHTML = src;--}}
+                {{--}--}}
 
-                function changeBack() {
-                    document.getElementById("kaart").src = "/img/parkingBelgie.png";
-                    document.getElementById("stad").innerHTML = "&nbsp";
-                }
-            </script>
+                {{--function changeBack() {--}}
+                    {{--document.getElementById("kaart").src = "/img/parkingBelgie.png";--}}
+                    {{--document.getElementById("stad").innerHTML = "&nbsp";--}}
+                {{--}--}}
+            {{--</script>--}}
 
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -180,18 +180,18 @@
     </section>
 
 
-    <section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">
-        <div class="row" text-align="center" style="margin-top: -100px">
-            <div class="col-lg-12 text-center">
-                <h3>Mogelijk dankzij</h3>
-            </div>
-        </div>
-        <div class="row" style="text-align: center;">
-            <div class="col-lg-12 text-center">
-                <img src="/img/parkingboys2.png" alt=""/>
-                <img src="http://www.wetenschapsacademieblankenberge.be/images/logo_howest.png" alt=""/>
-            </div>
-        </div>
-    </section>
+    {{--<section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">--}}
+        {{--<div class="row" text-align="center" style="margin-top: -100px">--}}
+            {{--<div class="col-lg-12 text-center">--}}
+                {{--<h3>Mogelijk dankzij</h3>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="row" style="text-align: center;">--}}
+            {{--<div class="col-lg-12 text-center">--}}
+                {{--<img src="/img/parkingboys2.png" alt=""/>--}}
+                {{--<img src="http://www.wetenschapsacademieblankenberge.be/images/logo_howest.png" alt=""/>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</section>--}}
 
 @endsection

@@ -35,9 +35,9 @@
               border-radius: 3px;
               box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
               font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-              top: 33%;
-              left: 20%;
-              right: 20%;
+              top: 28%;
+              left: 15%;
+              right: 15%;
               position: fixed;
               margin-left: 20px;
               margin-right: 20px;
@@ -79,7 +79,7 @@
               </p>
               <p>
 
-                    <input name="location" id="searchTextField" type="text" class="form-control" label="Zoeken..."/>
+                    <input name="location" id="searchTextField" type="text" class="form-control" label="Zoeken..." required="" />
                     <input name="coordinates" type="hidden" id="coordinates"  />
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                     {{--<input id="locationTextField" name="location" class="form-control" type="text" placeholder="{{ isset($searchTerm) ? $searchTerm : "Geef uw locatie in" }}" value="">--}}

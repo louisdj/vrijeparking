@@ -111,7 +111,7 @@
                     </li>
 
                     <li>
-                        {{--<a href="/mindervaliden"><i class="fa fa-wheelchair" aria-hidden="true"></i> Voorbehouden parking</a>--}}
+                        <a href="/mindervaliden"><i class="fa fa-wheelchair" aria-hidden="true"></i> Voorbehouden parking</a>
                     </li>
 
                     <li class="page-scroll">
