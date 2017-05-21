@@ -91,12 +91,12 @@ class ParkingController extends Controller
             compact('parking', 'openingsuren', 'historie', 'historieAverage', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht', 'bezettingVandaag'));
     }
 
-    public function vindparking() {
+    public function vindparking_old() {
 
         return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8]);
     }
 
-    public function vindparkingpost(Request $request)
+    public function vindparkingpost_old(Request $request)
     {
         if($request->location == null && $request->coordinates == null)
         {
@@ -150,16 +150,18 @@ class ParkingController extends Controller
     }
 
 
-    public function vindparking2() {
+    public function vindparking() {
 
         $lat = "50.7755478";
         $Lng = "3.6038558";
 
-        return view('vindParking.index2', ['parkings' => [],'lat' => $lat, 'Lng' => $Lng, 'start' => "ja", 'zoom' => 9, 'nofooter' => 'true']);
+        return view('vindParking.index', ['parkings' => [],'lat' => $lat, 'Lng' => $Lng, 'start' => "ja", 'zoom' => 9, 'nofooter' => 'true']);
     }
 
-    public function vindparkingpost2(Request $request, $coords = 0)
+    public function vindparkingpost(Request $request, $coords = 0)
     {
+        $zoom = 15;
+
         //Als er op de kaart geklikt wordt
         if($coords != 0)
         {
@@ -168,8 +170,8 @@ class ParkingController extends Controller
 
 
             $parkings = DB::table('parkings')
-                ->whereBetween('latitude', [$lat - 0.007, $lat + 0.007])
-                ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
+                ->whereBetween('latitude', [$lat - 0.015, $lat + 0.015])
+                ->whereBetween('longitude', [$Lng - 0.015, $Lng + 0.015])
                 ->get();
 
             if(count($parkings) > 0) {
@@ -186,10 +188,15 @@ class ParkingController extends Controller
 
                 $afstanden = $data->rows[0]->elements;
 
+
                 foreach ($afstanden as $key => $afstand) {
                     $parkings[$key]->afstand = $afstand->distance->value;
-                }
 
+                    if(Tarief::where(['parking_id' => $parkings[$key]->id, 'tijdsduur' => '02:00:00'])->first()) {
+                        $parkings[$key]->starttarief = Tarief::where(['parking_id' => $parkings[$key]->id, 'tijdsduur' => '02:00:00'])->first()->prijs;
+                    }
+
+                }
 
                 uasort($parkings, array($this, 'sort_by_order'));
 
@@ -197,23 +204,18 @@ class ParkingController extends Controller
                 $parkings = [];
             }
 
-
-            return view('mindervaliden.index2', compact('mindervalidenplaatsen', 'lat', 'Lng'));
+            return view('vindParking.index', compact('parkings', 'zoom', 'lat', 'Lng'));
         }
 
 
         //Als er niets werd ingevuld in het zoekveld
         if($request->location == null && $request->coordinates == null)
         {
-            dd("ello");
-
-            return view('mindervaliden.index2', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
+            return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
         }
         //Als men een adres manueel intypt zonder selectie van google adviezen
         else if($request->coordinates == null)
         {
-            dd("sup");
-
             $searchFor = str_replace(",","+", $request->location);
             $searchFor = str_replace(" ","+", $searchFor);
 
@@ -221,7 +223,7 @@ class ParkingController extends Controller
             $data = json_decode($json);
 
             if($data->status == "ZERO_RESULTS") {
-                return view('mindervaliden.index2', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
+                return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
             } else {
                 $lat = $data->results[0]->geometry->location->lat;
                 $Lng = $data->results[0]->geometry->location->lng;
@@ -236,8 +238,8 @@ class ParkingController extends Controller
         }
 
         $parkings = DB::table('parkings')
-            ->whereBetween('latitude', [$lat - 0.007, $lat + 0.007])
-            ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
+            ->whereBetween('latitude', [$lat - 0.015, $lat + 0.015])
+            ->whereBetween('longitude', [$Lng - 0.015, $Lng + 0.015])
             ->get();
 
         if(count($parkings) > 0)
@@ -250,15 +252,18 @@ class ParkingController extends Controller
             }
 
             $json = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $lat . ',' . $Lng . '&destinations=' . $origins_string . '&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo');
-
             $data = json_decode($json);
 
             $afstanden = $data->rows[0]->elements;
 
-            foreach ($afstanden as $key => $afstand) {
+            foreach ($afstanden as $key => $afstand)
+            {
                 $parkings[$key]->afstand = $afstand->distance->value;
+                if(Tarief::where(['parking_id' => $parkings[$key]->id, 'tijdsduur' => '02:00:00'])->first())
+                {
+                    $parkings[$key]->starttarief = Tarief::where(['parking_id' => $parkings[$key]->id, 'tijdsduur' => '02:00:00'])->first()->prijs;
+                }
             }
-
 
             uasort($parkings, array($this, 'sort_by_order'));
 
@@ -266,12 +271,15 @@ class ParkingController extends Controller
             $parkings = [];
         }
 
-        $zoom = 16;
         $nofooter = "jep";
 
 
-        return view('vindParking.index2', compact('parkings', 'lat', 'Lng', 'zoom', 'nofooter'));
+        return view('vindParking.index', compact('parkings', 'lat', 'Lng', 'zoom', 'nofooter'));
     }
+
+
+
+
 
 
     public function mindervalidenstart()

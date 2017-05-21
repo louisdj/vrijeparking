@@ -17,10 +17,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/stad/{stad}', 'ParkingController@stad');
     Route::get('/parking/{parking}', 'ParkingController@parking');
 
+//    Route::get('/vindparking3', 'ParkingController@vindparking');
+//    Route::post('/vindparking3', 'ParkingController@vindparkingpost');
+
     Route::get('/vindparking', 'ParkingController@vindparking');
-    Route::get('/vindparking2', 'ParkingController@vindparking2');
     Route::post('/vindparking', 'ParkingController@vindparkingpost');
-    Route::post('/vindparking2', 'ParkingController@vindparkingpost2');
+    Route::get('/vindparking/{coords?}', 'ParkingController@vindparkingpost');
 
     Route::get('/team', 'ExtraController@team');
     Route::get('/blog', 'ExtraController@blog');

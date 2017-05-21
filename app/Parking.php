@@ -26,5 +26,10 @@ class Parking extends Model
         return $this->hasMany('App\Betaalmogelijkheid');
     }
 
+    public function tarieven()
+    {
+        return $this->hasMany('App\Tarief', 'parking_id', 'id');
+    }
+
     protected $table = 'parkings';
 }
