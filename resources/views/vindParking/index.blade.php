@@ -86,7 +86,7 @@ $(document).ready(function(){
                         <tr style="padding-right: 15px; border-bottom: 1px dotted grey;" onclick="mymap.setView([{{ $parking->latitude }}+0.0015, {{ $parking->longitude }}],17); markers[{{ $count }}].openPopup();">
                             <a href="#">
                                 <td style="padding-left: 5px; padding-right: 15px; text-align: center;">
-                                    <img width="70px" height="70px" style="border-radius: 50%;" src="/img/parkings/gent/{{ $parking->naam }}.jpg" onerror="this.src='/img/parkings/parking-icon.gif'" alt=""/>
+                                    <img width="70px" height="70px" style="border-radius: 50%;" src="/img/parkings/gent/{{ strtolower($parking->naam) }}.jpg" onerror="this.src='/img/parkings/parking-icon.gif'" alt=""/>
 
                                 </td>
                                 <td>
@@ -236,7 +236,7 @@ $(document).ready(function(){
 
         @endif
 
-        '<img id="parking_banner" class="img-responsive" src="/img/parkings/gent/{{ $parking->naam }}.jpg" onerror="this.style.display=\'none\'"> ' +
+        '<img id="parking_banner" class="img-responsive" src="/img/parkings/gent/{{ strtolower($parking->naam) }}.jpg" onerror="this.style.display=\'none\'"> ' +
 
         '<a target="_blank" href="/parking/{{ $parking->naam }}"><input type="button" style="margin-top: 4px; width:50%" class="btn btn-primary" value="Bekijken"></a>' +
         '<input type="button" data-toggle="modal" data-target="#myModal" onclick="route({{ $parking->latitude  }}, {{ $parking->longitude }}, \'{{ str_replace("\n", "", $parking->adres) }} {{ $parking->stad }}\')" style="margin-top: 4px; margin-left: 1%; width:49%" class="btn btn-success" value="Krijg route">')
