@@ -96,7 +96,7 @@ $(document).ready(function(){
                                         @if($parking->live_data)
                                             {{ $parking->beschikbare_plaatsen }} / {{ $parking->totaal_plaatsen }} beschikbaar
                                         @else
-                                            Niet live
+                                            Totaal {{ $parking->totaal_plaatsen }} plaatsen
                                         @endif
                                     </kbd>
                                     <span>
@@ -228,6 +228,8 @@ $(document).ready(function(){
 
         @if(isset($parking->starttarief))
         '<h5><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>&nbsp; {{ $parking->starttarief }} / 2 uur</h5>' +
+        @elseif($parking->gratis == 1)
+        '<h5><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>&nbsp; Gratis</h5>' +
         @endif
 
         @if($parking->live_data)
@@ -246,6 +248,28 @@ $(document).ready(function(){
 	    markers.push(marker);
 
 	@endforeach
+
+
+
+
+
+	var latlngs =
+	[
+          [ // first polygon
+            [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]], // outer ring
+            [[37.29, -108.58],[40.71, -108.58],[40.71, -102.50],[37.29, -102.50]] // hole
+          ],
+          [ // second polygon
+            [[41, -111.03],[45, -111.04],[45, -104.05],[41, -104.05]]
+          ]
+    ];
+    var polygon = L.polygon(latlngs, {color: 'red'}).addTo(mymap);
+
+
+
+
+
+
 
     //Nieuw startpunt kiezen
 	var popup = L.popup();

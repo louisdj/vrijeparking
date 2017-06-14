@@ -79,6 +79,27 @@
                 <a class="navbar-brand hidden-md hidden-sm hidden-xs" href="/">Vrije Parking.be</a>
             </div>
 
+            <style>
+                @media screen and (max-width: 991px) {
+                  .columns {
+                    height: 200px;
+                    overflow-y: scroll;
+                    position:absolute;
+                    left: 0;
+                  }
+                }
+
+                @media screen and (min-width: 992px) {
+                  .columns {
+                    -moz-column-count: 3;
+                    /* Firefox */
+                    -webkit-column-count: 3;
+                    /* Safari and Chrome */
+                    column-count: 3;
+                  }
+                }
+            </style>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -90,7 +111,7 @@
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{ trans('navbar.parkings') }} <span class="caret"></span>
                           </a>
-                          <ul class="dropdown-menu">
+                          <ul class="dropdown-menu columns dropdown-menu-left">
                             <li style="background-color: lightgrey"><a><b>Live data</b></a>  </li>
                             <li><a href="/stad/gent"><img src="/img/transpa_ParkingGent.png" alt="parkingGent" width="20px"/> Stad Gent</a></li>
                             {{--<li role="separator" class="divider"></li>--}}

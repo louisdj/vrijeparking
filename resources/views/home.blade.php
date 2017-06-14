@@ -165,9 +165,9 @@
                         <div class="col-md-2" style="text-align: center; display:inline-block; float:none; margin-top: 10px;">
                             <a href="/stad/{{ $stad->stad }}" style="color:black; text-underline: none; font-weight:bold;">
                                 @if($stad->afbeelding)
-                                    <img width="100%" src="{{ $stad->afbeelding }}" alt="" style="border-radius:100px;"/>
+                                    <img width="150px" src="{{ $stad->afbeelding }}" alt="" style="border-radius:100px;"/>
                                 @else
-                                    <img width="100%" src="http://www.proprofs.com/quiz-school/user_upload/ckeditor/F1BH.jpg" alt=""/>
+                                    <img width="150px" src="http://www.proprofs.com/quiz-school/user_upload/ckeditor/F1BH.jpg" alt=""/>
                                 @endif
                                 <br/>{{ $stad->stad }}
                             </a>
@@ -178,6 +178,7 @@
 
         </div>
     </section>
+
 
 
     {{--<section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">--}}
