@@ -79,26 +79,7 @@
                 <a class="navbar-brand hidden-md hidden-sm hidden-xs" href="/">Vrije Parking.be</a>
             </div>
 
-            <style>
-                @media screen and (max-width: 991px) {
-                  .columns {
-                    height: 200px;
-                    overflow-y: scroll;
-                    position:absolute;
-                    left: 0;
-                  }
-                }
 
-                @media screen and (min-width: 992px) {
-                  .columns {
-                    -moz-column-count: 3;
-                    /* Firefox */
-                    -webkit-column-count: 3;
-                    /* Safari and Chrome */
-                    column-count: 3;
-                  }
-                }
-            </style>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -122,11 +103,7 @@
                             <li style="background-color: lightgrey;"><a><b>Andere steden</b></a>  </li>
 
 
-                            @foreach($offline_steden as $stad)
-                                @if($stad->aantal_parkings() >= 2)
-                                    <li><a href="/stad/{{ $stad->stad }}">  {{ $stad->stad }}</a></li>
-                                @endif
-                            @endforeach
+
 
                           </ul>
                     </li>

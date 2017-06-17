@@ -130,7 +130,7 @@ $(document).ready(function(){
             </h1>
 
             <div style="padding-left: 10px; text-align:center;">
-                <form action="/vindparking" method="post">
+                <form action="/vindparking" id="vindParkingForm" method="post">
 
                       <p style="padding-top: 5px; margin-bottom: -20px;">
                             <img src="http://www.freeiconspng.com/uploads/parking-icon-png-0.png" width="100px" alt=""/>
@@ -374,6 +374,7 @@ $(document).ready(function(){
               var lat = place.geometry.location.lat();
               var lng = place.geometry.location.lng();
               document.getElementById("coordinates").value = lat+","+lng;
+              document.getElementById("vindParkingForm").submit();
            }
         );
     }

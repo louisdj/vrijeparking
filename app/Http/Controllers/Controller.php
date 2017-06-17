@@ -17,9 +17,9 @@ class Controller extends BaseController
     public function __construct()
     {
         //its just a dummy data object.
-        $offline_steden = Stad::where('live_data', 0)->orderBy('stad', 'asc')->get();
+//        $offline_steden = Stad::where('live_data', 0)->orderBy('stad', 'asc')->get();
 
         // Sharing is caring
-        View::share('offline_steden', $offline_steden);
+//        View::share('offline_steden', $offline_steden);
     }
 }
