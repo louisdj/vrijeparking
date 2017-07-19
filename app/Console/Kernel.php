@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
             ->everyFiveMinutes();
 
         $schedule->command('pullParkingData')
-            ->everyMinute();
+            ->everyFiveMinutes();
 
 //        $schedule->command('pullAndPushTwitterRobot')
 //            ->everyFiveMinutes();
