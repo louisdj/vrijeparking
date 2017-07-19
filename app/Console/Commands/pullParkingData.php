@@ -29,12 +29,10 @@ class pullParkingData extends Command
      */
     public function handle()
     {
-        $json = file_get_contents('http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json');
-        $gent = json_decode($json);
+        //Cheat stukje voor Gent Sintpieters
+        $content = file_get_contents("https://datatank.stad.gent/4/mobiliteit/bezettingparkeergaragesnmbs.json");
+        $gsp_data = json_decode($content);
 
-        foreach($gent as $parking)
-        {
-            Parking::where('naam', strtolower($parking->description))->update(['beschikbare_plaatsen' => $parking->parkingStatus->availableCapacity]);
-        }
+        Parking::where('naam', "Gent Sint-Pieters")->update(['beschikbare_plaatsen' => $gsp_data[0]->parkingStatus->availableCapacity]);
     }
 }
