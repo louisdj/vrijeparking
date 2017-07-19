@@ -157,8 +157,8 @@
                 }
             </style>
 
-            <link rel="stylesheet" href="http://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.css">
-            <script src="http://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.js"></script>
+            <link rel="stylesheet" href="https://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.css">
+            <script src="https://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.js"></script>
 
             <script>
             $(document).ready(function(){
