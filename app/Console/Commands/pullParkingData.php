@@ -33,6 +33,7 @@ class pullParkingData extends Command
         $content = file_get_contents("https://datatank.stad.gent/4/mobiliteit/bezettingparkeergaragesnmbs.json");
         $gsp_data = json_decode($content);
 
-        Parking::where('naam', "Gent Sint-Pieters")->update(['beschikbare_plaatsen' => $gsp_data[0]->parkingStatus->availableCapacity]);
+        Parking::where('naam', "Gent Sint-Pieters")
+            ->update(['beschikbare_plaatsen' => $gsp_data[0]->parkingStatus->availableCapacity]);
     }
 }
