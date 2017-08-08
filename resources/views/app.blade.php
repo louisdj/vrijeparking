@@ -77,6 +77,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand hidden-md hidden-sm hidden-xs" href="/">Vrije Parking.be</a>
+                <a class="navbar-brand visible-md visible-sm visible-xs" href="/">VP</a>
             </div>
 
 
@@ -103,8 +104,6 @@
                             <li style="background-color: lightgrey;"><a><b>Andere steden</b></a>  </li>
 
 
-
-
                           </ul>
                     </li>
 
@@ -116,7 +115,7 @@
                         <a href="/vindparking">{{ trans('navbar.findParking') }}</a>
                     </li>
 
-                    <li class="dropdown">
+                    <li class="dropdown hidden-md hidden-sm">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span> {{ trans('navbar.extra') }} <span class="caret"></span>
                         </a>

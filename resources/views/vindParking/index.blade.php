@@ -7,6 +7,8 @@
 
  <link rel="stylesheet" href="/css/leaflet-sidebar.css" />
 
+ <script src="/js/leaflet-sidebar.js"></script>
+
 @endsection
 
 
@@ -14,10 +16,10 @@
 
 <style>
     #mapid {
-        position: absolute;
-          top: 0;
-          bottom: 0;
-          width: 100%;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 100%;
     }
 
     tr:hover {
@@ -38,16 +40,15 @@
 
 
 <script>
-$(document).ready(function(){
-    $("tr").click(function(){
-        $(this).addClass("selected").siblings().removeClass("selected");
-    });
+    $(document).ready(function(){
+        $("tr").click(function(){
+            $(this).addClass("selected").siblings().removeClass("selected");
+        });
 
-    $("img").click(function(){
-        $('tr').removeClass("selected");
+        $("img").click(function(){
+            $('tr').removeClass("selected");
+        });
     });
-
-});
 
 </script>
 
@@ -58,12 +59,12 @@ $(document).ready(function(){
         <ul role="tablist">
             <li class="@if(!isset($start)) active @endif"><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
             <li class="@if(isset($start)) active @endif "><a href="#zoeken" role="tab"><i class="fa fa-search"></i></a></li>
-            {{--<li><a href="#zones" role="tab"><i class="fa fa-road"></i></a></li>--}}
+            @if(count($zones) > 0)<li><a href="#zones" role="tab"><i class="fa fa-road"></i></a></li>@endif
         </ul>
 
-        {{--<ul role="tablist">--}}
-            {{--<li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>--}}
-        {{--</ul>--}}
+        <ul role="tablist">
+            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
     </div>
 
     <!-- Tab panes -->
@@ -156,6 +157,7 @@ $(document).ready(function(){
 
         </div>
 
+        @if(count($zones) > 0)
         <div class="sidebar-pane" id="zones">
             <h1 class="sidebar-header">
                 &nbsp;&nbsp; Overzicht parkeerzones
@@ -165,34 +167,71 @@ $(document).ready(function(){
             <p>
                 <table style="width: 100%">
 
-                        {{--<tr style="padding-right: 15px; border-bottom: 1px dotted grey;" onclick="mymap.setView([{{ null }}+0.0015, {{ null }}],17); markers[{{ $count }}].openPopup();">--}}
+                    @foreach($zones as $zone)
                         <tr style="padding-right: 15px; border-bottom: 1px dotted grey;">
                             <a href="#">
-                                <td style="padding-left: 5px; padding-right: 15px;">
-                                    {{--<img width="70px" height="70px" style="border-radius: 40px;" src="/img/parkings/gent/.jpg" alt=""/>--}}
+                                <td style="padding-left: 10px; padding-right: 12px">
+                                    <div style="width:70px; height: 70px; border-radius: 40px; background-color: {{ $zone->kleur }};"></div>
                                 </td>
                                 <td>
-                                    <h3>Zone 3 - Blauw</h3>
-                                    <h5><b>Parkeerschijf leggen voor 3u</b></h5>
+                                    <h3 style="margin-top: 2px; margin-bottom: -5px;">Zone {{ $zone->zonenummer }}</h3>
+                                    <span style="font-size: 16px; font-weight: bold;"><b>{{ $zone->beschrijving }}</b></span><br/>
+                                    <small>
+                                        <span style="font-weight: bold;">
+                                            {{ $zone->parkingduur }}
+                                        </span>
+                                        <span style="font-weight: bold; color: darkblue">
+                                            @if($zone->parkingkost) &nbsp;&nbsp; ({{ $zone->parkingkost }}) @endif
+                                        </span>
+                                    </small>
+
                                 </td>
                             </a>
                         </tr>
+                    @endforeach
 
                 </table>
             </p>
         </div>
+        @endif
 
         <div class="sidebar-pane" id="settings">
-            <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <h1 class="sidebar-header">&nbsp;&nbsp; Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+            <div style="padding-left: 10px; text-align:center;">
+                {{--<p>--}}
+                    {{--<table style="width: 100%">--}}
+                        {{--<tr style="padding-right: 15px; border-bottom: 1px dotted grey; ">--}}
+                            {{--<td>--}}
+                                {{--<h3>Zone {{ $zone->zonenummer }}</h3>--}}
+                                {{--<h5><b>{{ $zone->beschrijving }} - {{ $zone->parkingduur }}</b></h5>--}}
+                                 {{--<span style="font-size: 14px; font-weight: bold; color: red">--}}
+                                    {{--@if($zone->parkingkost) <br/> {{ $zone->parkingkost }} @endif--}}
+                                {{--</span>--}}
+                            {{--</td>--}}
+                        {{--</tr>--}}
+                    {{--</table>--}}
+                {{--</p>--}}
+
+                <h2>Parkeerzones</h2>
+
+                    <button type="button" id="toonPoly" disabled class="btn btn-success" onclick="this.disabled = true; document.getElementById('hidePoly').disabled = false; polygons.forEach(showpolygons)">Toon polygons</button>
+                    <button type="button" id="hidePoly" class="btn btn-danger" onclick="this.disabled = true; document.getElementById('toonPoly').disabled = false; polygons.forEach(removepolygons)">Verwijder polygons</button>
+
+                <hr/>
+
+            </div>
+
         </div>
     </div>
 </div>
 
 
+
+
 <div id="mapid" class="sidebar-map"></div>
 
 
-<script src="/js/leaflet-sidebar.js"></script>
 
 <script>
 
@@ -211,6 +250,22 @@ $(document).ready(function(){
         popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
     });
 
+    var parkandride = L.icon({
+        iconUrl: '/img/parkings/PR.png',
+
+        iconSize:     [35, 55], // size of the icon
+        iconAnchor:   [20, 55], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var parking = L.icon({
+        iconUrl: '/img/parkings/P.png',
+
+        iconSize:     [35, 55], // size of the icon
+        iconAnchor:   [20, 55], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
+    });
+
     @if(!isset($start))
 	    L.marker([{{ $lat  }}, {{ $Lng }}], {icon: lokatie}).addTo(mymap).bindPopup('Uw locatie').openPopup();
     @endif
@@ -220,7 +275,7 @@ $(document).ready(function(){
 
 	@foreach($parkings as $parking)
 
-        var marker = L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}])
+        var marker = L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride), {icon: parkandride} @else, {icon: parking} @endif)
         .bindPopup('<h3 style="margin-bottom: 2px;">{{ $parking->naam }}</h3>' +
 
         '<h5><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>&nbsp; {{ str_replace("\n", "", $parking->adres) }}  {{ $parking->stad }}</h5>' +
@@ -244,31 +299,34 @@ $(document).ready(function(){
         '<input type="button" data-toggle="modal" data-target="#myModal" onclick="route({{ $parking->latitude  }}, {{ $parking->longitude }}, \'{{ str_replace("\n", "", $parking->adres) }} {{ $parking->stad }}\')" style="margin-top: 4px; margin-left: 1%; width:49%" class="btn btn-success" value="Krijg route">')
         .addTo(mymap);
 
-
 	    markers.push(marker);
 
 	@endforeach
 
+    var polygons = [];
+    var zone_id;
 
+    @foreach($zones as $key => $zone)
 
+        @for($i = 1; $i <= $gebieden_array[$key]; $i++)
 
+            var myCoordinates = [
+                @foreach($zone->zone_gebieden as $zone_gebied)
 
-	var latlngs =
-	[
-          [ // first polygon
-            [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]], // outer ring
-            [[37.29, -108.58],[40.71, -108.58],[40.71, -102.50],[37.29, -102.50]] // hole
-          ],
-          [ // second polygon
-            [[41, -111.03],[45, -111.04],[45, -104.05],[41, -104.05]]
-          ]
-    ];
-    var polygon = L.polygon(latlngs, {color: 'red'}).addTo(mymap);
+                    @if($zone_gebied->gebied == $i)
+                        [{{ $zone_gebied->coordinaten }}],
+                    @endif
 
+                @endforeach
+             ];
 
+              var polygon = L.polygon(myCoordinates, {color: '{{ $zone->kleur }}'}).bindPopup('Zone {{ $zone->zonenummer }} {{ $zone->beschrijving }}').addTo(mymap);
 
+            polygons.push(polygon);
 
+        @endfor
 
+     @endforeach
 
 
     //Nieuw startpunt kiezen
@@ -290,6 +348,18 @@ $(document).ready(function(){
     }
 
     mymap.on('click', onMapClick);
+
+
+    function removepolygons(polygon)
+    {
+        polygon.remove();
+    }
+
+    function showpolygons(polygon)
+    {
+        polygon.addTo(mymap);
+    }
+
 
 </script>
 

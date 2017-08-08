@@ -8,6 +8,8 @@ use App\Openingsuren;
 use App\Parking;
 use App\Stad;
 use App\Tarief;
+use App\Zone;
+use App\Zone_gebied;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,10 +42,11 @@ class ParkingController extends Controller
 
     public function stad($stad)
     {
-        $parkings = Parking::all()->where('stad', strtolower($stad));
+        $parkings = Parking::all()->where('stad', strtolower($stad))->where('parkandride', 0);
+        $parkandrides =  Parking::all()->where('stad', strtolower($stad))->where('parkandride', 1);
         $stad = Stad::where('stad', $stad)->first();
 
-        return view('templates.stad_template', compact('stad', 'parkings'));
+        return view('templates.stad_template', compact('stad', 'parkings', 'parkandrides'));
     }
 
     public function parking($name)
@@ -91,76 +94,22 @@ class ParkingController extends Controller
             compact('parking', 'openingsuren', 'historie', 'historieAverage', 'parking_betaalmogelijkheden', 'tarievenDag', 'tarievenNacht', 'bezettingVandaag'));
     }
 
-    public function vindparking_old() {
-
-        return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8]);
-    }
-
-    public function vindparkingpost_old(Request $request)
-    {
-        if($request->location == null && $request->coordinates == null)
-        {
-            return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8])->with('parkings', []);
-        }
-        else if($request->coordinates == null) {
-
-            $searchFor = str_replace(",","+", $request->location);
-            $searchFor = str_replace(" ","+", $searchFor);
-
-            $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
-            $data = json_decode($json);
-
-            $lat = $data->results[0]->geometry->location->lat;
-            $Lng = $data->results[0]->geometry->location->lng;
-        }
-        else {
-            $lat = substr($request->coordinates, 0, strpos($request->coordinates, ','));
-            $Lng = substr($request->coordinates, strpos($request->coordinates, ',') + 1);
-        }
-
-        $parkings = DB::table('parkings')
-            ->whereBetween('latitude', [$lat - 0.007, $lat + 0.007])
-            ->whereBetween('longitude', [$Lng - 0.007, $Lng + 0.007])
-            ->get();
-
-
-//        dd($parkings);
-
-        //key: AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
-
-//        $json = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $searchFor);
-//        $data = json_decode($json);
-//        http://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
-
-//        https://maps.googleapis.com/maps/api/distancematrix/json?origins=
-//        Ter+Platen+12+9000+gent|amakersstraat+12&destinations=Sint-Pietersplein+65+9000+gent&mode=walking&language=fr-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo
-
-//        $distance = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $lat . "," . $Lng . "&destinations=". $parkings[0]->latitude . "," . $parkings[0]->longitude . "&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo"));
-//        $distanceResult = ($distance->rows[0]->elements[0]);
-//
-//        $afstand = $distanceResult->distance->text;
-//        $tijdsduur = $distanceResult->duration->text;
-
-
-        return view('vindParking.index',
-            ['mapCenter' => $lat .",". $Lng,
-            'parkings' => $parkings,
-            'zoom' => 16,
-            'searchTerm' => $request->location]);
-    }
-
-
     public function vindparking() {
 
         $lat = "50.7755478";
         $Lng = "3.6038558";
 
-        return view('vindParking.index', ['parkings' => [],'lat' => $lat, 'Lng' => $Lng, 'start' => "ja", 'zoom' => 9, 'nofooter' => 'true']);
+        return view('vindParking.index', ['parkings' => [],'lat' => $lat, 'Lng' => $Lng, 'start' => "ja", 'zoom' => 9, 'nofooter' => 'true', 'zones' => []]);
     }
 
     public function vindparkingpost(Request $request, $coords = 0)
     {
         $zoom = 15;
+        $parkings = [];
+        $zones = [];
+        $gebieden_array = [];
+        $nofooter = "jep";
+        $stad = "nogniets";
 
         //Als er op de kaart geklikt wordt
         if($coords != 0)
@@ -180,14 +129,13 @@ class ParkingController extends Controller
 
                 foreach ($parkings as $parking) {
                     $origins_string .= "" . $parking->latitude . "," . $parking->longitude . "|";
+                    $stad = $parking->stad;
                 }
 
                 $json = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $lat . ',' . $Lng . '&destinations=' . $origins_string . '&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo');
-
                 $data = json_decode($json);
 
                 $afstanden = $data->rows[0]->elements;
-
 
                 foreach ($afstanden as $key => $afstand) {
                     $parkings[$key]->afstand = $afstand->distance->value;
@@ -200,11 +148,17 @@ class ParkingController extends Controller
 
                 uasort($parkings, array($this, 'sort_by_order'));
 
-            } else {
-                $parkings = [];
             }
 
-            return view('vindParking.index', compact('parkings', 'zoom', 'lat', 'Lng'));
+//            $zone_stad = Stad::where('stad', $stad)->get()[0];
+            $zones = Zone::where('stad', $stad)->get();
+
+
+            foreach ($zones as $zone) {
+                array_push($gebieden_array, count(DB::table('zone_gebieden')->distinct()->select('gebied')->where('zone_id', $zone->id)->get()));
+            }
+
+            return view('vindParking.index', compact('parkings', 'zoom', 'lat', 'Lng', 'zones', 'gebieden_array', 'nofooter'));
         }
 
 
@@ -249,6 +203,7 @@ class ParkingController extends Controller
 
             foreach ($parkings as $parking) {
                 $origins_string .= "" . $parking->latitude . "," . $parking->longitude . "|";
+                $stad = $parking->stad;
             }
 
             $json = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' . $lat . ',' . $Lng . '&destinations=' . $origins_string . '&mode=walking&language=nl-FR&key=AIzaSyAwXAdR81t0uD5Y65HJE6IO9Ezx5ZVFBIo');
@@ -267,19 +222,17 @@ class ParkingController extends Controller
 
             uasort($parkings, array($this, 'sort_by_order'));
 
-        } else {
-            $parkings = [];
         }
 
-        $nofooter = "jep";
+        $zones = Zone::where('stad', $stad)->get();
+
+        foreach ($zones as $zone) {
+            array_push($gebieden_array, count(DB::table('zone_gebieden')->distinct()->select('gebied')->where('zone_id', $zone->id)->get()));
+        }
 
 
-        return view('vindParking.index', compact('parkings', 'lat', 'Lng', 'zoom', 'nofooter'));
+        return view('vindParking.index', compact('parkings', 'lat', 'Lng', 'zoom', 'nofooter', 'zones', 'gebieden_array'));
     }
-
-
-
-
 
 
     public function mindervalidenstart()
@@ -416,6 +369,15 @@ class ParkingController extends Controller
     //Wordt gebruikt om eenvoudig alle data vd "Parkings" tabel te inserten
     public function enterData()
     {
+        $content = file_get_contents("https://datatank.stad.gent/4/mobiliteit/bezettingparkeergaragesnmbs.json");
+        $gsp_data = json_decode($content);
+
+        Parking::where('naam', "Gent Sint-Pieters")
+            ->update(['beschikbare_plaatsen' => $gsp_data[0]->parkingStatus->availableCapacity]);
+
+        dd($gsp_data[0]->parkingStatus->availableCapacity);
+
+
 
 //        $xml=simplexml_load_file("http://data.its.be/storage/f/2016-12-01T16%3A10%3A11.824Z/hasselt-datex-v1-1.xml") or die("Error: Cannot create object");
         $xml = simplexml_load_file("C:/Users/robbert/Desktop/datasets/hasselt.xml") or die("Error: Cannot create object");
@@ -485,6 +447,78 @@ class ParkingController extends Controller
 
 
         }
+
+
+
+    public function toevoegen()
+    {
+        return view('parkeerzones.gebieden_toevoegen');
+    }
+
+    public function toevoegen2()
+    {
+        return view('parkeerzones.gebieden_toevoegen2');
+    }
+
+    public function toevoegenPost(Request $request)
+    {
+//        dd($request->coordinaten);
+
+        $unfilteredArray  = $request->coordinaten;
+        $pieces = explode("),\r\n", $unfilteredArray);
+
+//        dd(str_replace("new google.maps.LatLng(", "", $pieces[0]));
+
+        foreach($pieces as $piece)
+        {
+            $zone_gebied = new Zone_gebied();
+
+            $zone_gebied->zone_id = $request->zone_id;
+            $zone_gebied->gebied = $request->gebied;
+            $zone_gebied->coordinaten = str_replace("new google.maps.LatLng(", "", $piece);
+
+            $zone_gebied->save();
+        }
+
+
+
+        return view('parkeerzones.gebieden_toevoegen');
+    }
+
+    public function toevoegenPost2(Request $request)
+    {
+//        dd($request->coordinaten);
+
+        $unfilteredArray  = $request->coordinaten;
+        $pieces = explode("],", $unfilteredArray);
+
+//        dd(str_replace("new google.maps.LatLng(", "", $pieces[0]));
+
+        foreach($pieces as $piece)
+        {
+            $zone_gebied = new Zone_gebied();
+
+            $zone_gebied->zone_id = $request->zone_id;
+            $zone_gebied->gebied = $request->gebied;
+
+            $coordinaten_verkeerd = str_replace("[", "", $piece);
+            $array = explode(",", $coordinaten_verkeerd);
+//            $lat = $array[0];
+//            $long = $array[1];
+
+            $zone_gebied->coordinaten = $array[1] . "," . $array[0];
+
+            $zone_gebied->save();
+        }
+
+
+
+        return view('parkeerzones.gebieden_toevoegen2');
+    }
+
+
+
+
 
 
 //

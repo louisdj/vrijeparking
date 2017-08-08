@@ -363,47 +363,43 @@
 
             <div class="row">
                 <h3>Kaart</h3>
+
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
+                <script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/1B74BD89-2A22-4B93-B451-1C9E1052A0EC/main.js" charset="UTF-8"></script><script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+
+
                 <div class="col-md-12">
+                    <div id='map'></div>
                     <script>
+                        var mymap = L.map('map').setView([{{ $parking->latitude }},{{ $parking->longitude  }}],14);
 
-                      function initialize()
-                      {
-                           var mapOptions = {
-                             zoom: 15,
-                             center: new google.maps.LatLng("{{ $parking->latitude }}", "{{ $parking->longitude  }}"),
-                             scrollwheel: false
-                           };
+                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                            maxZoom: 18,
+                            id: 'mapbox.streets'
+                        }).addTo(mymap);
 
-                           var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                        var parking = L.icon({
+                            iconUrl: '/img/parkings/P.png',
 
-                           var contentString = '<div id="content">'+
-                                 '<div id="siteNotice">'+
-                                 '</div>'+
-                                 '<h3 id="firstHeading" class="firstHeading">'+
-                                 '{{ $parking->naam }} ({{ $parking->stad  }})'+
-                                 '</h3>'+
-                                 '</div>';
+                            iconSize:     [35, 55], // size of the icon
+                            iconAnchor:   [20, 55], // point of the icon which will correspond to marker's location
+                            popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
+                        });
 
-                             var infowindow = new google.maps.InfoWindow({
-                               content: contentString
-                             });
+                        var parkandride = L.icon({
+                            iconUrl: '/img/parkings/PR.png',
 
-                             var marker = new google.maps.Marker({
-                               position: new google.maps.LatLng("{{ $parking->latitude }}", "{{ $parking->longitude  }}"),
-                               map: map,
-                               title: '{{ $parking->naam }} ({{ $parking->stad  }})'
-                             });
+                            iconSize:     [35, 55], // size of the icon
+                            iconAnchor:   [20, 55], // point of the icon which will correspond to marker's location
+                            popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
+                        });
 
-                             infowindow.open(map, marker);
+                        L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride), {icon: parkandride} @else, {icon: parking} @endif)
+                                                .addTo(mymap).bindPopup("{{ $parking->adres }}").openPopup();
 
-                             marker.addListener('click', function() {
-                               infowindow.open(map, marker);
-                             });
-                      }
-                      google.maps.event.addDomListener(window, 'load', initialize);
+
                     </script>
 
-                    <div id="map"></div>
                 </div>
             </div>
         </div>

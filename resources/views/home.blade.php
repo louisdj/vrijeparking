@@ -20,7 +20,7 @@
 
     <section style="background-attachment: fixed; background-size: 100% 100%; text-shadow: 2px 2px black; color:white; background-image: url('/img/parkings/parking-banner.jpg'); margin-top:5%;" >
         <div class="row">
-              <div class="col-md-5 col-md-offset-3">
+              <div class="col-md-5 col-md-offset-3" style="padding-left: 40px;">
                     <h1>Mobiele App</h1><br>
                     <h3>
                         <ul>
@@ -55,7 +55,7 @@
         <h1>Zoek naar parking in ...</h1><br>
 
               <div class="col-md-3"></div>
-              <div class="col-md-6">
+              <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
                     <form action="/vindparking" id="vindParkingForm" method="post">
                         <div class="input-group">
 
@@ -105,42 +105,76 @@
                 </div>
             </div>
 
-            <div class="row" text-align="center">
-                <div class="col-md-2"></div>
-                <div class="col-md-4 portfolio-item">
-                    <a href="/stad/gent" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-3x">Gent</i>
-                            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3 portfolio-item" style="text-align: center;">
+                    <a href="/stad/gent">
+                        <div class="img__wrap">
+                            <img class="img__img" src="img/gent.jpg" width="257" height="200" />
+                            <div class="img__description_layer">
+                                <p class="img__description">Gent</p>
+                          </div>
                         </div>
-                        <img src="img/gent.jpg" alt="">
                     </a>
                 </div>
-                {{--<div class="col-sm-4 portfolio-item">--}}
-                    {{--<a href="/stad/brussel" class="portfolio-link" data-toggle="modal">--}}
-                        {{--<div class="caption">--}}
-                            {{--<div class="caption-content">--}}
-                                {{--<i class="fa fa-3x">Brussel</i>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<img src="img/brussel.jpg" alt="">--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-                <div class="col-sm-4 portfolio-item">
-                    <a href="/stad/kortrijk" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-3x">Kortrijk</i>
+                <div class="col-md-3 portfolio-item">
+                    <a href="/stad/kortrijk">
+                        <div class="img__wrap">
+                            <img class="img__img" src="img/kortrijk.jpg" width="257" height="200" />
+                            <div class="img__description_layer">
+                                <p class="img__description">Kortrijk</p>
                             </div>
                         </div>
-                        <img src="img/kortrijk.jpg" alt="">
                     </a>
                 </div>
+                <div class="col-md-3"></div>
             </div>
 
 
-            <div class="row" style="margin-top:100px;">
+            <style>
+            /* relevant styles */
+            .img__wrap {
+              position: relative;
+              height: 200px;
+              width: 257px;
+            }
+
+            .img__description_layer {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              background: rgba(36, 62, 206, 0.6);
+              color: #fff;
+              visibility: hidden;
+              opacity: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              /* transition effect. not necessary */
+              transition: opacity .2s, visibility .2s;
+            }
+
+            .img__wrap:hover .img__description_layer {
+              visibility: visible;
+              opacity: 1;
+            }
+
+            .img__description {
+              transition: .2s;
+              font-size: 25px;
+              transform: translateY(1em);
+            }
+
+            .img__wrap:hover .img__description {
+              transform: translateY(0);
+            }
+            </style>
+
+
+            <div class="row" style="margin-top:60px;">
                 <div class="col-lg-12 text-center">
                     <h3>Andere Steden</h3><br/>
                 </div>

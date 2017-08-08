@@ -31,5 +31,10 @@ class Parking extends Model
         return $this->hasMany('App\Tarief', 'parking_id', 'id');
     }
 
+    public function starttarief()
+    {
+        return $this->hasOne('App\Tarief', 'parking_id', 'id')->where('tijdsduur','02:00:00');
+    }
+
     protected $table = 'parkings';
 }
