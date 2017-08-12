@@ -397,6 +397,8 @@
                         L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride), {icon: parkandride} @else, {icon: parking} @endif)
                                                 .addTo(mymap).bindPopup("{{ $parking->adres }}").openPopup();
 
+//                                                It works
+
 
                     </script>
 
