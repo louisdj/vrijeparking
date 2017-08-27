@@ -292,7 +292,12 @@
                     <div id='map'></div>
 
                     <script>
-                        var mymap = L.map('map').setView([{{ $stad->coordinaten }}],14);
+
+                        @if($stad->coordinaten)
+                            var mymap = L.map('map').setView([{{ $stad->coordinaten }}],14);
+                        @else
+                             var mymap = L.map('map').setView([{{ $parkings->first()->latitude }}, {{ $parkings->first()->longitude }}],14);
+                        @endif
 
                         mymap.scrollWheelZoom.disable();
                         mymap.on('click', function() {

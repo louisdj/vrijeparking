@@ -114,7 +114,7 @@
                 @else
 
                     <div class="alert alert-warning alert-dismissible fade in" role="alert" style="margin-left: 8px;">
-                        <strong>Helaas!</strong> Wij zijn nog niet op de hoogte van parkings in deze buurt. Geef ons een seintje via <b><u>Mindervalidenparking@vrijeparking.be</u></b>.
+                        <strong>Helaas!</strong> Wij zijn nog niet op de hoogte van parkings in deze buurt. Geef ons een seintje via <b><u>Parkings@vrijeparking.be</u></b>.
                     </div>
 
                 @endif
