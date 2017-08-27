@@ -96,6 +96,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/mindervaliden/', 'ParkingController@mindervaliden');
 
 
+    Route::group(['prefix' => 'embed'], function () {
+
+        Route::get('/', 'embedController@index');
+        Route::get('/test', 'embedController@test');
+
+    });
+
+
 });
 
 

@@ -19,5 +19,21 @@ class Stad extends Model
         return Parking::where('stad', strtolower($this->stad))->get()->count();
     }
 
+    public function parkings()
+    {
+        return $this->hasMany('App\Parking', 'stad', 'stad');
+    }
+
+    public function totaal_plaatsen()
+    {
+        $plaatsen = 0;
+
+        foreach($this->parkings as $parking) {
+            $plaatsen += $parking->totaal_plaatsen;
+        }
+
+        return $plaatsen;
+    }
+
     public $timestamps = false;
 }

@@ -129,7 +129,10 @@
 
                         @if(count($openingsuren) > 0)
                             @foreach($openingsuren as $dag)
-                                <tr @if(date('w') == $dag->dag)style="font-weight: bold; color: royalblue; font-size: 17px;" @endif>
+
+                            {{ $dag->dag }}
+
+                                <tr @if(date('w') == $dag->dag || date('w') + 7 == $dag->dag)style="font-weight: bold; color: royalblue; font-size: 17px;" @endif>
                                     <td><b>{{ $dowMap[$dag->dag -1]  }}</b></td>
                                     <td>{{ date('H:i', strtotime($dag->openingsuur)) }} - {{ date('H:i', strtotime($dag->sluitingsuur)) }}</td>
                                 </tr>
@@ -373,6 +376,17 @@
                     <script>
                         var mymap = L.map('map').setView([{{ $parking->latitude }},{{ $parking->longitude  }}],14);
 
+                        mymap.scrollWheelZoom.disable();
+
+                        mymap.on('click', function() {
+                          if (mymap.scrollWheelZoom.enabled()) {
+                            mymap.scrollWheelZoom.disable();
+                            }
+                            else {
+                            mymap.scrollWheelZoom.enable();
+                            }
+                          });
+
                         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                             maxZoom: 18,
                             id: 'mapbox.streets'
@@ -394,8 +408,8 @@
                             popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
                         });
 
-                        L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride), {icon: parkandride} @else, {icon: parking} @endif)
-                                                .addTo(mymap).bindPopup("{{ $parking->adres }}").openPopup();
+                        L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride),{icon: parkandride}@else,{icon: parking}@endif).addTo(mymap).bindPopup("{{trim($parking->adres)}}")
+                        .openPopup();
 
 //                                                It works
 
