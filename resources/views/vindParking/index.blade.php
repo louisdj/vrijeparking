@@ -134,7 +134,7 @@
                 <form action="/vindparking" id="vindParkingForm" method="post">
 
                       <p style="padding-top: 5px; margin-bottom: -20px;">
-                            <img src="http://www.freeiconspng.com/uploads/parking-icon-png-0.png" width="100px" alt=""/>
+                            <img src="/img/parkings/parking-icon.gif" width="100px" alt=""/>
                       </p>
                       <p>
                             <h3 style="color: dodgerblue">Vind parking in Vlaanderen</h3>

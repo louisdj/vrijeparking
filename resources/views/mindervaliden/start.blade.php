@@ -18,7 +18,7 @@
 
             .background-image {
               /*background-image: url('/img/parkings/mindervaliden/mindervalidenplaatsen.jpg');*/
-              background-image: url('http://transportation.psu.edu/sites/transportation/files/handicapped-parking.jpg');
+              background-image: url('/img/parkings/mindervaliden/handicapped-parking.jpg');
               background-size: cover;
               display: block;
               filter: blur(5px);

@@ -130,8 +130,6 @@
                         @if(count($openingsuren) > 0)
                             @foreach($openingsuren as $dag)
 
-                            {{ $dag->dag }}
-
                                 <tr @if(date('w') == $dag->dag || date('w') + 7 == $dag->dag)style="font-weight: bold; color: royalblue; font-size: 17px;" @endif>
                                     <td><b>{{ $dowMap[$dag->dag -1]  }}</b></td>
                                     <td>{{ date('H:i', strtotime($dag->openingsuur)) }} - {{ date('H:i', strtotime($dag->sluitingsuur)) }}</td>
@@ -365,7 +363,7 @@
             <hr/>
 
             <div class="row">
-                <h3>Kaart</h3>
+                <h3>Kaart <small> Klik op de kaart om in te zoomen</small></h3>
 
                 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
                 <script type="text/javascript" src="http://gc.kis.scr.kaspersky-labs.com/1B74BD89-2A22-4B93-B451-1C9E1052A0EC/main.js" charset="UTF-8"></script><script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
@@ -377,13 +375,12 @@
                         var mymap = L.map('map').setView([{{ $parking->latitude }},{{ $parking->longitude  }}],14);
 
                         mymap.scrollWheelZoom.disable();
-
                         mymap.on('click', function() {
                           if (mymap.scrollWheelZoom.enabled()) {
-                            mymap.scrollWheelZoom.disable();
+                                mymap.scrollWheelZoom.disable();
                             }
                             else {
-                            mymap.scrollWheelZoom.enable();
+                                mymap.scrollWheelZoom.enable();
                             }
                           });
 
@@ -408,11 +405,7 @@
                             popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
                         });
 
-                        L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride),{icon: parkandride}@else,{icon: parking}@endif).addTo(mymap).bindPopup("{{trim($parking->adres)}}")
-                        .openPopup();
-
-//                                                It works
-
+                        L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride),{icon: parkandride}@else,{icon: parking}@endif).addTo(mymap).bindPopup("{{trim($parking->adres)}}").openPopup();
 
                     </script>
 
