@@ -405,6 +405,7 @@
                             popupAnchor:  [-3, -56] // point from which the popup should open relative to the iconAnchor
                         });
 
+                        //Trimmed
                         L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride),{icon: parkandride}@else,{icon: parking}@endif).addTo(mymap).bindPopup("{{trim($parking->adres)}}").openPopup();
 
                     </script>
