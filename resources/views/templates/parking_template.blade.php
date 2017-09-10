@@ -82,8 +82,14 @@
 
                     <h4>Contact</h4>
                         @if($parking->telefoon)
-                            {!! $parking->telefoon !!}
-                        @else
+                            <i class="fa fa-phone" aria-hidden="true"></i> {!! $parking->telefoon !!}
+                        @endif
+                        @if($parking->email && $parking->telefoon)
+                            <br/><i class="fa fa-envelope" aria-hidden="true"></i> {!! $parking->email !!}
+                        @elseif($parking->email)
+                            <i class="fa fa-envelope" aria-hidden="true"></i> {!! $parking->email !!}
+                        @endif
+                        @if(!$parking->telefoon && !$parking->email)
                             /
                         @endif
                     <br/><br/>
