@@ -85,9 +85,9 @@
                             <i class="fa fa-phone" aria-hidden="true"></i> {!! $parking->telefoon !!}
                         @endif
                         @if($parking->email && $parking->telefoon)
-                            <br/><i class="fa fa-envelope" aria-hidden="true"></i> {!! $parking->email !!}
+                            <br/><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{!! $parking->email !!}">{!! $parking->email !!}</a>
                         @elseif($parking->email)
-                            <i class="fa fa-envelope" aria-hidden="true"></i> {!! $parking->email !!}
+                            <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{!! $parking->email !!}">{!! $parking->email !!}</a>
                         @endif
                         @if(!$parking->telefoon && !$parking->email)
                             /
