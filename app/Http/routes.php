@@ -140,3 +140,6 @@ Route::get('/toevoegen', 'ParkingController@toevoegen');
 Route::get('/toevoegen2', 'ParkingController@toevoegen2');
 Route::post('/toevoegen', 'ParkingController@toevoegenPost');
 Route::post('/toevoegen2', 'ParkingController@toevoegenPost2');
+
+
+Route::post('/suggestie', 'ParkingController@suggestie');

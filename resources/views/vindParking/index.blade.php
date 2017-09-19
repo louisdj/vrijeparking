@@ -16,7 +16,7 @@
 
 <style>
     #mapid {
-        position: fixed;
+        position: absolute;
         top: 0;
         bottom: 0;
         width: 100%;
@@ -48,9 +48,11 @@
         $("img").click(function(){
             $('tr').removeClass("selected");
         });
+
     });
 
 </script>
+
 
 
 <div id="sidebar" class="sidebar" style="margin-top: 110px; z-index: 500;">
@@ -150,6 +152,7 @@
                       </p>
                       <p>
                         <button type="submit" class="btn btn-success form-control">Zoeken</button>
+                        {{--<button type="button" onclick="locate()" class="btn btn-primary form-control" style="margin-top: 3px;"><i class="fa fa-location-arrow" aria-hidden="true"></i>  Zoek via locatie</button>--}}
                       </p>
 
                 </form>
@@ -199,19 +202,6 @@
             <h1 class="sidebar-header">&nbsp;&nbsp; Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 
             <div style="padding-left: 10px; text-align:center;">
-                {{--<p>--}}
-                    {{--<table style="width: 100%">--}}
-                        {{--<tr style="padding-right: 15px; border-bottom: 1px dotted grey; ">--}}
-                            {{--<td>--}}
-                                {{--<h3>Zone {{ $zone->zonenummer }}</h3>--}}
-                                {{--<h5><b>{{ $zone->beschrijving }} - {{ $zone->parkingduur }}</b></h5>--}}
-                                 {{--<span style="font-size: 14px; font-weight: bold; color: red">--}}
-                                    {{--@if($zone->parkingkost) <br/> {{ $zone->parkingkost }} @endif--}}
-                                {{--</span>--}}
-                            {{--</td>--}}
-                        {{--</tr>--}}
-                    {{--</table>--}}
-                {{--</p>--}}
 
                 <h2>Parkeerzones</h2>
 
@@ -229,7 +219,7 @@
 
 
 
-<div id="mapid" class="sidebar-map"></div>
+<div id="mapid" ></div>
 
 
 
@@ -239,8 +229,10 @@
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
-		id: 'mapbox.streets'
+		id: 'mapbox.streets',
 	}).addTo(mymap);
+
+	mymap.zoomControl.setPosition('topright');
 
     var lokatie = L.icon({
         iconUrl: 'http://images.clipartpanda.com/google-location-icon-whitakergroup-google-location-icon-195x300.png',
@@ -278,6 +270,10 @@
         var marker = L.marker([{{ $parking->latitude  }}, {{ $parking->longitude }}]@if($parking->parkandride), {icon: parkandride} @else, {icon: parking} @endif)
         .bindPopup('<h3 style="margin-bottom: 2px;">{{ $parking->naam }}</h3>' +
 
+        @if($parking->voorstel_vernoeming)
+        '<small>Gemeld door gebruiker <b>{{ $parking->voorstel_vernoeming }}</b></small><br>' +
+        @endif
+
         '<h5><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>&nbsp; {{ str_replace("\n", "", $parking->adres) }}  {{ $parking->stad }}</h5>' +
         '<h5><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>&nbsp; {{ $parking->afstand }} Meter wandelafstand</h5>' +
 
@@ -294,6 +290,8 @@
         @endif
 
         '<img id="parking_banner" class="img-responsive" src="/img/parkings/gent/{{ strtolower($parking->naam) }}.jpg" onerror="this.style.display=\'none\'"> ' +
+
+
 
         '<a target="_blank" href="/parking/{{ $parking->naam }}"><input type="button" style="margin-top: 4px; width:50%" class="btn btn-primary" value="Bekijken"></a>' +
         '<input type="button" data-toggle="modal" data-target="#myModal" onclick="route({{ $parking->latitude  }}, {{ $parking->longitude }}, \'{{ str_replace("\n", "", $parking->adres) }} {{ $parking->stad }}\')" style="margin-top: 4px; margin-left: 1%; width:49%" class="btn btn-success" value="Krijg route">')
@@ -335,7 +333,7 @@
     function onMapClick(e) {
         popup
              .setLatLng(e.latlng)
-            .setContent("Zoek nabij <a href='/vindparking/"+e.latlng.lat +"," + e.latlng.lng + "'>dit punt</a>")
+            .setContent(" <a href='/vindparking/"+e.latlng.lat +"," + e.latlng.lng + "'><input type='button' style='width: 100%' class='btn btn-primary' value='Zoek nabij dit punt'></a><br><input type='button' data-toggle='modal' data-target='#parking_toevoegen' onclick='toevoegen("+e.latlng.lat +"," + e.latlng.lng + ")' style='margin-top: 4px; width:100%' class='btn btn-success' value='Parking toevoegen'>")
             .openOn(mymap);
     }
 
@@ -345,6 +343,11 @@
         document.getElementById("adres").value = adres;
         document.getElementById("url").value = "https://www.google.be/maps/dir//" + lat + "," + long;
         document.getElementById("route_coordinaten").value = lat + "," + long;
+    }
+
+    function toevoegen(lat, long)
+    {
+        document.getElementById("toevoegen_coordinaten").value = lat + "," + long;
     }
 
     mymap.on('click', onMapClick);
@@ -360,6 +363,39 @@
         polygon.addTo(mymap);
     }
 
+
+
+    var current_position, current_accuracy;
+
+    function onLocationFound(e) {
+      // if position defined, then remove the existing position marker and accuracy circle from the map
+      if (current_position) {
+          mymap.removeLayer(current_position);
+          mymap.removeLayer(current_accuracy);
+      }
+
+      var radius = e.accuracy / 2;
+
+      current_position = L.marker(e.latlng).addTo(mymap)
+        .bindPopup("U bevind zich binnen " + radius + " meter van dit punt.").openPopup();
+
+      current_accuracy = L.circle(e.latlng, radius).addTo(mymap);
+    }
+
+    function onLocationError(e) {
+      alert(e.message);
+    }
+
+    mymap.on('locationfound', onLocationFound);
+    mymap.on('locationerror', onLocationError);
+
+    // wrap map.locate in a function
+    function locate() {
+      mymap.locate({setView: true, maxZoom: 16});
+    }
+
+    // call locate every 3 seconds... forever
+//    setInterval(locate, 5000);
 
 </script>
 
@@ -424,6 +460,78 @@
                     <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Open in Google Maps
                 </button>
             </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+
+<script>
+     // wait for the DOM to be loaded
+     $(function() {
+       // bind 'myForm' and provide a simple callback function
+       $('#toevoeg_form').ajaxForm(function() {
+           $('#bericht').html("Uw suggestie werd goed ontvangen. Wij bekijken deze spoedig!<br/>");
+           document.getElementById("toevoeg_form").reset();
+       });
+     });
+</script>
+
+<div style="margin-top: 10%" class="modal fade" id="parking_toevoegen" tabindex="-1" role="dialog" aria-labelledby="parking_toevoegen">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Stel een parking voor</h4>
+      </div>
+      <div class="modal-body" id="suggestie_body">
+        <div id="bericht"></div>
+
+        <form action="/suggestie" method="post" id="toevoeg_form">
+            <div class="row">
+                <div class="col-md-6" style="padding-right: 2px;">
+                    <label for="url">Naam parking*:</label>
+                    <input id="url" name="naam" type="text" class="form-control" value="" required=""/>
+                </div>
+                <div class="col-md-6" style="padding-left: 2px;">
+                    <label for="route_coordinaten">Coordinaten:</label>
+                    <input id="toevoegen_coordinaten" name="coordinaten" type="text" class="form-control" readonly value=""/>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 8px;">
+                <div class="col-md-9" style="padding-right: 2px;">
+                    <label for="url">Adres:</label>
+                    <input id="url" name="adres" type="text" class="form-control" value="" placeholder="Bv. Polderstraat 21"/>
+                </div>
+                <div class="col-md-3" style="padding-left: 2px;">
+                    <label for="route_coordinaten">Stad:</label>
+                    {{--<input  class="form-control" value="" placeholder="Bv. Frederik"/>--}}
+                    <input type="text" class="form-control" name="stad" placeholder="Gent"/>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 8px;">
+                <div class="col-md-6" style="padding-right: 2px;">
+                    <label for="url">Geschatte plaatsen*:</label>
+                    <input id="url" name="plaatsen" type="number" class="form-control" value="" placeholder="Bv. 30" required=""/>
+                </div>
+                <div class="col-md-6" style="padding-left: 2px;">
+                    <label for="route_coordinaten">Uw vernoeming:</label>
+                    <input id="toevoegen_coordinaten" name="vernoeming" type="text" class="form-control" value="" placeholder="Bv. Frederik"/>
+                </div>
+            </div>
+
+            <a href="" target="_blank" id="googlemaps" >
+                <button class="btn btn-success form-control" style="margin-top: 8px;">
+                    Insturen van suggestie
+                </button>
+            </a>
+        </form>
       </div>
 
     </div>

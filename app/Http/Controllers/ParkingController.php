@@ -20,6 +20,25 @@ use Illuminate\Support\Facades\Session;
 
 class ParkingController extends Controller
 {
+    public function suggestie(Request $request)
+    {
+        $parking = new Parking();
+
+        $parking->naam = $request->naam;
+
+        $parking->latitude = explode(",",$request->coordinaten)[0];
+        $parking->longitude = explode(",",$request->coordinaten)[1];
+
+        $parking->adres = $request->adres;
+        $parking->stad = $request->stad;
+        $parking->totaal_plaatsen = $request->plaatsen;
+
+        $parking->voorstel = 1;
+        $parking->voorstel_vernoeming = $request->vernoeming;
+
+        $parking->save();
+    }
+
     public function complete(Request $request)
     {
         $keywords = $request->get('term');
