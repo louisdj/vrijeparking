@@ -36,6 +36,35 @@
     {
         padding-left: 0px;
     }
+
+        #plaatsen {
+            font-size: 20px;
+            border-radius: 4px;
+            text-align: center;
+            color: white;
+        }
+
+        .volzet {
+            background-color: #FE2E2E;
+            border: 1px solid #FE2E2E;
+        }
+
+        .bijna_volzet {
+            background-color: #FE9A2E;
+            border: 1px solid #FE9A2E;
+        }
+
+        .vrij {
+            background-color: #3c763d;
+            border: 1px solid #3c763d;
+        }
+
+        #parking_banner {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 30px;
+            width: 300px;
+        }
 </style>
 
 
@@ -48,6 +77,15 @@
         $("img").click(function(){
             $('tr').removeClass("selected");
         });
+
+        $('#toevoeg_form').ajaxForm({
+            error: function(){
+                $('#bericht').html("Oeps! We ontvingen reeds soortgelijke suggestie of er ging iets fout.<br/><br/>");
+            }, success: function() {
+                $('#bericht').html("Uw suggestie werd goed ontvangen. Wij bekijken deze spoedig!<br/><br/>");
+                document.getElementById("toevoeg_form").reset();
+            }
+       });
 
     });
 
@@ -348,7 +386,20 @@
     function toevoegen(lat, long)
     {
         document.getElementById("toevoegen_coordinaten").value = lat + "," + long;
+
+        var latlng = {lat: parseFloat(lat), lng: parseFloat(long)};
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({'location': latlng}, function(results, status) {
+              if (status === 'OK') {
+                    if (results[0]) {
+                         document.getElementById("adres_straat").value = results[0].address_components[1].long_name + " " + results[0].address_components[0].long_name;
+                         document.getElementById("stad").value = results[0].address_components[2].long_name;
+                    }
+              }
+        });
     }
+
 
     mymap.on('click', onMapClick);
 
@@ -365,71 +416,8 @@
 
 
 
-    var current_position, current_accuracy;
-
-    function onLocationFound(e) {
-      // if position defined, then remove the existing position marker and accuracy circle from the map
-      if (current_position) {
-          mymap.removeLayer(current_position);
-          mymap.removeLayer(current_accuracy);
-      }
-
-      var radius = e.accuracy / 2;
-
-      current_position = L.marker(e.latlng).addTo(mymap)
-        .bindPopup("U bevind zich binnen " + radius + " meter van dit punt.").openPopup();
-
-      current_accuracy = L.circle(e.latlng, radius).addTo(mymap);
-    }
-
-    function onLocationError(e) {
-      alert(e.message);
-    }
-
-    mymap.on('locationfound', onLocationFound);
-    mymap.on('locationerror', onLocationError);
-
-    // wrap map.locate in a function
-    function locate() {
-      mymap.locate({setView: true, maxZoom: 16});
-    }
-
-    // call locate every 3 seconds... forever
-//    setInterval(locate, 5000);
-
 </script>
 
-<style>
-    #plaatsen {
-        font-size: 20px;
-        border-radius: 4px;
-        text-align: center;
-        color: white;
-    }
-
-    .volzet {
-        background-color: #FE2E2E;
-        border: 1px solid #FE2E2E;
-    }
-
-    .bijna_volzet {
-        background-color: #FE9A2E;
-        border: 1px solid #FE9A2E;
-    }
-
-    .vrij {
-        background-color: #3c763d;
-        border: 1px solid #3c763d;
-    }
-
-    #parking_banner {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        margin-right: 30px;
-        width: 300px;
-    }
-
-</style>
 
 
 <div style="margin-top: 15%" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -470,16 +458,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
 
-<script>
-     // wait for the DOM to be loaded
-     $(function() {
-       // bind 'myForm' and provide a simple callback function
-       $('#toevoeg_form').ajaxForm(function() {
-           $('#bericht').html("Uw suggestie werd goed ontvangen. Wij bekijken deze spoedig!<br/>");
-           document.getElementById("toevoeg_form").reset();
-       });
-     });
-</script>
 
 <div style="margin-top: 10%" class="modal fade" id="parking_toevoegen" tabindex="-1" role="dialog" aria-labelledby="parking_toevoegen">
   <div class="modal-dialog" role="document">
@@ -506,12 +484,12 @@
             <div class="row" style="margin-top: 8px;">
                 <div class="col-md-9" style="padding-right: 2px;">
                     <label for="url">Adres:</label>
-                    <input id="url" name="adres" type="text" class="form-control" value="" placeholder="Bv. Polderstraat 21"/>
+                    <input id="adres_straat" name="adres" type="text" class="form-control" value="" placeholder="Bv. Polderstraat 21"/>
                 </div>
                 <div class="col-md-3" style="padding-left: 2px;">
                     <label for="route_coordinaten">Stad:</label>
                     {{--<input  class="form-control" value="" placeholder="Bv. Frederik"/>--}}
-                    <input type="text" class="form-control" name="stad" placeholder="Gent"/>
+                    <input type="text" class="form-control" name="stad" id="stad" placeholder="Gent"/>
                 </div>
             </div>
 
@@ -559,6 +537,6 @@
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdcNxd6g8V0tyzJK87vZjsRYlnPI7DLRw&libraries=places&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdcNxd6g8V0tyzJK87vZjsRYlnPI7DLRw&libraries=places&callback=initMap"></script>
 
 @endsection

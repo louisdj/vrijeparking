@@ -16,12 +16,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 
 class ParkingController extends Controller
 {
     public function suggestie(Request $request)
     {
+        $this->validate($request, [
+            'naam' => 'required|unique:parkings',
+            'adres' => 'required|unique:parkings'
+        ]);
+
         $parking = new Parking();
 
         $parking->naam = $request->naam;
