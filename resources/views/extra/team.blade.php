@@ -16,7 +16,7 @@
         <div class="container">
 
             <p>
-                De data waar VrijeParking van gebruik maakt wordt beschikbaar gestelt door een grote groep mensen bij zowel steden als bedrijven.
+                De data waar VrijeParking van gebruik maakt wordt beschikbaar gesteld door een grote groep mensen bij zowel steden als bedrijven.
                 De mensen achter VrijeParking zelf, die instaan voor de verwerking en presentatie van deze data in de web-browser en mobiele app zijn hieronder vermeld.
                 Het team bestaat uit afgestudeerden aan de richting Toegepaste Informatica van Howest te Brugge met een grote interesse in open data.
             </p>
