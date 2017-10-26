@@ -101,7 +101,8 @@
 
                             {{--<li role="separator" class="divider"></li>--}}
 
-                            {{--<li style="background-color: lightgrey;"><a><b>Andere steden</b></a>  </li>--}}
+                            <li style="background-color: lightgrey;"><a><b>Andere steden</b></a>  </li>
+                            <li><a href="/overzicht_steden"> Overzicht</a></li>
 
 
                           </ul>

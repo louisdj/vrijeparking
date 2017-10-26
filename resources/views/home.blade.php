@@ -200,7 +200,7 @@
 
                     @foreach($offline_steden as $stad)
                         @if($stad->aantal_parkings() >= 2)
-                            {text: "{{ $stad->stad }}", weight: {{ $stad->aantal_parkings()  }}, link: '/stad/{{ $stad->stad }}' },
+                            {text: "{{ htmlspecialchars_decode($stad->stad) }}", weight: {{ $stad->aantal_parkings()  }}, link: '/stad/{{ $stad->stad }}' },
                         @endif
                     @endforeach
 
