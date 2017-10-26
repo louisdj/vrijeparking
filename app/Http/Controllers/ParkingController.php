@@ -24,7 +24,6 @@ class ParkingController extends Controller
     public function suggestie(Request $request)
     {
         $this->validate($request, [
-            'naam' => 'required|unique:parkings',
             'adres' => 'required|unique:parkings'
         ]);
 
@@ -151,8 +150,8 @@ class ParkingController extends Controller
 
 
             $parkings = DB::table('parkings')
-                ->whereBetween('latitude', [$lat - 0.015, $lat + 0.015])
-                ->whereBetween('longitude', [$Lng - 0.015, $Lng + 0.015])
+                ->whereBetween('latitude', [$lat - 0.025, $lat + 0.025])
+                ->whereBetween('longitude', [$Lng - 0.025, $Lng + 0.025])
                 ->get();
 
             if(count($parkings) > 0) {
@@ -224,8 +223,8 @@ class ParkingController extends Controller
         }
 
         $parkings = DB::table('parkings')
-            ->whereBetween('latitude', [$lat - 0.015, $lat + 0.015])
-            ->whereBetween('longitude', [$Lng - 0.015, $Lng + 0.015])
+            ->whereBetween('latitude', [$lat - 0.025, $lat + 0.025])
+            ->whereBetween('longitude', [$Lng - 0.025, $Lng + 0.025])
             ->get();
 
         if(count($parkings) > 0)
