@@ -80,7 +80,7 @@
                                             </div>
                                         </div>
                                         <h5>
-                                            Geen realtime
+                                            @if($parking->totaal_plaatsen != 0) {{ $parking->totaal_plaatsen }} plaatsen @else Geen data @endif
                                         </h5>
                                     </div>
                                 @endif
