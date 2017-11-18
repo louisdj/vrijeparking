@@ -2,44 +2,44 @@
 
 @section('content')
 
-    {{--<header>--}}
-        {{--<div class="container" style="padding-top:110px">--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-lg-12 text-center">--}}
-                    {{--<h2>Over ons</h2>--}}
+{{--<header>--}}
+    {{--<div class="container" style="padding-top:110px">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-lg-12 text-center">--}}
+                {{--<h2>Over ons</h2>--}}
                 {{--</div>--}}
             {{--</div>--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-lg-6 col-lg-offset-3">--}}
-                    {{--<p>VrijeParking is een initiatief om alle beschikbare parkingdata uit België eenvoudig en toegankelijk beschikbaar te stellen voor het grote publiek.--}}
-                        {{--Wij breiden ons aanbod van data steeds zoveel mogelijk uit en proberen steden/bedrijven steeds aan te moedigen hun data beschikbaar te stellen.<p>--}}
-                {{--</div>--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-lg-6 col-lg-offset-3">--}}
+                {{--<p>VrijeParking is een initiatief om alle beschikbare parkingdata uit België eenvoudig en toegankelijk beschikbaar te stellen voor het grote publiek.--}}
+                    {{--Wij breiden ons aanbod van data steeds zoveel mogelijk uit en proberen steden/bedrijven steeds aan te moedigen hun data beschikbaar te stellen.<p>--}}
+                    {{--</div>--}}
             {{--</div>--}}
         {{--</div>--}}
     {{--</header>--}}
 
-    <section style="background-attachment: fixed; background-size: 100% 100%; text-shadow: 2px 2px black; color:white; background-image: url('/img/parkings/parking-banner.jpg'); margin-top:5%;" >
-        <div class="row">
-              <div class="col-md-5 col-md-offset-3" style="padding-left: 40px;">
-                    <h1>Mobiele App</h1><br>
-                    <h3>
-                        <ul>
-                            <li>Realtime beschikbare plaatsen</li>
-                            <li>Eenvoudige navigatie naar parkings</li>
-                            <li>Assistentie bij betalen voor straatparking</li>
-                            <li>Vind parkings in jouw buurt</li>
-                        </ul>
-                    </h3>
-                    <br/>
-                    <a href="https://play.google.com/store/apps/details?id=com.ionicframework.vrijeparking374441"><img src="/img/app/android.png" width="200px" alt=""/></a>
-                    <a href="https://itunes.apple.com/nl/app/vrijeparking/id1175461339?mt=8"><img src="/img/app/ios.png" width="200px" alt=""/></a>
-              </div>
-
+<section style="background-attachment: fixed; background-size: 100% 100%; text-shadow: 2px 2px black; color:white; background-image: url('/img/parkings/parking-banner.jpg'); margin-top:5%;" >
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3" style="padding-left: 40px;">
+            <h1>Mobiele App</h1><br>
+            <h3>
+                <ul>
+                    <li>Realtime beschikbare plaatsen</li>
+                    <li>Eenvoudige navigatie naar parkings</li>
+                    <li>Assistentie bij betalen voor straatparking</li>
+                    <li>Vind parkings in jouw buurt</li>
+                </ul>
+            </h3>
+            <br/>
+            <a href="https://play.google.com/store/apps/details?id=com.ionicframework.vrijeparking374441"><img src="/img/app/android.png" width="200px" alt=""/></a>
+            <a href="https://itunes.apple.com/nl/app/vrijeparking/id1175461339?mt=8"><img src="/img/app/ios.png" width="200px" alt=""/></a>
         </div>
 
-    </section>
+    </div>
 
-    <style>
+</section>
+
+<style>
         .zoekParkings {
             background: #258cd1; /* For browsers that do not support gradients */
             background: -webkit-linear-gradient(#258cd1, white); /* For Safari 5.1 to 6.0 */
@@ -49,32 +49,32 @@
         }
     </style>
 
-    <section style="color:white; background-color: #258cd1; text-align: center;" class="zoekParkings">
-        <div class="row">
+<section style="color:white; background-color: #258cd1; text-align: center;" class="zoekParkings">
+    <div class="row">
 
         <h1>Zoek naar parking in ...</h1><br>
 
-              <div class="col-md-3"></div>
-              <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
-                    <form action="/vindparking" id="vindParkingForm" method="post">
-                        <div class="input-group">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
+            <form action="/vindparking" id="vindParkingForm" method="post">
+                <div class="input-group">
 
-                              <div class="input-group-addon"><bold><span class="glyphicon glyphicon-search" aria-hidden="true"></span></bold></div>
+                    <div class="input-group-addon"><bold><span class="glyphicon glyphicon-search" aria-hidden="true"></span></bold></div>
 
-                              <input name="location" id="searchTextField" type="text" class="form-control" label="Zoeken..." required />
-                              <input name="coordinates" type="hidden" id="coordinates"  />
-                              <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                    <input name="location" id="searchTextField" type="text" class="form-control" label="Zoeken..." required />
+                    <input name="coordinates" type="hidden" id="coordinates"  />
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
-                        </div>
-                    </form>
-              </div>
-              <div class="col-md-3"></div>
-
+                </div>
+            </form>
         </div>
+        <div class="col-md-3"></div>
 
-    </section>
+    </div>
 
-    <script>
+</section>
+
+<script>
         function initMap()
         {
             var input = document.getElementById('searchTextField');
@@ -93,45 +93,45 @@
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdcNxd6g8V0tyzJK87vZjsRYlnPI7DLRw&libraries=places&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdcNxd6g8V0tyzJK87vZjsRYlnPI7DLRw&libraries=places&callback=initMap" async defer></script>
 
 
-    <section id="portfolio">
-        <div class="container">
+<section id="portfolio">
+    <div class="container">
 
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Live bezetting</h2><br/>
-                </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Live bezetting</h2><br/>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-3 portfolio-item" style="text-align: center;">
-                    <a href="/stad/gent">
-                        <div class="img__wrap">
-                            <img class="img__img" src="img/gent.jpg" width="257" height="200" />
-                            <div class="img__description_layer">
-                                <p class="img__description">Gent</p>
-                          </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3 portfolio-item" style="text-align: center;">
+                <a href="/stad/gent">
+                    <div class="img__wrap">
+                        <img class="img__img" src="img/gent.jpg" width="257" height="200" />
+                        <div class="img__description_layer">
+                            <p class="img__description">Gent</p>
                         </div>
-                    </a>
-                </div>
-                <div class="col-md-3 portfolio-item">
-                    <a href="/stad/kortrijk">
-                        <div class="img__wrap">
-                            <img class="img__img" src="img/kortrijk.jpg" width="257" height="200" />
-                            <div class="img__description_layer">
-                                <p class="img__description">Kortrijk</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3"></div>
+                    </div>
+                </a>
             </div>
+            <div class="col-md-3 portfolio-item">
+                <a href="/stad/kortrijk">
+                    <div class="img__wrap">
+                        <img class="img__img" src="img/kortrijk.jpg" width="257" height="200" />
+                        <div class="img__description_layer">
+                            <p class="img__description">Kortrijk</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
 
 
-            <style>
+        <style>
             /* relevant styles */
             .img__wrap {
               position: relative;
@@ -174,13 +174,13 @@
             </style>
 
 
-            <div class="row" style="margin-top:60px;">
-                <div class="col-lg-12 text-center">
-                    <h3>Andere Steden</h3><br/>
-                </div>
+        <div class="row" style="margin-top:60px;">
+            <div class="col-lg-12 text-center">
+                <h3>Andere Steden</h3><br/>
             </div>
+        </div>
 
-            <style>
+        <style>
                 a:hover {
                     opacity: 0.7;
                 }
@@ -191,10 +191,10 @@
                 }
             </style>
 
-            <link rel="stylesheet" href="https://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.css">
-            <script src="https://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.js"></script>
+        <link rel="stylesheet" href="https://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.css">
+        <script src="https://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.js"></script>
 
-            <script>
+        <script>
             $(document).ready(function(){
                 var words = [
 
@@ -214,24 +214,24 @@
             </script>
 
 
-        </div>
+    </div>
 
-        <div id="keywords"></div>
+    <div id="keywords"></div>
 
-    </section>
+</section>
 
 
 
-    {{--<section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">--}}
-        {{--<div class="row" text-align="center" style="margin-top: -100px">--}}
-            {{--<div class="col-lg-12 text-center">--}}
-                {{--<h3>Mogelijk dankzij</h3>--}}
+{{--<section style="text-shadow: 1px 1px black; color:white; height: 280px; background-color: black;">--}}
+    {{--<div class="row" text-align="center" style="margin-top: -100px">--}}
+        {{--<div class="col-lg-12 text-center">--}}
+            {{--<h3>Mogelijk dankzij</h3>--}}
             {{--</div>--}}
         {{--</div>--}}
-        {{--<div class="row" style="text-align: center;">--}}
-            {{--<div class="col-lg-12 text-center">--}}
-                {{--<img src="/img/parkingboys2.png" alt=""/>--}}
-                {{--<img src="http://www.wetenschapsacademieblankenberge.be/images/logo_howest.png" alt=""/>--}}
+    {{--<div class="row" style="text-align: center;">--}}
+        {{--<div class="col-lg-12 text-center">--}}
+            {{--<img src="/img/parkingboys2.png" alt=""/>--}}
+            {{--<img src="http://www.wetenschapsacademieblankenberge.be/images/logo_howest.png" alt=""/>--}}
             {{--</div>--}}
         {{--</div>--}}
     {{--</section>--}}

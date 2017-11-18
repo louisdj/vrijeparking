@@ -103,6 +103,7 @@
         </ul>
 
         <ul role="tablist">
+            <!--<li><a href="#bijdragers" role="tab"><i class="fa fa-trophy"></i></a></li>-->
             <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
         </ul>
     </div>
@@ -236,6 +237,36 @@
         </div>
         @endif
 
+        <!--<div class="sidebar-pane" id="bijdragers">-->
+            <!--<h1 class="sidebar-header">&nbsp;&nbsp; Bijdragers<span class="sidebar-close"><i class="fa fa-trophy"></i></span></h1>-->
+
+            <!--<div style="padding-left: 10px; text-align:center;">-->
+
+                <!--<h2>Ranglijst</h2>-->
+
+                <!--@if(Auth::check())-->
+                    <!--U doet mee als <b>{{ Auth::user()->name }}</b>-->
+                <!--@else-->
+                    <!--<small>Meedoen? <a href="/login">Login</a> of <a href="/register">registreer</a>!</small>-->
+                <!--@endif-->
+
+
+                <!--<hr>-->
+
+                    <!--<table style="width:100%; text-align:center;">-->
+                        <!--@foreach($users as $key => $user)-->
+                            <!--<tr >-->
+                                <!--<td>-->
+                                    <!--<h4><small>{{ $key+1 }}.</small> <img src="/img/medals/gold.png" width="20px" alt=""> {{ $user->name }} <small>(123)</small></h4>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                        <!--@endforeach-->
+                    <!--</table>-->
+
+            <!--</div>-->
+
+        <!--</div>-->
+
         <div class="sidebar-pane" id="settings">
             <h1 class="sidebar-header">&nbsp;&nbsp; Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 
@@ -331,7 +362,7 @@
 
 
 
-        '<a target="_blank" href="/parking/{{ $parking->naam }}"><input type="button" style="margin-top: 4px; width:50%" class="btn btn-primary" value="Bekijken"></a>' +
+        '<a target="_blank" href="/{{ $parking->stad }}/{{ $parking->naam }}"><input type="button" style="margin-top: 4px; width:50%" class="btn btn-primary" value="Bekijken"></a>' +
         '<input type="button" data-toggle="modal" data-target="#myModal" onclick="route({{ $parking->latitude  }}, {{ $parking->longitude }}, \'{{ str_replace("\n", "", $parking->adres) }} {{ $parking->stad }}\')" style="margin-top: 4px; margin-left: 1%; width:49%" class="btn btn-success" value="Krijg route">')
         .addTo(mymap);
 
@@ -515,6 +546,17 @@
     </div>
   </div>
 </div>
+
+<!--<div style="position:fixed; z-index:999; bottom:0; right:32%; background-color: #18bc9c; color:white; padding: 5px; padding-left: 15px; padding-right:15px; border:1px solid grey;">-->
+    <!--@if(Auth::user())-->
+    <!--Ingelogd als <b>{{ Auth::user()->name }}.</b>-->
+    <!--<small>-->
+        <!--<a style="color:black" href="/logout">Uitloggen?</a>-->
+    <!--</small>-->
+    <!--@else-->
+    <!--<a style="color:white" href="/login">Inloggen op vrijeparking?</a>-->
+    <!--@endif-->
+<!--</div>-->
 
 
 

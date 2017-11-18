@@ -16,7 +16,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/stad/{stad}', 'ParkingController@stad');
     Route::get('/overzicht_steden', 'ParkingController@overzicht_steden');
-    Route::get('/parking/{parking}', 'ParkingController@parking');
 
 //    Route::get('/vindparking3', 'ParkingController@vindparking');
 //    Route::post('/vindparking3', 'ParkingController@vindparkingpost');
@@ -72,8 +71,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/blog/{id}/remove', 'BlogController@remove');
         Route::get('/blog/{id}', 'BlogController@edit');
 
-
-
         Route::get('/klantenpaneel/', 'KlantenPaneelController@index');
         Route::get('/klantenpaneel/parking/{id}', 'KlantenPaneelController@parking');
 
@@ -104,6 +101,11 @@ Route::group(['middleware' => 'web'], function () {
 
     });
 
+    Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+    Route::get('/callback', 'SocialAuthFacebookController@callback');
+
+    Route::get('/parking/{parking}', 'ParkingController@parking_zonder_stad');
+    Route::get('/{stad}/{parking}', 'ParkingController@parking');
 
 });
 
@@ -144,3 +146,7 @@ Route::post('/toevoegen2', 'ParkingController@toevoegenPost2');
 
 
 Route::post('/suggestie', 'ParkingController@suggestie');
+//Route::auth();
+
+Route::get('/home', 'HomeController@index');
+

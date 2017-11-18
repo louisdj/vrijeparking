@@ -58,7 +58,7 @@
                             @endif
 
                                 @if($parking->live_data == 1)
-                                    <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;
+                                    <div onclick="window.location.href='/{{$stad->stad}}/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;
                                     background-color: @if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) lightcoral;
                                                                                                       @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) orange; @endif">
                                         <h5>{{ $parking->naam }}</h5>
@@ -72,7 +72,7 @@
                                         </h5>
                                     </div>
                                 @else
-                                    <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;">
+                                    <div onclick="window.location.href='/{{$stad->stad}}/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;">
                                         <h5>{{ $parking->naam }}</h5>
                                         <div class="row" style="text-align: center;">
                                             <div class="col-xs-6 col-sm-12" >
@@ -109,7 +109,7 @@
                             <tbody>
                                 @foreach($parkings as $parking)
                                     @if($parking->totaal_plaatsen != 0 && $parking->beschikbare_plaatsen != 0)
-                                        <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'" class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
+                                        <tr style="cursor:pointer" onclick="window.location.href='/{{$stad->stad}}/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'" class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
                                                     @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
                                             <td>
                                                 <img height="25px" src="/img/parkings/parking-icon.gif" alt=""/>
@@ -122,7 +122,7 @@
                                             </td>
                                         </tr>
                                     @else
-                                        <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'">
+                                        <tr style="cursor:pointer" onclick="window.location.href='/{{$stad->stad}}/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'">
                                             <td>
                                                 <img height="25px" src="/img/parkings/parking-icon.gif" alt=""/>
                                                 {{ isset($parking->naam) ? $parking->naam : "Niet beschikbaar" }}
@@ -161,7 +161,7 @@
                     @endif
 
                         @if($parking->live_data == 1)
-                            <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;
+                            <div onclick="window.location.href='/{{$stad->stad}}/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;
                             background-color: @if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) lightcoral;
                                                                                               @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) orange; @endif">
                                 <h5>{{ $parking->naam }}</h5>
@@ -175,7 +175,7 @@
                                 </h5>
                             </div>
                         @else
-                            <div onclick="window.location.href='/parking/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;">
+                            <div onclick="window.location.href='/{{$stad->stad}}/{{ strtolower(addslashes($parking->naam)) }}'" id="parking" class="col-sm-2 hidden-lg-down" style="margin-right: 20px; margin-bottom: 10px; text-align: center;">
                                 <h5>{{ $parking->naam }}</h5>
                                 <div class="row" style="text-align: center;">
                                     <div class="col-xs-6 col-sm-12" >
@@ -212,7 +212,7 @@
                         <tbody>
                             @foreach($parkandrides as $parking)
                                 @if($parking->totaal_plaatsen != 0 && $parking->beschikbare_plaatsen != 0)
-                                    <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'" class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
+                                    <tr style="cursor:pointer" onclick="window.location.href='/{{$stad->stad}}/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'" class="@if(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.10) danger
                                                 @elseif(($parking->beschikbare_plaatsen / $parking->totaal_plaatsen) < 0.30) warning @endif">
                                         <td>
                                             <img height="25px" src="/img/parkings/parking-icon.gif" alt=""/>
@@ -225,7 +225,7 @@
                                         </td>
                                     </tr>
                                 @else
-                                    <tr style="cursor:pointer" onclick="window.location.href='/parking/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'">
+                                    <tr style="cursor:pointer" onclick="window.location.href='/{{$stad->stad}}/{{ isset($parking->naam) ? strtolower(addslashes($parking->naam)) : "Niet beschikbaar" }}'">
                                         <td>
                                             <img height="25px" src="/img/parkings/parking-icon.gif" alt=""/>
                                             {{ isset($parking->naam) ? $parking->naam : "Niet beschikbaar" }}

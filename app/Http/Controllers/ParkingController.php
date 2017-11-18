@@ -10,6 +10,8 @@ use App\Stad;
 use App\Tarief;
 use App\Zone;
 use App\Zone_gebied;
+use App\User;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -80,9 +82,20 @@ class ParkingController extends Controller
         return view('parking.overzicht_steden', compact('offline_steden'));
     }
 
-    public function parking($name)
+    public function parking_zonder_stad($parkingnaam)
     {
-        $parking = Parking::where('naam', $name)->first();
+        return $this->parking(null, $parkingnaam);
+    }
+
+    public function parking($stad, $parkingnaam)
+    {
+        if($stad) {
+            $parking = Parking::where('stad', $stad)
+                ->where('naam', $parkingnaam)->first();
+        } else {
+            //legacy ondersteuning
+            $parking = Parking::where('naam', $parkingnaam)->first();
+        }
 
         $bezettingVandaag = DB::table('parkings_historie')
             ->select('bezetting')
@@ -129,8 +142,9 @@ class ParkingController extends Controller
 
         $lat = "50.7755478";
         $Lng = "3.6038558";
+        $users = User::all()->take(10);
 
-        return view('vindParking.index', ['parkings' => [],'lat' => $lat, 'Lng' => $Lng, 'start' => "ja", 'zoom' => 9, 'nofooter' => 'true', 'zones' => []]);
+        return view('vindParking.index', ['parkings' => [],'lat' => $lat, 'Lng' => $Lng, 'start' => "ja", 'zoom' => 9, 'nofooter' => 'true', 'zones' => [], 'users' => $users]);
     }
 
     public function vindparkingpost(Request $request, $coords = 0)
@@ -139,8 +153,10 @@ class ParkingController extends Controller
         $parkings = [];
         $zones = [];
         $gebieden_array = [];
+
         $nofooter = "jep";
         $stad = "nogniets";
+        $users = User::all()->take(10);
 
         //Als er op de kaart geklikt wordt
         if($coords != 0)
@@ -189,14 +205,14 @@ class ParkingController extends Controller
                 array_push($gebieden_array, count(DB::table('zone_gebieden')->distinct()->select('gebied')->where('zone_id', $zone->id)->get()));
             }
 
-            return view('vindParking.index', compact('parkings', 'zoom', 'lat', 'Lng', 'zones', 'gebieden_array', 'nofooter'));
+            return view('vindParking.index', compact('parkings', 'zoom', 'lat', 'Lng', 'zones', 'gebieden_array', 'nofooter', 'users'));
         }
 
 
         //Als er niets werd ingevuld in het zoekveld
         if($request->location == null && $request->coordinates == null)
         {
-            return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
+            return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558', 'users' => $users])->with('parkings', [])->with('mindervalidenplaatsen', []);
         }
         //Als men een adres manueel intypt zonder selectie van google adviezen
         else if($request->coordinates == null)
@@ -208,7 +224,7 @@ class ParkingController extends Controller
             $data = json_decode($json);
 
             if($data->status == "ZERO_RESULTS") {
-                return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558'])->with('parkings', [])->with('mindervalidenplaatsen', []);
+                return view('vindParking.index', ['mapCenter' => "50.7755478,3.6038558",'zoom' => 8, 'lat' => '50.7755478', 'Lng' => '3.6038558', 'users' => $users])->with('parkings', [])->with('mindervalidenplaatsen', []);
             } else {
                 $lat = $data->results[0]->geometry->location->lat;
                 $Lng = $data->results[0]->geometry->location->lng;
@@ -262,7 +278,7 @@ class ParkingController extends Controller
         }
 
 
-        return view('vindParking.index', compact('parkings', 'lat', 'Lng', 'zoom', 'nofooter', 'zones', 'gebieden_array'));
+        return view('vindParking.index', compact('parkings', 'lat', 'Lng', 'zoom', 'nofooter', 'zones', 'gebieden_array', 'users'));
     }
 
 
