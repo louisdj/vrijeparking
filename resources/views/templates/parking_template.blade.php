@@ -34,7 +34,7 @@
                 {{--<h3>Details</h3>--}}
                 <div class="col-md-4">
                     {{--<img src="/img/parkings/{{ $parking->stad }}/{{strtolower($parking->naam)}}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>--}}
-                    <img class="img-responsive" onerror="this.src='/img/parkings/placeholder.jpg'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
+                    <img class="img-responsive" onerror="this.src='https://maps.googleapis.com/maps/api/streetview?size=400x300&location={{ $parking->latitude }},{{ $parking->longitude }}&fov=120&heading=130&pitch=10&key=AIzaSyConkrSh5Gm0OcY_l5_pRCCrKPhR0qTgJw'" src="/img/parkings/{{$parking->stad}}/{{ strtolower(str_replace(["é","è"], "e", $parking->naam)) }}.jpg" alt="" width="330px" height="220px" style="border-radius: 20px;"/>
 
                     <br/><br/>
 
