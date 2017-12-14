@@ -184,6 +184,7 @@
             </table>
             </div>
 
+            @if($parking->stad != "gent")
             <h6>{!! $parking->nachttarief !!}</h6>
             <div class="table-responsive">
             <table class="table table-bordered">
@@ -205,6 +206,10 @@
                 </tr>
             </table>
             </div>
+            @else
+            <br>
+            <h6>Tijdens de winterfeesten gelden de dagtarieven gedurende de hele dag.</h6>
+            @endif
 
             @endif
 
