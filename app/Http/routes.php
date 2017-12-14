@@ -1,5 +1,23 @@
 <?php
 
+Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
+
+Route::get('/steden', 'ApiController@steden');
+Route::get('/stad/{stad}', 'ApiController@stad');
+
+Route::get('/parking/{parking}', 'ApiController@parking');
+Route::get('/parkings/lokatie/{lat}/{Lng}', 'ApiController@lokatie');
+Route::get('/parkings/{stad}', 'ApiController@parkings');
+
+Route::get('/vindStad/{lat}/{Lng}', 'ApiController@vindStad');
+
+Route::get('/twitter/{stad}', 'ApiController@twitter');
+
+Route::get('/chat/{stad}', 'ApiController@chat_stad');
+Route::get('/chat/{stad}/{parking}', 'ApiController@chat');
+
+});
+
 Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index');
@@ -115,23 +133,7 @@ Route::group(['middleware' => 'web'], function () {
 Route::get('/update', 'ParkingController@enterData');
 
 
-Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
 
-    Route::get('/steden', 'ApiController@steden');
-    Route::get('/stad/{stad}', 'ApiController@stad');
-
-    Route::get('/parking/{parking}', 'ApiController@parking');
-    Route::get('/parkings/lokatie/{lat}/{Lng}', 'ApiController@lokatie');
-    Route::get('/parkings/{stad}', 'ApiController@parkings');
-
-    Route::get('/vindStad/{lat}/{Lng}', 'ApiController@vindStad');
-
-    Route::get('/twitter/{stad}', 'ApiController@twitter');
-
-    Route::get('/chat/{stad}', 'ApiController@chat_stad');
-    Route::get('/chat/{stad}/{parking}', 'ApiController@chat');
-
-});
 
 
 Route::get('/graph', 'ParkingController@graph');
